@@ -1,17 +1,19 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gibalica/PoseController.dart';
-import 'package:gibalica/localization_test.dart';
-import 'package:gibalica/pose_detector_view.dart';
+import 'package:gibalica/controllers/device_controller.dart';
+import 'package:gibalica/controllers/pose_controller.dart';
+import 'package:gibalica/helpers/localization_test.dart';
+import 'package:gibalica/widgets/pose_detector_view.dart';
 
 List<CameraDescription> cameras = [];
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   cameras = await availableCameras();
-
   runApp(const MyApp());
 }
 
@@ -41,11 +43,19 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final PoseController controller = Get.put(PoseController());
+  final PoseController poseController = Get.put(PoseController());
+  final DeviceController deviceController = Get.put(DeviceController());
 
   bool isEnglish = true;
+
   @override
   Widget build(BuildContext context) {
+    // Fill device information into controller
+    deviceController.deviceType = MediaQuery.of(context).size.shortestSide < 550 ? DeviceType.phone : DeviceType.tablet;
+    log("Device type: ${deviceController.deviceType}");
+    deviceController.width = MediaQuery.of(context).size.width;
+    deviceController.height = MediaQuery.of(context).size.height;
+
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -91,7 +101,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: FittedBox(
                     child: Padding(
                       padding: EdgeInsets.all(30),
-                      child: Text("Pose detection", style: TextStyle(color: Colors.white),),
+                      child: Text(
+                        "Pose detection",
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                 ),
