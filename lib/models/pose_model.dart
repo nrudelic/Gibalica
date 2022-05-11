@@ -35,6 +35,8 @@ class PoseModel {
   PoseLandmark? leftFootIndex;
   PoseLandmark? rightFootIndex;
 
+  PoseModel.empty();
+
   PoseModel(List<Pose> poses) {
     for (var pose in poses) {
       pose.landmarks.forEach((_, landmark) {
@@ -143,3 +145,52 @@ class PoseModel {
     }
   }
 }
+
+enum BasePose{
+  leftArmNeutral,
+  leftArmMiddle,
+  leftArmUp,
+  rightArmNeutral,
+  rightArmMiddle,
+  rightArmUp,
+  leftLegNeutral,
+  leftLegGap,
+  leftLegUp,
+  rightLegNeutral,
+  rightLegGap,
+  rightLegUp,
+}
+
+extension BasePoseExtension on BasePose {
+  String get toStr {
+    switch (this) {
+      case BasePose.leftArmNeutral:
+        return "LEFT ARM NEUTRAL";
+      case BasePose.leftArmMiddle:
+        return "LEFT ARM MIDDLE";
+      case BasePose.leftArmUp:
+        return "LEFT ARM UP";
+      case BasePose.rightArmNeutral:
+        return "RIGHT ARM NEUTRAL";
+      case BasePose.rightArmMiddle:
+        return "RIGHT ARM MIDDLE";
+      case BasePose.rightArmUp:
+        return "RIGHT ARM UP";
+      case BasePose.leftLegNeutral:
+        return "LEFT LEG NEUTRAL";
+      case BasePose.leftLegGap:
+        return "LEFT LEG GAP";
+      case BasePose.leftLegUp:
+        return "LEFT LEG UP";
+      case BasePose.rightLegNeutral:
+        return "RIGHT LEG NEUTRAL";
+      case BasePose.rightLegGap:
+        return "RIGHT LEG GAP";
+      case BasePose.rightLegUp:
+        return "RIGHT LEG UP";
+      default:
+        return "";
+    }
+  }
+}
+

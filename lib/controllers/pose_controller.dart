@@ -1,16 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gibalica/models/pose_model.dart';
 
 class PoseController extends GetxController {
   final currentPose = 'Poza nije prepoznata'.obs;
-  ValueNotifier<bool> playAnimation = ValueNotifier<bool>(false);
-  int poseHoldingCounter = 0;
-  bool onboardingCompleted = false;
+  BasePose? wantedPose;
 
-  Color leftArmPaint = Colors.red;
-  Color rightArmPaint = Colors.red;
-  Color leftLegPaint = Colors.red;
-  Color rightLegPaint = Colors.red;
+  ValueNotifier<bool> playAnimation = ValueNotifier<bool>(false);
+
+  int poseHoldingCounter = 0;
+  var onboardingCompleted = false;
+
+  var poseCalculationDict = {
+    BasePose.leftArmNeutral : 0.0,
+    BasePose.leftArmMiddle : 0.0,
+    BasePose.leftArmUp : 0.0,
+    BasePose.rightArmNeutral : 0.0,
+    BasePose.rightArmMiddle : 0.0,
+    BasePose.rightArmUp : 0.0,
+    BasePose.leftLegNeutral : 0.0,
+    BasePose.leftLegGap : 0.0,
+    BasePose.leftLegUp : 0.0,
+    BasePose.rightLegNeutral : 0.0,
+    BasePose.rightLegGap : 0.0,
+    BasePose.rightLegUp : .00
+  };
+
+  var frameDelta = 0.06;
 
   updateCurrentPose(String pose) {
     currentPose(pose);
@@ -20,7 +36,7 @@ class PoseController extends GetxController {
     playAnimation.value = status;
   }
 
-  setonboardingCompleted(bool value){
+  setonboardingCompleted(var value){
     onboardingCompleted = value;
   }
 }

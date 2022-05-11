@@ -23,22 +23,22 @@ class PosePainter extends CustomPainter {
     final leftArmPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0
-      ..color = poseController.leftArmPaint;
+      ..color = Colors.green;
 
     final rightArmPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0
-      ..color = poseController.rightArmPaint;
+      ..color = Colors.green;
 
     final leftLegPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0
-      ..color = poseController.leftLegPaint;
+      ..color = Colors.green;
 
     final rightLegPaint = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0
-      ..color = poseController.rightLegPaint;
+      ..color = Colors.green;
 
     for (var pose in poses) {
       pose.landmarks.forEach((_, landmark) {

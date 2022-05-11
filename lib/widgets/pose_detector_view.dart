@@ -25,12 +25,13 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
   PoseCalculationHelper poseCalculationHelper = PoseCalculationHelper();
   bool isBusy = false;
   CustomPaint? customPaint;
+  DateTime? timestamp;
 
   @override
   void initState() {
     super.initState();
-    Timer.periodic(
-        const Duration(seconds: 2), (Timer t) => handleCurrentPose());
+    widget.poseController.onboardingCompleted = false;
+    poseCalculationHelper.setNewPose();
   }
 
   @override
@@ -54,21 +55,19 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
     if (isBusy) return;
     isBusy = true;
     final poses = await poseDetector.processImage(inputImage);
+    // if (widget.poseController.onboardingCompleted) {
+    poseCalculationHelper.processBasePoses(poses);
+    isPoseSuccessful();
+    // } else {
+    //   if (true) {
+    //     poseCalculationHelper.onboardingPhonePoseDetection(poses);
+    //   } else {
+    //     poseCalculationHelper.onboardingTabletPoseDetection(poses);
+    //   }
+    // }
 
-    if (widget.poseController.onboardingCompleted) {
-      poseCalculationHelper.processPoses(poses);
-    } else {
-      if (true) {
-        poseCalculationHelper.onboardingPhonePoseDetection(poses);
-      } else {
-        poseCalculationHelper.onboardingTabletPoseDetection(poses);
-      }
-    }
-
-    if (inputImage.inputImageData?.size != null &&
-        inputImage.inputImageData?.imageRotation != null) {
-      final painter = PosePainter(poses, inputImage.inputImageData!.size,
-          inputImage.inputImageData!.imageRotation);
+    if (inputImage.inputImageData?.size != null && inputImage.inputImageData?.imageRotation != null) {
+      final painter = PosePainter(poses, inputImage.inputImageData!.size, inputImage.inputImageData!.imageRotation);
       customPaint = CustomPaint(painter: painter);
     } else {
       customPaint = null;
@@ -77,15 +76,21 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
     if (mounted) {
       setState(() {});
     }
+
+    if (timestamp == null) {
+      timestamp = DateTime.now();
+    } else {
+      Duration diff = DateTime.now().difference(timestamp!);
+      timestamp = DateTime.now();
+      widget.poseController.frameDelta = diff.inMilliseconds / 1000;
+      log("DELTA: ${diff.inMilliseconds / 1000}");
+    }
   }
 
-  handleCurrentPose() {
-    log("TRENUTNO IMAM: ${widget.poseController.poseHoldingCounter}");
-    if (widget.poseController.poseHoldingCounter > 20) {
+  void isPoseSuccessful() {
+    if (widget.poseController.poseCalculationDict[widget.poseController.wantedPose] == 3) {
+      poseCalculationHelper.setNewPose();
       widget.poseController.updateLottieStatus(true);
-      widget.poseController.setonboardingCompleted(true);
-      log("ONBOARDING COMPLETED!");
     }
-    widget.poseController.poseHoldingCounter = 0;
   }
 }
