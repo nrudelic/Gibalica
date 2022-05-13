@@ -56,8 +56,8 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(0, 176, 240, 1),
-      //body:  SafeArea(child: StartView()),
-      body:  PoseDetectorView()
+      body:  SafeArea(child: StartView()),
+      // body:  PoseDetectorView()
 
     );
     // Fill device information into controller
