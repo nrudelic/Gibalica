@@ -11,7 +11,9 @@ import 'package:gibalica/widgets/lottie_animation.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 
 import '../../main.dart';
+import '../controllers/camera_view_controller.dart';
 import '../controllers/pose_controller.dart';
+import '../helpers/pose_calculator.dart';
 
 enum ScreenMode { liveFeed, gallery }
 
@@ -31,6 +33,7 @@ class CameraView extends StatefulWidget {
 class _CameraViewState extends State<CameraView> with SingleTickerProviderStateMixin {
   late AnimationController lottieController;
   final poseController = Get.find<PoseController>();
+  CameraViewController cameraViewController = Get.find<CameraViewController>();
 
   CameraController? _controller;
   int _cameraIndex = 0;
@@ -52,8 +55,37 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
       if (status == AnimationStatus.completed) {
         widget.poseController.playAnimation.value = false;
         lottieController.value = 0;
+        Timer(
+          const Duration(seconds: 1),
+          () {       
+                            var poseCalculator = new PoseCalculationHelper();
+         print("OVAJ TIMER2");
+                // poseCalculator.setNewPose();
+            cameraViewController.isPoseImageShowing = true;
+            Timer(
+              const Duration(seconds: 3),
+              () {
+                print("OVAJ TIMER3");
+                resetPosesDict();
+                poseCalculator.setNewPose();
+                cameraViewController.isProgressBarShowing = true;
+                cameraViewController.isPoseImageShowing = false;               
+              },
+            );
+          },
+        );
       }
     });
+
+    final timer = Timer(
+      const Duration(seconds: 3),
+      () {
+        cameraViewController.isOnboardingImageShowing = false;
+        cameraViewController.isProgressBarShowing = true;
+        //cameraViewController.isPoseImageShowing = true;
+
+      },
+    );
 
     _startLiveFeed();
   }
@@ -84,8 +116,20 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
       return Container();
     }
 
-    var targetPose = poseController.wantedPose;
-    var progressBarValue = (poseController.poseCalculationDict[targetPose] as double) / 3;
+    BasePose targetPose;
+    double progressBarValue = 0;
+
+if(cameraViewController.isProgressBarShowing){
+
+    if (poseController.onboardingCompleted ) {
+      targetPose = poseController.wantedPose as BasePose;
+
+      progressBarValue = (poseController.poseCalculationDict[targetPose] as double) / 3;
+    } else {
+      progressBarValue = ((poseController.poseCalculationDict[BasePose.leftArmNeutral] as double) + (poseController.poseCalculationDict[BasePose.rightArmNeutral] as double) + (poseController.poseCalculationDict[BasePose.leftLegNeutral] as double) + (poseController.poseCalculationDict[BasePose.rightLegNeutral] as double)) / 12;
+      
+    }
+}
 
     return Container(
       color: Colors.black,
@@ -94,52 +138,93 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
         children: <Widget>[
           CameraPreview(_controller!),
           if (widget.customPaint != null) widget.customPaint!,
-          Positioned(
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Container(
-                color: Colors.white,
-                margin: const EdgeInsets.only(top: 25),
-                child: Text(
-                  poseController.wantedPose!.toStr,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 24),
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                margin: const EdgeInsets.all(20),
-                // child: Container(
-                //   height: 50,
-                //   width: MediaQuery.of(context).size.width * 0.8,
-                //   child: LiquidLinearProgressIndicator(
-                //     value: progressBarValue,
-                //     valueColor: AlwaysStoppedAnimation(Colors.green),
-                //     backgroundColor: Colors.white,
-                //     borderColor: Colors.green,
-                //     borderWidth: 5.0,
-                //     borderRadius: 12.0,
-                //     direction: Axis.horizontal,
-                //     center: Text(
-                //       progressBarValue.toString() + "%",
-                //       style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w600, color: Colors.black),
-                //     ),
-                //   ),
-                // ),
 
-                child: LinearProgressIndicator(
-                  value: progressBarValue,
-                  backgroundColor: Colors.grey,
-                  color: Colors.green,
-                  minHeight: 40,
-                ),
-              ),
-            ),
-          ),
+          true
+              ? Positioned(
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      color: Colors.white,
+                      margin: const EdgeInsets.only(top: 25),
+                      child: Text(
+                        // poseController.wantedPose!.toStr,
+                        poseController.onboardingCompleted ? "Zauzimanje poze" : "Onboarding",
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 24),
+                      ),
+                    ),
+                  ),
+                )
+              : Container(),
+poseController.wantedPose != null
+              ? Positioned(
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      color: Colors.white,
+                      margin: const EdgeInsets.only(top: 25),
+                      child: Text(
+                        poseController.wantedPose!.toStr,
+                        // poseController.onboardingCompleted.toString(),
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(fontSize: 24),
+                      ),
+                    ),
+                  ),
+                )
+              : Container(),
+          cameraViewController.isOnboardingImageShowing
+              ? Positioned(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Image.asset('assets/images/onboarding1.png'),
+                  ),
+                )
+              : Container(),
+
+          cameraViewController.isPoseImageShowing
+              ? Positioned(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Image.asset('assets/images/onboarding3.png'),
+                  ),
+                )
+              : Container(),
+
+          cameraViewController.isProgressBarShowing
+              ? Positioned(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      margin: const EdgeInsets.all(20),
+                      // child: Container(
+                      //   height: 50,
+                      //   width: MediaQuery.of(context).size.width * 0.8,
+                      //   child: LiquidLinearProgressIndicator(
+                      //     value: progressBarValue,
+                      //     valueColor: AlwaysStoppedAnimation(Colors.green),
+                      //     backgroundColor: Colors.white,
+                      //     borderColor: Colors.green,
+                      //     borderWidth: 5.0,
+                      //     borderRadius: 12.0,
+                      //     direction: Axis.horizontal,
+                      //     center: Text(
+                      //       progressBarValue.toString() + "%",
+                      //       style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w600, color: Colors.black),
+                      //     ),
+                      //   ),
+                      // ),
+
+                      child: LinearProgressIndicator(
+                        value: progressBarValue,
+                        backgroundColor: Colors.grey,
+                        color: Colors.green,
+                        minHeight: 40,
+                      ),
+                    ),
+                  ),
+                )
+              : Container(),
           // Positioned(
           //   child: Padding(
           //     padding: const EdgeInsets.all(12.0),
@@ -222,5 +307,9 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
     final inputImage = InputImage.fromBytes(bytes: bytes, inputImageData: inputImageData);
 
     widget.onImage(inputImage);
+  }
+
+  void resetPosesDict() {
+    poseController.poseCalculationDict.forEach((name, value) => poseController.poseCalculationDict[name] = 0);
   }
 }

@@ -26,6 +26,12 @@ class PoseController extends GetxController {
     BasePose.rightLegUp : .00
   };
 
+var poseCalculationOnboardingDict = {
+    BasePose.leftArmNeutral : 0.0,
+    BasePose.rightArmNeutral : 0.0,
+    BasePose.leftLegNeutral : 0.0,
+    BasePose.rightLegNeutral : 0.0,
+  };
   var frameDelta = 0.06;
 
   updateCurrentPose(String pose) {

@@ -15,18 +15,26 @@ class PoseCalculationHelper {
     poseController = Get.find<PoseController>();
   }
 
-  void processBasePoses(List<Pose> poses) {
+  void processBasePoses(List<Pose> poses, bool isOnboarding) {
     this.poses = PoseModel(poses);
+    var poseController1 = Get.find<PoseController>();
 
-    poseController.poseCalculationDict.forEach((BasePose pose, double poseCounter) {
+    Map<BasePose, double> posesDict = {};
+    if(true){
+      posesDict = poseController1.poseCalculationDict;
+    }else{
+      posesDict = poseController1.poseCalculationOnboardingDict;
+    }
+    print("TIMER 1 ${poseController.poseCalculationDict}");
+    print("TIMER 2${poseController1.poseCalculationDict}");
+    posesDict.forEach((BasePose pose, double poseCounter) {
       var isPoseFunction = basePoseFunctions[pose];
       var isPose = isPoseFunction!(this.poses);
-
       if (isPose) {
         if (poseCounter + poseController.frameDelta > 3) {
-          poseController.poseCalculationDict[pose] = 3;
+          poseController1.poseCalculationDict[pose] = 3;
         } else {
-          poseController.poseCalculationDict[pose] = poseCounter + poseController.frameDelta;
+          poseController1.poseCalculationDict[pose] = poseCounter + poseController.frameDelta;
         }
       } else {
         if (poseCounter - poseController.frameDelta * 0.5 < 0) {
@@ -42,6 +50,8 @@ class PoseCalculationHelper {
   void setNewPose() {
     var rnd = math.Random();
     var nextPose = BasePose.values[rnd.nextInt(BasePose.values.length)];
+
+    // TODO ukljuci noge 
     while (nextPose.toStr.contains("LEG")) {
       nextPose = BasePose.values[rnd.nextInt(BasePose.values.length)];
     }
@@ -50,8 +60,14 @@ class PoseCalculationHelper {
     poseController.poseCalculationDict.forEach((key, value) {
       value = 0;
     });
+              print("TIMER sve resetao");
+
 
     log("DEBUG Dict ${poseController.poseCalculationDict}");
+  }
+
+  void setOnboardingPose(){
+
   }
 
   void onboardingTabletPoseDetection(List<Pose> poses) {
@@ -89,6 +105,11 @@ class PoseCalculationHelper {
   }
 
   void onboardingPhonePoseDetection(List<Pose> poses) {
+
+    if (poseController.poseCalculationDict[poseController.wantedPose] == 3) {
+      setNewPose();
+      poseController.updateLottieStatus(true);
+    }
     var landmarks = PoseModel(poses);
 
     double angleLeftShoulder = calculateAngle(landmarks.leftElbow, landmarks.leftShoulder, landmarks.leftHip);
@@ -237,11 +258,10 @@ bool isLeftLegNeutral(PoseModel poses) {
   var p1 = poses.leftElbow;
   var p2 = poses.leftShoulder;
   var p3 = poses.leftHip;
-
+  
   double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isLeftLegNeutral: $r");
-
-  if (r > 110) {
+  log("DEBUG isLeftArmNeutral: $r");
+  if (r > 0 && r < 30) {
     return true;
   }
   return false;
@@ -279,11 +299,10 @@ bool isRightLegNeutral(PoseModel poses) {
   var p1 = poses.leftElbow;
   var p2 = poses.leftShoulder;
   var p3 = poses.leftHip;
-
+  
   double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isRightLegNeutral: $r");
-
-  if (r > 110) {
+  log("DEBUG isLeftArmNeutral: $r");
+  if (r > 0 && r < 30) {
     return true;
   }
   return false;

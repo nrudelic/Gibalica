@@ -10,6 +10,8 @@ import 'package:gibalica/helpers/localization_test.dart';
 import 'package:gibalica/views/start_view.dart';
 import 'package:gibalica/widgets/pose_detector_view.dart';
 
+import 'controllers/camera_view_controller.dart';
+
 List<CameraDescription> cameras = [];
 
 Future<void> main() async {
@@ -46,14 +48,17 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final PoseController poseController = Get.put(PoseController());
   final DeviceController deviceController = Get.put(DeviceController());
+  final CameraViewController cameraViewController = Get.put(CameraViewController());
 
   bool isEnglish = true;
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Color.fromRGBO(0, 176, 240, 1),
-      body:  SafeArea(child: StartView()),
+      //body:  SafeArea(child: StartView()),
+      body:  PoseDetectorView()
+
     );
     // Fill device information into controller
   }
