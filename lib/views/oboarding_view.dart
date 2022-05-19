@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/widgets/pose_detector_view.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:lottie/lottie.dart';
 
-import 'onboarding_pages/onboarding_page1.dart';
+import 'meetup_view.dart';
 
 class OnBoardingView extends StatefulWidget {
   const OnBoardingView({Key? key}) : super(key: key);
@@ -23,13 +24,13 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             child: Align(
               alignment: Alignment.centerRight,
               child: Container(
-                margin: EdgeInsets.only(right: 10),
+                margin: const EdgeInsets.only(right: 10),
                 child: SizedBox(
                     child: TextButton(
                         onPressed: () {
-                          Get.to(PoseDetectorView());
+                          Get.to(const MeetupView());
                         },
-                        child: Text("Preskoci")),
+                        child: const Text("Preskoci")),
                     height: MediaQuery.of(context).size.height * 0.1),
               ),
             ),
@@ -39,58 +40,150 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             child: IntroductionScreen(
               done: const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
               onDone: () {
-                Get.to(PoseDetectorView());
+                Get.to(const MeetupView());
               },
               onSkip: () {
-                Get.to(PoseDetectorView());
+                Get.to(const MeetupView());
               },
+              showSkipButton: false,
               showNextButton: true,
               showBackButton: true,
-              next: Text("NESA"),
-              skip: const Text("Skip"),
-              back: const Text("back"),
+              next: const Text(">"),
+              back: const Text("<"),
               globalBackgroundColor: Colors.white,
               pages: [
                 PageViewModel(
-                  title: "Aplikacija služi za vježbanje i učenje",
-                  body: "",
-                  image: Image.asset('assets/images/onboarding1.png'),
-                ),
+                    title: "",
+                    image: Image.asset('assets/images/Gibalica_running.png'),
+                    bodyWidget: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "Aplikacija služi za",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                        Text(
+                          "vježbanje i učenje",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                      ],
+                    )),
                 PageViewModel(
-                  title: "Prednjom i stražnjom kamerom možeš snimati pokret tijela",
-                  body: "",
-                  image: Image.asset('assets/images/onboarding1.png'),
-                ),
+                    title: "",
+                    image: Lottie.network('https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
+                    bodyWidget: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "Prednjom i stražnjom",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                        Text(
+                          "kamerom možeš snimati",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                        Text(
+                          "pokret tijela",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                      ],
+                    )),
                 PageViewModel(
-                  title: "Umjesto vlastitim tijelom možeš vježbati i s karticama",
-                  body: "",
-                  image: Image.asset('assets/images/onboarding3.png'),
-                ),
+                    title: "",
+                    image: Padding(padding: EdgeInsets.symmetric(horizontal: 100), child: Image.asset('assets/images/Gibalica_cards.png')),
+                    bodyWidget: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "Umjesto vlastitim tijelom možeš",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                        Text(
+                          "vježbati i s karticama",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                      ],
+                    )),
                 PageViewModel(
-                  title: "Gibalica ti nudi 3 igre...",
-                  body: "",
-                  image: Image.asset('assets/images/onboarding3.png'),
-                ),
+                    title: "",
+                    image: Lottie.network('https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
+                    bodyWidget: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "Gibalica ti nudi 3 igre...",
+                          style: TextStyle(fontSize: 50),
+                        )
+                      ],
+                    )),
                 PageViewModel(
-                  title: "TRENING",
-                  body: "igra s vježbama za ruke i noge",
-                  image: Image.asset('assets/images/onboarding5.png'),
-                ),
+                    titleWidget: const Text(
+                      "TRENING",
+                      style: TextStyle(fontSize: 50),
+                    ),
+                    image: Image.asset('assets/images/Gibalica_training.png'),
+                    bodyWidget: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "igra s vježbama za ruke i noge",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                      ],
+                    )),
                 PageViewModel(
-                  title: "DAN i NOĆ",
-                  body: "zabavna igra koncentracije",
-                  image: Image.asset('assets/images/onboarding5.png'),
-                ),
+                    titleWidget: const Text(
+                      "DAN i NOĆ",
+                      style: TextStyle(fontSize: 50),
+                    ),
+                    image: Lottie.network('https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
+                    bodyWidget: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "zabavna igra koncentracije",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                      ],
+                    )),
                 PageViewModel(
-                  body: "igra pamćenja redoslijeda vježbi",
-                  title: "PONAVLJANJE",
-                  image: Image.asset('assets/images/onboarding7.png'),
-                ),
+                    titleWidget: const Text(
+                      "PONAVLJANJE",
+                      style: TextStyle(fontSize: 50),
+                    ),
+                    image: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 100.0),
+                      child: Image.asset('assets/images/Gibalica_repeating.png'),
+                    ),
+                    bodyWidget: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "igra pamćenja",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                        Text(
+                          "redoslijeda vježbi",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                      ],
+                    )),
                 PageViewModel(
-                  body: "",
-                  title: "Gibalica prati tvoj napredak za svaku od igara",
-                  image: Image.asset('assets/images/onboarding7.png'),
-                ),
+                    title: "",
+                    image: Image.asset('assets/images/onboarding9.png'),
+                    bodyWidget: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text(
+                          "Gibalica prati tvoj napredak ",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                        Text(
+                          "za svaku od igara",
+                          style: TextStyle(fontSize: 40),
+                        ),
+                      ],
+                    )),
               ],
             ),
           ),

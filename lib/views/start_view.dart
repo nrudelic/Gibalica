@@ -12,15 +12,14 @@ class StartView extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
 
     return Center(
-      child: Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            SizedBox(
-              height: 100,
-            ),
-            Column(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Expanded(
+            flex: 1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Text(
                   "GIBALICA",
@@ -32,14 +31,15 @@ class StartView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 100,
-            ),
-            Image.asset('assets/images/welcomeCharacter.png'),
-            SizedBox(
-              height: 100,
-            ),
-            Column(
+          ),
+          Expanded(
+            flex: 2,
+            child: Image.asset('assets/images/Gibalica_hello_white_circle.png'),
+          ),
+          Expanded(
+            flex: 1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Text(
                   "Drago mi te vidjeti ovdje...",
@@ -51,28 +51,25 @@ class StartView extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(
-              height: 100,
-            ),
-            FlatButton(
+          ),
+          Expanded(
+            flex: 1,
+            child: TextButton(
                 onPressed: () {
-                  Get.to(OnBoardingView());
+                  Get.to(const OnBoardingView());
                 },
                 child: Container(
                   width: width * 0.6,
                   height: 100,
-                  decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(Radius.circular(50))),
-                  child: Center(
-                      child: const Text(
+                  decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(const Radius.circular(50))),
+                  child: const Center(
+                      child: Text(
                     "Kreni",
                     style: TextStyle(fontSize: 40, color: Colors.black),
                   )),
                 )),
-            SizedBox(
-              height: 100,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

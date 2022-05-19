@@ -72,6 +72,24 @@ flutter:
     - assets/images/onboarding7.png
     - assets/images/onboarding9.png
     - assets/bell.wav
+    - assets/images/Gibalica_hello_white_circle.png
+    - assets/images/Gibalica_running.png
+    - assets/images/Gibalica_standing.png
+    - assets/images/Gibalica_sitting.png
+    - assets/images/Gibalica_cards.png
+    - assets/images/Gibalica_repeating.png
+    - assets/images/Gibalica_training.png
+    - assets/images/Avatar_1_Girl1.png
+    - assets/images/Avatar_2_Girl2.png
+    - assets/images/Avatar_3_Girl3.png
+    - assets/images/Avatar_4_Boy1.png
+    - assets/images/Avatar_5_Boy2.png
+    - assets/images/Avatar_6_Boy3.png
+    - assets/images/Gibalica_squat.png
+    - assets/images/Hand_Left.png
+    - assets/images/Hand_Right.png
+    - assets/images/Leg_Left.png
+    - assets/images/Leg_Right.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
