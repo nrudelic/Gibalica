@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'oboarding_view.dart';
+import 'onboarding_pages.dart';
 
 class StartView extends StatelessWidget {
   const StartView({Key? key}) : super(key: key);
@@ -43,10 +44,12 @@ class StartView extends StatelessWidget {
               children: const [
                 Text(
                   "Drago mi te vidjeti ovdje...",
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 40, color: Colors.white),
                 ),
                 Text(
                   "Dobro došao(la)!",
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 40, color: Colors.white),
                 ),
               ],
@@ -56,7 +59,7 @@ class StartView extends StatelessWidget {
             flex: 1,
             child: TextButton(
                 onPressed: () {
-                  Get.to(const OnBoardingView());
+                  Get.to(const OnboardingPages());
                 },
                 child: Container(
                   width: width * 0.6,

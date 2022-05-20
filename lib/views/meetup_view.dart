@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/views/profile_activation_view.dart';
+import 'package:gibalica/views/screening_pages.dart';
 
 import 'oboarding_view.dart';
 
@@ -12,62 +13,49 @@ class MeetupView extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      backgroundColor: Color.fromRGBO(112, 173, 71, 1),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: height * 0.2,
-            ),
-            Expanded(
-              flex: 2,
-              child: Image.asset('assets/images/Gibalica_hello_white_circle.png'),
-            ),
-            Expanded(
-              flex: 1,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
-                    "Sada kada znaš što te sve",
-                    style: TextStyle(fontSize: 40, color: Colors.white),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "čeka, možemo krenuti",
-                    style: TextStyle(fontSize: 40, color: Colors.white),
-                  ),
-                ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color.fromRGBO(112, 173, 71, 1),
+        body: Center(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Image.asset('assets/images/Gibalica_hello_white_circle.png'),
+                ),
               ),
-            ),
-            Expanded(
-              flex: 1,
-              child: TextButton(
+              const Expanded(
+                flex: 1,
+                child: Center(
+                  child: Text(
+                    "Sada kada znaš što te sve čeka, možemo krenuti",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 40, color: Colors.white),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: TextButton(
                   onPressed: () {
-                    Get.to(const ProfileActivationView());
+                    Get.to(const ScreeningPages());
                   },
                   child: Container(
-                    width: width * 0.45,
-                    height: 70,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(
-                        const Radius.circular(50),
-                      ),
-                    ),
-                    child: const Center(
-                        child: Text(
-                      "Upoznajmo se!",
+                    padding: const EdgeInsets.all(20.0),
+                    decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(50)), color: Colors.white),
+                    child: const Text(
+                      'Upoznajmo se!',
                       style: TextStyle(fontSize: 35, color: Color.fromRGBO(36, 80, 128, 1)),
-                    )),
-                  )),
-            ),
-          ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
