@@ -59,7 +59,7 @@ class MainScreen extends StatelessWidget {
                   children: [
                     TextButton(
                       onPressed: () {
-                        Get.to(() => const TrainingView());
+                        Get.to(() => TrainingView());
                       },
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40),

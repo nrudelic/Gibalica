@@ -9,6 +9,7 @@ import 'package:gibalica/helpers/localization_test.dart';
 import 'package:gibalica/views/start_view.dart';
 
 import 'controllers/camera_view_controller.dart';
+import 'controllers/game_controller.dart';
 
 List<CameraDescription> cameras = [];
 
@@ -48,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final DeviceController deviceController = Get.put(DeviceController());
   final CameraViewController cameraViewController = Get.put(CameraViewController());
   final PlayerController playerController = Get.put(PlayerController());
+  final GameController gameController = Get.put(GameController());
 
   bool isEnglish = true;
 

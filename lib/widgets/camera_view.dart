@@ -99,11 +99,10 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    return SafeArea(
+      child: Scaffold(
+        body: _body(),
       ),
-      body: _body(),
     );
   }
 
