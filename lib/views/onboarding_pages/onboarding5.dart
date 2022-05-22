@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Onboarding5 extends StatelessWidget {
   const Onboarding5({Key? key}) : super(key: key);
@@ -9,7 +10,7 @@ class Onboarding5 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Image.asset('assets/images/Gibalica_training.png'),
+          child: SvgPicture.asset('assets/Gibalica_training.svg'),
         ),
         Expanded(
           child: Center(

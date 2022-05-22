@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gibalica/views/onboarding_pages/onboarding1.dart';
 import 'package:gibalica/views/screening_pages/screening1.dart';
 import 'package:gibalica/views/screening_pages/screening2.dart';
 import 'package:gibalica/views/screening_pages/screening3.dart';
@@ -8,7 +7,6 @@ import 'package:gibalica/views/screening_pages/screening4.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'everything_ready_view.dart';
-import 'meetup_view.dart';
 
 
 class ScreeningPages extends StatefulWidget {
@@ -43,10 +41,10 @@ class _ScreeningPagesState extends State<ScreeningPages> {
               });
             },
             controller: controller,
-            children: const [
-              Screening1(),
-              Screening2(),
-              Screening3(),
+            children: [
+              const Screening1(),
+              const Screening2(),
+              const Screening3(),
               Screening4(),
             ],
           ),
@@ -75,7 +73,7 @@ class _ScreeningPagesState extends State<ScreeningPages> {
             ),
             GestureDetector(
               onTap: () {
-                isLastPage ? Get.to(EverythingReady()) : controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+                isLastPage ? Get.to(()=>const EverythingReady()) : controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
               },
               child: Container(
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(112, 173, 71, 1)),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:gibalica/color_palette.dart';
 
-import 'oboarding_view.dart';
 import 'onboarding_pages.dart';
 
 class StartView extends StatelessWidget {
@@ -9,8 +10,6 @@ class StartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
 
     return Center(
       child: Column(
@@ -24,18 +23,18 @@ class StartView extends StatelessWidget {
               children: const [
                 Text(
                   "GIBALICA",
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 Text(
                   "kaže bok!",
-                  style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ],
             ),
           ),
           Expanded(
             flex: 2,
-            child: Image.asset('assets/images/Gibalica_hello_white_circle.png'),
+            child: SvgPicture.asset('assets/Gibalica_hello_white_circle.svg'),
           ),
           Expanded(
             flex: 1,
@@ -45,12 +44,12 @@ class StartView extends StatelessWidget {
                 Text(
                   "Drago mi te vidjeti ovdje...",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 40, color: Colors.white),
+                  style: TextStyle(fontSize: 30, color: Colors.white),
                 ),
                 Text(
                   "Dobro došao(la)!",
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 40, color: Colors.white),
+                  style: TextStyle(fontSize: 30, color: Colors.white),
                 ),
               ],
             ),
@@ -58,19 +57,18 @@ class StartView extends StatelessWidget {
           Expanded(
             flex: 1,
             child: TextButton(
-                onPressed: () {
-                  Get.to(const OnboardingPages());
-                },
-                child: Container(
-                  width: width * 0.6,
-                  height: 100,
-                  decoration: const BoxDecoration(color: Colors.white, borderRadius: BorderRadius.all(const Radius.circular(50))),
-                  child: const Center(
-                      child: Text(
-                    "Kreni",
-                    style: TextStyle(fontSize: 40, color: Colors.black),
-                  )),
-                )),
+              onPressed: () {
+                Get.to(() => const OnboardingPages());
+              },
+              child: Container(
+                padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 60),
+                decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(50)), color: Colors.white),
+                child: const Text(
+                  'Kreni!',
+                  style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
+                ),
+              ),
+            ),
           ),
         ],
       ),

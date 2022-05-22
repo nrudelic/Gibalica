@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:gibalica/views/profile_activation_view.dart';
 import 'package:gibalica/views/screening_pages.dart';
-
-import 'oboarding_view.dart';
 
 class MeetupView extends StatelessWidget {
   const MeetupView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
-    var height = MediaQuery.of(context).size.height;
 
     return SafeArea(
       child: Scaffold(
@@ -25,7 +21,7 @@ class MeetupView extends StatelessWidget {
                 flex: 2,
                 child: Padding(
                   padding: const EdgeInsets.all(30.0),
-                  child: Image.asset('assets/images/Gibalica_hello_white_circle.png'),
+                  child: SvgPicture.asset('assets/Gibalica_hello_white_circle.svg'),
                 ),
               ),
               const Expanded(
@@ -42,7 +38,7 @@ class MeetupView extends StatelessWidget {
                 flex: 1,
                 child: TextButton(
                   onPressed: () {
-                    Get.to(const ScreeningPages());
+                    Get.to(() => const ScreeningPages());
                   },
                   child: Container(
                     padding: const EdgeInsets.all(20.0),

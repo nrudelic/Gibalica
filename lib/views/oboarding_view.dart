@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gibalica/widgets/pose_detector_view.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lottie/lottie.dart';
 
@@ -30,7 +29,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   child: SizedBox(
                       child: TextButton(
                           onPressed: () {
-                            Get.to(const MeetupView());
+                            Get.to(() => const MeetupView());
                           },
                           child: const Text("Preskoci")),
                       height: (MediaQuery.of(context).size.height - statusBarHeight) * 0.1),
@@ -42,10 +41,10 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               child: IntroductionScreen(
                 done: const Text("Done", style: TextStyle(fontWeight: FontWeight.w600)),
                 onDone: () {
-                  Get.to(const MeetupView());
+                  Get.to(() => const MeetupView());
                 },
                 onSkip: () {
-                  Get.to(const MeetupView());
+                  Get.to(() => const MeetupView());
                 },
                 showSkipButton: false,
                 showNextButton: true,
@@ -97,7 +96,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                       )),
                   PageViewModel(
                       title: "",
-                      image: Padding(padding: EdgeInsets.symmetric(horizontal: 100), child: Image.asset('assets/images/Gibalica_cards.png')),
+                      image: Padding(padding: const EdgeInsets.symmetric(horizontal: 100), child: Image.asset('assets/images/Gibalica_cards.png')),
                       bodyWidget: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
@@ -129,7 +128,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   PageViewModel(
                       titleWidget: const Text(
                         "TRENING",
-                            textAlign: TextAlign.center,
+                        textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 50),
                       ),
                       image: Image.asset('assets/images/Gibalica_training.png'),
@@ -146,7 +145,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   PageViewModel(
                       titleWidget: const Text(
                         "DAN i NOĆ",
-                            textAlign: TextAlign.center,
+                        textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 50),
                       ),
                       image: Lottie.network('https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
@@ -163,7 +162,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                   PageViewModel(
                       titleWidget: const Text(
                         "PONAVLJANJE",
-                            textAlign: TextAlign.center,
+                        textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 50),
                       ),
                       image: Padding(

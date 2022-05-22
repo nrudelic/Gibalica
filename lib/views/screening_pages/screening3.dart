@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:gibalica/controllers/player_controller.dart';
 
-class Screening3 extends StatelessWidget {
+class Screening3 extends StatefulWidget {
   const Screening3({Key? key}) : super(key: key);
+
+  @override
+  State<Screening3> createState() => _Screening3State();
+}
+
+class _Screening3State extends State<Screening3> {
+  var playerController = Get.find<PlayerController>();
 
   @override
   Widget build(BuildContext context) {
@@ -9,51 +19,68 @@ class Screening3 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 30, left: 20, right: 20),
-          child: Text(
-            "Prilagodi svoj trening",
-            style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
-          ),
-        ),
-        const Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-          child: Text(
-            "Odaberi pozicije za vježbanje",
-            style: TextStyle(fontSize: 30),
-          ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {print("1");},
-                    child: Image.asset(
-                      "assets/images/Gibalica_standing.png",
-                    ),
-                  ),
-                  const Text("Stajanje", style: TextStyle(fontSize: 40))
-                ],
-              ),
+        const Expanded(
+          flex: 1,
+          child: Padding(
+            padding: EdgeInsets.only(top: 30, left: 20, right: 20),
+            child: Text(
+              "Prilagodi svoj trening",
+              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
             ),
-            Expanded(
-              child: Column(
-                children: [
-                  GestureDetector(
-                    onTap: () {print("2");},
-                    child: Image.asset(
-                      "assets/images/Gibalica_sitting.png",
+          ),
+        ),
+        const Expanded(
+          flex: 1,
+          child: Padding(
+            padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+            child: Text(
+              "Odaberi pozicije za vježbanje",
+              style: TextStyle(fontSize: 30),
+            ),
+          ),
+        ),
+        Expanded(
+          flex: 4,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          playerController.positionPlayMode = PositionPlayMode.standing;
+                        },
+                        child: SvgPicture.asset(
+                          "assets/Gibalica_standing.svg",
+                        ),
+                      ),
                     ),
-                  ),
-                  const Text("Sjedenje", style: TextStyle(fontSize: 40))
-                ],
+                    const Text("Stajanje", style: TextStyle(fontSize: 40))
+                  ],
+                ),
               ),
-            )
-          ],
+              Expanded(
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          playerController.positionPlayMode = PositionPlayMode.sitting;
+                        },
+                        child: SvgPicture.asset(
+                          "assets/Gibalica_sitting.svg",
+                        ),
+                      ),
+                    ),
+                    const Text("Sjedenje", style: TextStyle(fontSize: 40))
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ],
     );

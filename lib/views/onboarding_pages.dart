@@ -39,7 +39,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
           actions: [
             TextButton(
               onPressed: () {
-                Get.to(const MeetupView());
+                Get.to(()=> const MeetupView());
               },
               child: const Text("PRESKOČI"),
             )
@@ -91,7 +91,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
             ),
             GestureDetector(
               onTap: () {
-                isLastPage ? Get.to(MeetupView()) : controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+                isLastPage ? Get.to(() => const MeetupView()) : controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
               },
               child: Container(
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(112, 173, 71, 1)),

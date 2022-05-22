@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class Screening1 extends StatelessWidget {
+import '../../controllers/player_controller.dart';
+
+class Screening1 extends StatefulWidget {
   const Screening1({Key? key}) : super(key: key);
+
+  @override
+  State<Screening1> createState() => _Screening1State();
+}
+
+class _Screening1State extends State<Screening1> {
+  var playerController = Get.find<PlayerController>();
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +43,9 @@ class Screening1 extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
           child: TextField(
+            onChanged: (text){
+              playerController.playerName = text;
+            },
             style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             decoration: InputDecoration(
               filled: true,

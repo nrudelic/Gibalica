@@ -41,6 +41,7 @@ dependencies:
   introduction_screen: ^3.0.2
   audioplayers: ^0.20.1
   smooth_page_indicator: ^1.0.0+2
+  flutter_svg: ^1.0.3
 
 dev_dependencies:
   flutter_test:
@@ -91,7 +92,24 @@ flutter:
     - assets/images/Hand_Right.png
     - assets/images/Leg_Left.png
     - assets/images/Leg_Right.png
-
+    - assets/Gibalica_running.svg
+    - assets/Gibalica_training.svg
+    - assets/Gibalica_cards.svg
+    - assets/Gibalica_repeating.svg
+    - assets/Avatar_1_Girl1.svg
+    - assets/Avatar_2_Girl2.svg
+    - assets/Avatar_3_girl3.svg
+    - assets/Avatar_4_Boy1.svg
+    - assets/Avatar_5_Boy2.svg
+    - assets/Avatar_6_Boy3.svg
+    - assets/Gibalica_sitting.svg
+    - assets/Gibalica_squat.svg
+    - assets/Gibalica_standing.svg
+    - assets/Hand_Left.svg
+    - assets/Hand_Right.svg
+    - assets/Leg_Left.svg
+    - assets/Leg_Right.svg
+    - assets/Gibalica_hello_white_circle.svg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

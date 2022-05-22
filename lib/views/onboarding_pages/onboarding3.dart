@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class Onboarding3 extends StatelessWidget {
   const Onboarding3({Key? key}) : super(key: key);
@@ -8,7 +9,7 @@ class Onboarding3 extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: Image.asset('assets/images/Gibalica_cards.png'),
+          child: SvgPicture.asset('assets/Gibalica_cards.svg'),
         ),
         const Expanded(
           child: Center(
