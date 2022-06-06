@@ -4,11 +4,14 @@ class PlayerController extends GetxController {
   String? playerName;
   String? avatarAssetPath;
   PositionPlayMode? positionPlayMode;
-  bool leftHandPref = false; 
-  bool rightHandPref = false;
-  bool squatPref = false;
-  bool leftLegPref = false;
-  bool rightLegPref = false;
+
+  bool avatarChosen = false;
+  
+  var leftHandPref = false.obs; 
+  var rightHandPref = false.obs;
+  var squatPref = false.obs;
+  var leftLegPref = false.obs;
+  var rightLegPref = false.obs;
 }
 
 enum PositionPlayMode{

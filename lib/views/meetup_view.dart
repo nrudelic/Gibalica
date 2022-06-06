@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:gibalica/controllers/settings_controller.dart';
 import 'package:gibalica/views/screening_pages.dart';
 
 class MeetupView extends StatelessWidget {
-  const MeetupView({Key? key}) : super(key: key);
-
+  MeetupView({Key? key}) : super(key: key);
+  var settingsController = Get.find<SettingsController>();
   @override
   Widget build(BuildContext context) {
 

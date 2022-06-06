@@ -154,10 +154,8 @@ enum BasePose{
   rightArmMiddle,
   rightArmUp,
   leftLegNeutral,
-  leftLegGap,
   leftLegUp,
   rightLegNeutral,
-  rightLegGap,
   rightLegUp,
 }
 
@@ -178,19 +176,22 @@ extension BasePoseExtension on BasePose {
         return "RIGHT ARM UP";
       case BasePose.leftLegNeutral:
         return "LEFT LEG NEUTRAL";
-      case BasePose.leftLegGap:
-        return "LEFT LEG GAP";
+      
       case BasePose.leftLegUp:
         return "LEFT LEG UP";
       case BasePose.rightLegNeutral:
         return "RIGHT LEG NEUTRAL";
-      case BasePose.rightLegGap:
-        return "RIGHT LEG GAP";
+      
       case BasePose.rightLegUp:
         return "RIGHT LEG UP";
       default:
         return "";
     }
   }
+}
+
+enum DayNightEnum{
+  day,
+  night
 }
 

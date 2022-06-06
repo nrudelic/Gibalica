@@ -13,7 +13,8 @@ import 'onboarding_pages/onboarding7.dart';
 import 'onboarding_pages/onboarding8.dart';
 
 class OnboardingPages extends StatefulWidget {
-  const OnboardingPages({Key? key}) : super(key: key);
+  int i;
+  OnboardingPages(this.i, {Key? key}) : super(key: key);
 
   @override
   State<OnboardingPages> createState() => _OnboardingPagesState();
@@ -39,7 +40,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
           actions: [
             TextButton(
               onPressed: () {
-                Get.to(()=> const MeetupView());
+                widget.i == 0 ? Get.to(()=> MeetupView()) : Get.back();
               },
               child: const Text("PRESKOČI"),
             )
@@ -91,7 +92,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
             ),
             GestureDetector(
               onTap: () {
-                isLastPage ? Get.to(() => const MeetupView()) : controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+                isLastPage ? (widget.i == 0 ? Get.to(() => MeetupView()) : Get.back()) : controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
               },
               child: Container(
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(112, 173, 71, 1)),

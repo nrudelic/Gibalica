@@ -58,7 +58,7 @@ class StartView extends StatelessWidget {
             flex: 1,
             child: TextButton(
               onPressed: () {
-                Get.to(() => const OnboardingPages());
+                Get.to(() => OnboardingPages(0));
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 60),

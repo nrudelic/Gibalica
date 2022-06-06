@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
+import 'package:gibalica/controllers/settings_controller.dart';
 
 import 'main_screen_view.dart';
 
 class EverythingReady extends StatelessWidget {
-  const EverythingReady({Key? key}) : super(key: key);
-
+  EverythingReady({Key? key}) : super(key: key);
+  var settingsController = Get.find<SettingsController>();
   @override
   Widget build(BuildContext context) {
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorPalette.yellow,
@@ -43,11 +43,12 @@ class EverythingReady extends StatelessWidget {
                 flex: 1,
                 child: TextButton(
                   onPressed: () {
+                    settingsController.gibalicaBox.put("onboardingFinished", true);
 
                     Get.to(() => MainScreen());
                   },
                   child: Container(
-                    padding: const EdgeInsets.symmetric(vertical:20.0, horizontal: 40),
+                    padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40),
                     decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(50)), color: Colors.white),
                     child: const Text(
                       'Gibaj se!',

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gibalica/controllers/game_controller.dart';
+import 'package:gibalica/controllers/player_controller.dart';
 import 'package:gibalica/views/screening_pages/screening1.dart';
 import 'package:gibalica/views/screening_pages/screening2.dart';
 import 'package:gibalica/views/screening_pages/screening3.dart';
@@ -7,7 +9,6 @@ import 'package:gibalica/views/screening_pages/screening4.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'everything_ready_view.dart';
-
 
 class ScreeningPages extends StatefulWidget {
   const ScreeningPages({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class ScreeningPages extends StatefulWidget {
 
 class _ScreeningPagesState extends State<ScreeningPages> {
   final controller = PageController();
+  var playerController = Get.find<PlayerController>();
   bool isLastPage = false;
 
   @override
@@ -37,14 +39,13 @@ class _ScreeningPagesState extends State<ScreeningPages> {
           child: PageView(
             onPageChanged: (index) {
               setState(() {
-                isLastPage = index == 3;
+                isLastPage = index == 2;
               });
             },
             controller: controller,
             children: [
               const Screening1(),
               const Screening2(),
-              const Screening3(),
               Screening4(),
             ],
           ),
@@ -68,12 +69,20 @@ class _ScreeningPagesState extends State<ScreeningPages> {
             Center(
               child: SmoothPageIndicator(
                 controller: controller,
-                count: 4,
+                count: 3,
               ),
             ),
             GestureDetector(
               onTap: () {
-                isLastPage ? Get.to(()=>const EverythingReady()) : controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+                if (isLastPage) {
+                  if (playerController.playerName != null && playerController.playerName != "Ime igrača" && playerController.playerName!.isNotEmpty && playerController.avatarChosen && (playerController.leftHandPref.value || playerController.rightHandPref.value || playerController.squatPref.value || playerController.leftLegPref.value || playerController.rightLegPref.value)) {
+                    Get.to(() => EverythingReady());
+                  } else {
+                    showAlertDialog(context);
+                  }
+                } else {
+                  controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+                }
               },
               child: Container(
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(112, 173, 71, 1)),
@@ -87,6 +96,43 @@ class _ScreeningPagesState extends State<ScreeningPages> {
           ]),
         ),
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: const Text("OK"),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: const Text("Oooops... :("),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Text("Kako bi nastavio/la dalje potrebno je zadovoljiti sljedeće uvjete:"),
+          Text(" - upisati svoje ime"),
+          Text(" - odabrati avatar"),
+          Text(" - odabrati barem jednu vježbu"),
+        ],
+      ),
+      shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

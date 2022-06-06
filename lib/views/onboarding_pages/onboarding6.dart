@@ -10,7 +10,7 @@ class Onboarding6 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Lottie.network('https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
+          child: Lottie.asset('assets/lotties/day-night.json'),
         ),
         Expanded(
           child: Center(

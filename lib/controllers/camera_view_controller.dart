@@ -21,4 +21,7 @@ class CameraViewController extends GetxController {
   void cancelTimer() {
     timer?.cancel();
   }
+
+  int maxX = 720;
+  int maxY = 1280;
 }

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/controllers/player_controller.dart';
+import 'package:gibalica/controllers/settings_controller.dart';
+
+import '../../color_palette.dart';
 
 class Screening4 extends StatefulWidget {
   Screening4({Key? key}) : super(key: key);
@@ -12,6 +15,7 @@ class Screening4 extends StatefulWidget {
 
 class _Screening4State extends State<Screening4> {
   final playerController = Get.find<PlayerController>();
+  final settingsController = Get.find<SettingsController>();
   var colors = [Colors.white, Colors.white, Colors.white, Colors.white, Colors.white];
 
   @override
@@ -63,20 +67,16 @@ class _Screening4State extends State<Screening4> {
                               padding: const EdgeInsets.all(8.0),
                               child: GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    playerController.leftHandPref = !playerController.leftHandPref;
-                                    if (playerController.leftHandPref) {
-                                      colors[0] = Colors.blue.shade100;
-                                    } else {
-                                      colors[0] = Colors.white;
-                                    }
-                                  });
+                                  playerController.leftHandPref.value = !playerController.leftHandPref.value;
+                                  settingsController.gibalicaBox.put("leftHandPref", playerController.leftHandPref.value);
                                 },
                                 child: LayoutBuilder(builder: (context, constraint) {
-                                  return CircleAvatar(
-                                    child: SvgPicture.asset("assets/Hand_Left.svg"),
-                                    backgroundColor: colors[0],
-                                    minRadius: constraint.biggest.height,
+                                  return Obx(
+                                    () => CircleAvatar(
+                                      child: SvgPicture.asset("assets/Hand_Left.svg"),
+                                      backgroundColor: playerController.leftHandPref.value ? ColorPalette.green : ColorPalette.pink,
+                                      minRadius: constraint.biggest.height,
+                                    ),
                                   );
                                 }),
                               ),
@@ -94,20 +94,16 @@ class _Screening4State extends State<Screening4> {
                               padding: const EdgeInsets.all(8.0),
                               child: GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    playerController.rightHandPref = !playerController.rightHandPref;
-                                    if (playerController.rightHandPref) {
-                                      colors[1] = Colors.blue.shade100;
-                                    } else {
-                                      colors[1] = Colors.white;
-                                    }
-                                  });
+                                  playerController.rightHandPref.value = !playerController.rightHandPref.value;
+                                  settingsController.gibalicaBox.put("rightHandPref", playerController.rightHandPref.value);
                                 },
                                 child: LayoutBuilder(builder: (context, constraint) {
-                                  return CircleAvatar(
-                                    child: SvgPicture.asset("assets/Hand_Right.svg"),
-                                    backgroundColor: colors[1],
-                                    minRadius: constraint.biggest.height,
+                                  return Obx(
+                                    () => CircleAvatar(
+                                      child: SvgPicture.asset("assets/Hand_Right.svg"),
+                                      backgroundColor: playerController.rightHandPref.value ? ColorPalette.green : ColorPalette.pink,
+                                      minRadius: constraint.biggest.height,
+                                    ),
                                   );
                                 }),
                               ),
@@ -132,20 +128,16 @@ class _Screening4State extends State<Screening4> {
                               padding: const EdgeInsets.all(8.0),
                               child: GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    playerController.squatPref = !playerController.squatPref;
-                                    if (playerController.squatPref) {
-                                      colors[2] = Colors.blue.shade100;
-                                    } else {
-                                      colors[2] = Colors.white;
-                                    }
-                                  });
+                                  playerController.squatPref.value = !playerController.squatPref.value;
+                                  settingsController.gibalicaBox.put("squatPref", playerController.squatPref.value);
                                 },
                                 child: LayoutBuilder(builder: (context, constraint) {
-                                  return CircleAvatar(
-                                    child: SvgPicture.asset("assets/Gibalica_squat.svg"),
-                                    backgroundColor: colors[2],
-                                    minRadius: constraint.biggest.height,
+                                  return Obx(
+                                    () => CircleAvatar(
+                                      child: SvgPicture.asset("assets/Gibalica_squat.svg"),
+                                      backgroundColor: playerController.squatPref.value ? ColorPalette.green : ColorPalette.pink,
+                                      minRadius: constraint.biggest.height,
+                                    ),
                                   );
                                 }),
                               ),
@@ -170,20 +162,16 @@ class _Screening4State extends State<Screening4> {
                               padding: const EdgeInsets.all(8.0),
                               child: GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    playerController.leftLegPref = !playerController.leftLegPref;
-                                    if (playerController.leftLegPref) {
-                                      colors[3] = Colors.blue.shade100;
-                                    } else {
-                                      colors[3] = Colors.white;
-                                    }
-                                  });
+                                  playerController.leftLegPref.value = !playerController.leftLegPref.value;
+                                  settingsController.gibalicaBox.put("leftLegPref", playerController.leftLegPref.value);
                                 },
                                 child: LayoutBuilder(builder: (context, constraint) {
-                                  return CircleAvatar(
-                                    child: SvgPicture.asset("assets/Leg_Left.svg"),
-                                    backgroundColor: colors[3],
-                                    minRadius: constraint.biggest.height,
+                                  return Obx(
+                                    () => CircleAvatar(
+                                      child: SvgPicture.asset("assets/Leg_Left.svg"),
+                                      backgroundColor: playerController.leftLegPref.value ? ColorPalette.green : ColorPalette.pink,
+                                      minRadius: constraint.biggest.height,
+                                    ),
                                   );
                                 }),
                               ),
@@ -201,20 +189,16 @@ class _Screening4State extends State<Screening4> {
                               padding: const EdgeInsets.all(8.0),
                               child: GestureDetector(
                                 onTap: () {
-                                  setState(() {
-                                    playerController.rightLegPref = !playerController.rightLegPref;
-                                    if (playerController.rightLegPref) {
-                                      colors[4] = Colors.blue.shade100;
-                                    } else {
-                                      colors[4] = Colors.white;
-                                    }
-                                  });
+                                  playerController.rightLegPref.value = !playerController.rightLegPref.value;
+                                  settingsController.gibalicaBox.put("rightLegPref", playerController.rightLegPref.value);
                                 },
                                 child: LayoutBuilder(builder: (context, constraint) {
-                                  return CircleAvatar(
-                                    child: SvgPicture.asset("assets/Leg_Right.svg"),
-                                    backgroundColor: colors[4],
-                                    minRadius: constraint.biggest.height,
+                                  return Obx(
+                                    () => CircleAvatar(
+                                      child: SvgPicture.asset("assets/Leg_Right.svg"),
+                                      backgroundColor: playerController.rightLegPref.value ? ColorPalette.green : ColorPalette.pink,
+                                      minRadius: constraint.biggest.height,
+                                    ),
                                   );
                                 }),
                               ),

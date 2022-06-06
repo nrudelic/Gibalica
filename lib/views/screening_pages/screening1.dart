@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gibalica/main.dart';
 
 import '../../controllers/player_controller.dart';
 
@@ -45,6 +46,7 @@ class _Screening1State extends State<Screening1> {
           child: TextField(
             onChanged: (text){
               playerController.playerName = text;
+              settingsController.gibalicaBox.put("playerName", text);
             },
             style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             decoration: InputDecoration(

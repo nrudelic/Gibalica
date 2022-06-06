@@ -1,5 +1,8 @@
 import 'dart:developer';
+import 'package:camera/camera.dart';
 import 'package:get/get.dart';
+import 'package:gibalica/controllers/camera_view_controller.dart';
+import 'package:gibalica/controllers/game_controller.dart';
 import 'package:gibalica/controllers/pose_controller.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:vector_math/vector_math.dart' as vector_math;
@@ -9,138 +12,128 @@ import '../models/pose_model.dart';
 
 class PoseCalculationHelper {
   late PoseController poseController;
+  late GameController gameController;
+  late CameraViewController cameraController;
   PoseModel poses = PoseModel.empty();
 
   PoseCalculationHelper() {
     poseController = Get.find<PoseController>();
+    gameController = Get.find<GameController>();
+    cameraController = Get.find<CameraViewController>();
   }
 
   void processBasePoses(List<Pose> poses, bool isOnboarding) {
+    log("KOKO: ${gameController.gameMode}");
     this.poses = PoseModel(poses);
-    var poseController1 = Get.find<PoseController>();
 
-    Map<BasePose, double> posesDict = {};
-    if(true){
-      posesDict = poseController1.poseCalculationDict;
-    }else{
-      posesDict = poseController1.poseCalculationOnboardingDict;
-    }
-    print("TIMER 1 ${poseController.poseCalculationDict}");
-    print("TIMER 2${poseController1.poseCalculationDict}");
-    posesDict.forEach((BasePose pose, double poseCounter) {
-      var isPoseFunction = basePoseFunctions[pose];
-      var isPose = isPoseFunction!(this.poses);
-      if (isPose) {
-        if (poseCounter + poseController.frameDelta > 3) {
-          poseController1.poseCalculationDict[pose] = 3;
-        } else {
-          poseController1.poseCalculationDict[pose] = poseCounter + poseController.frameDelta;
-        }
-      } else {
-        if (poseCounter - poseController.frameDelta * 0.5 < 0) {
-          poseController.poseCalculationDict[pose] = 0;
-        } else {
-          poseController.poseCalculationDict[pose] = poseCounter - poseController.frameDelta * 0.5;
-        }
+    if (!poseController.onboardingCompleted) {
+      if (this.poses.leftShoulder != null) {
+        poseController.yLeftShoulder = this.poses.leftShoulder!.y;
       }
-    });
-    log("DEBUG DictFAFA ${poseController.poseCalculationDict}");
+      if (this.poses.rightShoulder != null) {
+        poseController.yRightShoulder = this.poses.rightShoulder!.y;
+      }
+    }
+
+    if (gameController.gameMode == GameMode.training || !poseController.onboardingCompleted) {
+      Map<BasePose, double> posesDict = {};
+      posesDict = poseController.poseCalculationDict;
+
+      posesDict.forEach((BasePose pose, double poseCounter) {
+        var isPoseFunction = basePoseFunctions[pose];
+
+        // Check if pose taking is succesfull for this frame
+        var isPose = isPoseFunction!(this.poses);
+
+        // If pose is succesfully taken then we have to increase pose counter in dictionary
+        if (isPose) {
+          if (poseCounter + poseController.frameDelta > 3) {
+            poseController.poseCalculationDict[pose] = 3;
+          } else {
+            poseController.poseCalculationDict[pose] = poseCounter + poseController.frameDelta;
+          }
+        } else {
+          if (poseCounter - poseController.frameDelta * 0.5 < 0) {
+            poseController.poseCalculationDict[pose] = 0;
+          } else {
+            poseController.poseCalculationDict[pose] = poseCounter - poseController.frameDelta * 0.5;
+          }
+        }
+      });
+    } else if (gameController.gameMode == GameMode.dayAndNight) {
+      Map<DayNightEnum, double> dayNightDict = {};
+      dayNightDict = poseController.dayNightDict;
+
+      dayNightDict.forEach((DayNightEnum pose, double poseCounter) {
+        var isPoseFunction = dayNightFunctions[pose];
+
+        // Check if pose taking is succesfull for this frame
+        var isPose = isPoseFunction!(this.poses, cameraController);
+
+        // If pose is succesfully taken then we have to increase pose counter in dictionary
+        if (isPose) {
+          if (poseCounter + poseController.frameDelta > 3) {
+            poseController.dayNightDict[pose] = 3;
+          } else {
+            poseController.dayNightDict[pose] = poseCounter + poseController.frameDelta;
+          }
+        } else {
+          if (poseCounter - poseController.frameDelta * 0.5 < 0) {
+            poseController.dayNightDict[pose] = 0;
+          } else {
+            poseController.dayNightDict[pose] = poseCounter - poseController.frameDelta * 0.5;
+          }
+        }
+      });
+    }
   }
 
-  void setNewPose() {
+  void setNewRepeatingGameModePose() {
     var rnd = math.Random();
     var nextPose = BasePose.values[rnd.nextInt(BasePose.values.length)];
 
-    // TODO ukljuci noge 
-    while (nextPose.toStr.contains("LEG")) {
-      nextPose = BasePose.values[rnd.nextInt(BasePose.values.length)];
-    }
     poseController.wantedPose = nextPose;
 
     poseController.poseCalculationDict.forEach((key, value) {
       value = 0;
     });
-              print("TIMER sve resetao");
-
-
-    log("DEBUG Dict ${poseController.poseCalculationDict}");
   }
 
-  void setOnboardingPose(){
+  void setNewTrainingGameModePose() {
+    var rnd = math.Random();
+    var possiblePoses = gameController.possiblePoses;
+    log("DEEBUG" + possiblePoses.toString());
+    if (possiblePoses != null) {
+      var nextPose = possiblePoses[rnd.nextInt(possiblePoses.length)];
 
+      poseController.wantedPose = nextPose;
+
+      poseController.poseCalculationDict.forEach((key, value) {
+        value = 0;
+      });
+    }
   }
 
-  void onboardingTabletPoseDetection(List<Pose> poses) {
-    var landmarks = PoseModel(poses);
+  void setNewRepeatinGameModePose() {
+    var rnd = math.Random();
+    var nextPose = BasePose.values[rnd.nextInt(BasePose.values.length)];
 
-    double angleLeftShoulder = calculateAngle(landmarks.leftElbow, landmarks.leftShoulder, landmarks.leftHip);
-    log("angleLeftShoulder = $angleLeftShoulder");
-    if (angleLeftShoulder < 70 || angleLeftShoulder > 110) {
-      log("tu vracam");
-      return;
-    }
+    poseController.wantedPose = nextPose;
 
-    double angleRightShoulder = calculateAngle(landmarks.rightElbow, landmarks.rightShoulder, landmarks.rightHip);
-    log("angleRightShoulder = $angleRightShoulder");
-    if (angleRightShoulder < 70 || angleRightShoulder > 110) {
-      log("tu vracam2");
-      return;
-    }
-
-    double angleLeftElbow = calculateAngle(landmarks.leftWrist, landmarks.leftElbow, landmarks.leftShoulder);
-    log("angleLeftElbow = $angleLeftElbow");
-    if (angleRightShoulder < 160 || angleRightShoulder > 200) {
-      log("tu vracam3");
-      return;
-    }
-
-    double angleRightElbow = calculateAngle(landmarks.rightWrist, landmarks.rightElbow, landmarks.rightShoulder);
-    log("angleRightElbow = $angleRightElbow");
-    if (angleRightShoulder < 160 || angleRightShoulder > 200) {
-      log("tu vracam4");
-      return;
-    }
-
-    poseController.poseHoldingCounter++;
+    poseController.poseCalculationDict.forEach((key, value) {
+      value = 0;
+    });
   }
 
-  void onboardingPhonePoseDetection(List<Pose> poses) {
+  void setNewDayNightPosition() {
+    var rnd = math.Random();
+    var nextPose = DayNightEnum.values[rnd.nextInt(DayNightEnum.values.length)];
 
-    if (poseController.poseCalculationDict[poseController.wantedPose] == 3) {
-      setNewPose();
-      poseController.updateLottieStatus(true);
-    }
-    var landmarks = PoseModel(poses);
+    poseController.wantedDayNightPosition = nextPose;
 
-    double angleLeftShoulder = calculateAngle(landmarks.leftElbow, landmarks.leftShoulder, landmarks.leftHip);
-    log("angleLeftShoulder = $angleLeftShoulder");
-    if (angleLeftShoulder < 65 || angleLeftShoulder > 115) {
-      log("tu vracam1");
-      return;
-    }
-
-    double angleRightShoulder = calculateAngle(landmarks.rightElbow, landmarks.rightShoulder, landmarks.rightHip);
-    log("angleRightShoulder = $angleRightShoulder");
-    if (angleRightShoulder < 65 || angleRightShoulder > 115) {
-      log("tu vracam2");
-      return;
-    }
-
-    double angleLeftElbow = calculateAngle(landmarks.leftWrist, landmarks.leftElbow, landmarks.leftShoulder);
-    log("angleLeftElbow = $angleLeftElbow");
-    if (angleRightShoulder < 70 || angleRightShoulder > 110) {
-      log("tu vracam3");
-      return;
-    }
-
-    double angleRightElbow = calculateAngle(landmarks.rightWrist, landmarks.rightElbow, landmarks.rightShoulder);
-    log("angleRightElbow = $angleRightElbow");
-    if (angleRightShoulder < 70 || angleRightShoulder > 110) {
-      log("tu vracam4");
-      return;
-    }
-    log("PROSLO");
-    poseController.poseHoldingCounter++;
+    poseController.dayNightDict.forEach((key, value) {
+      value = 0;
+    });
   }
 
   var basePoseFunctions = {
@@ -151,12 +144,29 @@ class PoseCalculationHelper {
     BasePose.rightArmMiddle: isRightArmMiddle,
     BasePose.rightArmUp: isRightArmUp,
     BasePose.leftLegNeutral: isLeftLegNeutral,
-    BasePose.leftLegGap: isLeftLegGap,
     BasePose.leftLegUp: isLeftLegUp,
     BasePose.rightLegNeutral: isRightLegNeutral,
-    BasePose.rightLegGap: isRightLegGap,
     BasePose.rightLegUp: isRightLegUp,
   };
+
+  var dayNightFunctions = {
+    DayNightEnum.day: isDay,
+    DayNightEnum.night: isNight,
+  };
+}
+
+bool isDay(PoseModel poses, CameraViewController cameraController) {
+  var rightShoulder = poses.rightShoulder;
+  if (rightShoulder != null && rightShoulder.y < (cameraController.maxY / 2)) return true;
+
+  return false;
+}
+
+bool isNight(PoseModel poses, CameraViewController cameraController) {
+  var rightShoulder = poses.rightShoulder;
+  if (rightShoulder != null && rightShoulder.y > (cameraController.maxY / 2)) return true;
+
+  return false;
 }
 
 double calculateAngle(PoseLandmark? p1, PoseLandmark? p2, PoseLandmark? p3) {
@@ -175,9 +185,8 @@ bool isLeftArmNeutral(PoseModel poses) {
   var p1 = poses.leftElbow;
   var p2 = poses.leftShoulder;
   var p3 = poses.leftHip;
-  
+
   double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isLeftArmNeutral: $r");
   if (r > 0 && r < 30) {
     return true;
   }
@@ -190,7 +199,6 @@ bool isLeftArmMiddle(PoseModel poses) {
   var p3 = poses.leftHip;
 
   double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isLeftArmMiddle: $r");
 
   if (r > 80 && r < 100) {
     return true;
@@ -204,7 +212,6 @@ bool isLeftArmUp(PoseModel poses) {
   var p3 = poses.leftHip;
 
   double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isLeftArmUp: $r");
 
   if (r > 110) {
     return true;
@@ -218,7 +225,6 @@ bool isRightArmNeutral(PoseModel poses) {
   var p3 = poses.rightHip;
 
   double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isRightArmNeutral: $r");
 
   if (r > 0 && r < 30) {
     return true;
@@ -232,7 +238,6 @@ bool isRightArmMiddle(PoseModel poses) {
   var p3 = poses.rightHip;
 
   double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isRightArmMiddle: $r");
 
   if (r > 80 && r < 100) {
     return true;
@@ -246,7 +251,6 @@ bool isRightArmUp(PoseModel poses) {
   var p3 = poses.rightHip;
 
   double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isRightArmUp: $r");
 
   if (r > 110) {
     return true;
@@ -255,83 +259,53 @@ bool isRightArmUp(PoseModel poses) {
 }
 
 bool isLeftLegNeutral(PoseModel poses) {
-  var p1 = poses.leftElbow;
-  var p2 = poses.leftShoulder;
-  var p3 = poses.leftHip;
-  
-  double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isLeftArmNeutral: $r");
-  if (r > 0 && r < 30) {
-    return true;
-  }
-  return false;
-}
-
-bool isLeftLegGap(PoseModel poses) {
-  var p1 = poses.leftElbow;
-  var p2 = poses.leftShoulder;
-  var p3 = poses.leftHip;
+  var p1 = poses.leftShoulder;
+  var p2 = poses.leftHip;
+  var p3 = poses.leftKnee;
 
   double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isLeftLegGap: $r");
-
-  if (r > 110) {
+  if (r > 160 && r < 200) {
     return true;
   }
   return false;
 }
 
 bool isLeftLegUp(PoseModel poses) {
-  var p1 = poses.leftElbow;
-  var p2 = poses.leftShoulder;
-  var p3 = poses.leftHip;
+  var rightHip = poses.rightHip;
+  var leftKnee = poses.leftKnee;
+  var rightKnee = poses.rightKnee;
 
-  double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isLeftLegUp: $r");
-
-  if (r > 110) {
-    return true;
+  if (rightHip != null && leftKnee != null && rightKnee != null) {
+    var delta = (rightKnee.y - rightHip.y) / 2;
+    if (leftKnee.y <= rightKnee.y - delta) {
+      return true;
+    }
   }
   return false;
 }
 
 bool isRightLegNeutral(PoseModel poses) {
-  var p1 = poses.leftElbow;
-  var p2 = poses.leftShoulder;
-  var p3 = poses.leftHip;
-  
-  double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isLeftArmNeutral: $r");
-  if (r > 0 && r < 30) {
-    return true;
-  }
-  return false;
-}
-
-bool isRightLegGap(PoseModel poses) {
-  var p1 = poses.leftElbow;
-  var p2 = poses.leftShoulder;
-  var p3 = poses.leftHip;
+  var p1 = poses.rightShoulder;
+  var p2 = poses.rightHip;
+  var p3 = poses.rightKnee;
 
   double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isRightLegGap: $r");
-
-  if (r > 110) {
+  if (r > 160 && r < 200) {
     return true;
   }
   return false;
 }
 
 bool isRightLegUp(PoseModel poses) {
-  var p1 = poses.leftElbow;
-  var p2 = poses.leftShoulder;
-  var p3 = poses.leftHip;
+  var leftHip = poses.leftHip;
+  var rightKnee = poses.rightKnee;
+  var leftKnee = poses.leftKnee;
 
-  double r = calculateAngle(p1, p2, p3);
-  log("DEBUG isRightLegUp: $r");
-
-  if (r > 110) {
-    return true;
+  if (leftHip != null && rightKnee != null && leftKnee != null) {
+    var delta = (leftKnee.y - leftHip.y) / 2;
+    if (rightKnee.y <= leftKnee.y - delta) {
+      return true;
+    }
   }
   return false;
 }

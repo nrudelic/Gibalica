@@ -9,7 +9,7 @@ class Onboarding2 extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child:Lottie.network('https://raw.githubusercontent.com/xvrh/lottie-flutter/master/example/assets/Mobilo/A.json'),
+          child:Lottie.asset("assets/lotties/camera-roll.json"),
         ),
         const Expanded(
           child: Center(

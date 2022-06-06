@@ -1,11 +1,13 @@
 // import 'dart:io';
 
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gibalica/controllers/game_controller.dart';
 import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/lottie_animation.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
@@ -33,6 +35,7 @@ class CameraView extends StatefulWidget {
 class _CameraViewState extends State<CameraView> with SingleTickerProviderStateMixin {
   late AnimationController lottieController;
   final poseController = Get.find<PoseController>();
+  final gameController = Get.find<GameController>();
   CameraViewController cameraViewController = Get.find<CameraViewController>();
 
   CameraController? _controller;
@@ -51,42 +54,92 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
       vsync: this,
     );
 
-    lottieController.addStatusListener((status) {
-      if (status == AnimationStatus.completed) {
-        widget.poseController.playAnimation.value = false;
-        lottieController.value = 0;
-        Timer(
-          const Duration(seconds: 1),
-          () {       
-                            var poseCalculator = new PoseCalculationHelper();
-         print("OVAJ TIMER2");
-                // poseCalculator.setNewPose();
-            cameraViewController.isPoseImageShowing = true;
-            Timer(
-              const Duration(seconds: 3),
-              () {
-                print("OVAJ TIMER3");
-                resetPosesDict();
-                poseCalculator.setNewPose();
-                cameraViewController.isProgressBarShowing = true;
-                cameraViewController.isPoseImageShowing = false;               
-              },
-            );
-          },
-        );
-      }
-    });
+    if (gameController.gameMode == GameMode.training || gameController.gameMode == GameMode.repeating) {
+      lottieController.addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          widget.poseController.playAnimation.value = false;
+          lottieController.value = 0;
+          if (gameController.gameMode == GameMode.training) {
+            if (gameController.repeatNumber.value == gameController.currentRepetitionCounter) {
+              poseController.posePerformance[gameController.currentMode!] = true;
+              Get.back();
+              return;
+            }
+          } else {
+            if (gameController.repeatGameModeCounter.value == gameController.currentRepetitionCounter) {
+              Get.back();
+              return;
+            }
+          }
 
-    final timer = Timer(
-      const Duration(seconds: 3),
-      () {
-        cameraViewController.isOnboardingImageShowing = false;
-        cameraViewController.isProgressBarShowing = true;
-        //cameraViewController.isPoseImageShowing = true;
+          Timer(
+            const Duration(seconds: 1),
+            () {
+              var poseCalculator = new PoseCalculationHelper();
+              cameraViewController.isPoseImageShowing = true;
+              Timer(
+                const Duration(seconds: 3),
+                () {
+                  resetPosesDict();
+                  if (gameController.gameMode == GameMode.training) {
+                    poseCalculator.setNewTrainingGameModePose();
+                  } else if (gameController.gameMode == GameMode.repeating) {
+                    poseCalculator.setNewRepeatingGameModePose();
+                  }
+                  cameraViewController.isProgressBarShowing = true;
+                  cameraViewController.isPoseImageShowing = false;
+                },
+              );
+            },
+          );
+        }
+      });
 
-      },
-    );
+      final timer = Timer(
+        const Duration(seconds: 3),
+        () {
+          cameraViewController.isOnboardingImageShowing = false;
+          cameraViewController.isProgressBarShowing = true;
+          //cameraViewController.isPoseImageShowing = true;
+        },
+      );
+    }
 
+    if (gameController.gameMode == GameMode.dayAndNight) {
+      lottieController.addStatusListener((status) {
+        if (status == AnimationStatus.completed) {
+          widget.poseController.playAnimation.value = false;
+          lottieController.value = 0;
+          if (gameController.currentRepetitionCounter == gameController.dayNightCounter.value) {
+            Get.back();
+            return;
+          }
+          Timer(
+            const Duration(seconds: 1),
+            () {
+              cameraViewController.isPoseImageShowing = true;
+              Timer(
+                const Duration(seconds: 3),
+                () {
+                  resetPosesDict();
+                  cameraViewController.isProgressBarShowing = true;
+                  cameraViewController.isPoseImageShowing = false;
+                },
+              );
+            },
+          );
+        }
+      });
+
+      final timer = Timer(
+        const Duration(seconds: 3),
+        () {
+          cameraViewController.isOnboardingImageShowing = false;
+          cameraViewController.isProgressBarShowing = true;
+          //cameraViewController.isPoseImageShowing = true;
+        },
+      );
+    }
     _startLiveFeed();
   }
 
@@ -118,17 +171,16 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
     BasePose targetPose;
     double progressBarValue = 0;
 
-if(cameraViewController.isProgressBarShowing){
-
-    if (poseController.onboardingCompleted ) {
-      targetPose = poseController.wantedPose as BasePose;
-
-      progressBarValue = (poseController.poseCalculationDict[targetPose] as double) / 3;
-    } else {
-      progressBarValue = ((poseController.poseCalculationDict[BasePose.leftArmNeutral] as double) + (poseController.poseCalculationDict[BasePose.rightArmNeutral] as double) + (poseController.poseCalculationDict[BasePose.leftLegNeutral] as double) + (poseController.poseCalculationDict[BasePose.rightLegNeutral] as double)) / 12;
-      
+    if (cameraViewController.isProgressBarShowing) {
+      if (!poseController.onboardingCompleted) {
+        progressBarValue = ((poseController.poseCalculationDict[BasePose.leftArmNeutral] as double) + (poseController.poseCalculationDict[BasePose.rightArmNeutral] as double) + (poseController.poseCalculationDict[BasePose.leftLegNeutral] as double) + (poseController.poseCalculationDict[BasePose.rightLegNeutral] as double)) / 12;
+      } else if (poseController.onboardingCompleted && (gameController.gameMode == GameMode.training || gameController.gameMode == GameMode.repeating)) {
+        targetPose = poseController.wantedPose as BasePose;
+        progressBarValue = (poseController.poseCalculationDict[targetPose] as double) / 3;
+      } else if (poseController.onboardingCompleted && gameController.gameMode == GameMode.dayAndNight) {
+        progressBarValue = (poseController.dayNightDict[poseController.wantedDayNightPosition] as double) / 3;
+      }
     }
-}
 
     return Container(
       color: Colors.black,
@@ -137,11 +189,10 @@ if(cameraViewController.isProgressBarShowing){
         children: <Widget>[
           CameraPreview(_controller!),
           if (widget.customPaint != null) widget.customPaint!,
-
           true
               ? Positioned(
                   child: Align(
-                    alignment: Alignment.topCenter,
+                    alignment: Alignment.topRight,
                     child: Container(
                       color: Colors.white,
                       margin: const EdgeInsets.only(top: 25),
@@ -155,7 +206,7 @@ if(cameraViewController.isProgressBarShowing){
                   ),
                 )
               : Container(),
-poseController.wantedPose != null
+          poseController.wantedPose != null
               ? Positioned(
                   child: Align(
                     alignment: Alignment.topLeft,
@@ -164,7 +215,7 @@ poseController.wantedPose != null
                       margin: const EdgeInsets.only(top: 25),
                       child: Text(
                         poseController.wantedPose!.toStr,
-                        // poseController.onboardingCompleted.toString(),
+                        //poseController.wantedDayNightPosition.toString(),
                         textAlign: TextAlign.center,
                         style: const TextStyle(fontSize: 24),
                       ),
@@ -180,7 +231,6 @@ poseController.wantedPose != null
                   ),
                 )
               : Container(),
-
           cameraViewController.isPoseImageShowing
               ? Positioned(
                   child: Align(
@@ -189,31 +239,12 @@ poseController.wantedPose != null
                   ),
                 )
               : Container(),
-
           cameraViewController.isProgressBarShowing
               ? Positioned(
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Container(
                       margin: const EdgeInsets.all(20),
-                      // child: Container(
-                      //   height: 50,
-                      //   width: MediaQuery.of(context).size.width * 0.8,
-                      //   child: LiquidLinearProgressIndicator(
-                      //     value: progressBarValue,
-                      //     valueColor: AlwaysStoppedAnimation(Colors.green),
-                      //     backgroundColor: Colors.white,
-                      //     borderColor: Colors.green,
-                      //     borderWidth: 5.0,
-                      //     borderRadius: 12.0,
-                      //     direction: Axis.horizontal,
-                      //     center: Text(
-                      //       progressBarValue.toString() + "%",
-                      //       style: TextStyle(fontSize: 12.0, fontWeight: FontWeight.w600, color: Colors.black),
-                      //     ),
-                      //   ),
-                      // ),
-
                       child: LinearProgressIndicator(
                         value: progressBarValue,
                         backgroundColor: Colors.grey,
@@ -224,20 +255,6 @@ poseController.wantedPose != null
                   ),
                 )
               : Container(),
-          // Positioned(
-          //   child: Padding(
-          //     padding: const EdgeInsets.all(12.0),
-          //     child: Align(
-          //         alignment: Alignment.topRight,
-          //         child: widget.poseController.onboardingCompleted
-          //             ? const CircleAvatar(
-          //                 backgroundColor: Colors.green,
-          //               )
-          //             : const CircleAvatar(
-          //                 backgroundColor: Colors.red,
-          //               )),
-          //   ),
-          // ),
           AnimationOverlay(lottieController: lottieController),
         ],
       ),
@@ -251,6 +268,7 @@ poseController.wantedPose != null
       ResolutionPreset.max,
       enableAudio: false,
     );
+
     _controller?.initialize().then((_) {
       if (!mounted) {
         return;
@@ -274,6 +292,9 @@ poseController.wantedPose != null
   }
 
   Future _processCameraImage(CameraImage image) async {
+    cameraViewController.maxX = image.height;
+    cameraViewController.maxY = image.width;
+
     final WriteBuffer allBytes = WriteBuffer();
     for (Plane plane in image.planes) {
       allBytes.putUint8List(plane.bytes);

@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/player_controller.dart';
+import 'package:gibalica/main.dart';
 
 class Screening2 extends StatefulWidget {
   const Screening2({Key? key}) : super(key: key);
@@ -65,6 +66,8 @@ class _Screening2State extends State<Screening2> {
                               resetColors();
                               colors[0] = Colors.blue.shade100;
                               playerController.avatarAssetPath = "assets/Avatar_1_Girl1.svg";
+                              settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_1_Girl1.svg");
+                              playerController.avatarChosen = true;
                             });
                           },
                           child: LayoutBuilder(builder: (context, constraint) {
@@ -86,6 +89,8 @@ class _Screening2State extends State<Screening2> {
                               resetColors();
                               colors[1] = Colors.blue.shade100;
                               playerController.avatarAssetPath = "assets/Avatar_2_Girl2.svg";
+                              settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_2_Girl2.svg");
+                              playerController.avatarChosen = true;
                             });
                           },
                           child: LayoutBuilder(builder: (context, constraint) {
@@ -107,6 +112,8 @@ class _Screening2State extends State<Screening2> {
                               resetColors();
                               colors[2] = Colors.blue.shade100;
                               playerController.avatarAssetPath = "assets/Avatar_3_girl3.svg";
+                              settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_3_girl3.svg");
+                              playerController.avatarChosen = true;
                             });
                           },
                           child: LayoutBuilder(builder: (context, constraint) {
@@ -135,6 +142,8 @@ class _Screening2State extends State<Screening2> {
                               resetColors();
                               colors[3] = Colors.blue.shade100;
                               playerController.avatarAssetPath = "assets/Avatar_4_Boy1.svg";
+                              settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_4_Boy1.svg");
+                              playerController.avatarChosen = true;
                             });
                           },
                           child: LayoutBuilder(builder: (context, constraint) {
@@ -156,6 +165,8 @@ class _Screening2State extends State<Screening2> {
                               resetColors();
                               colors[4] = Colors.blue.shade100;
                               playerController.avatarAssetPath = "assets/Avatar_5_Boy2.svg";
+                              settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_5_Boy2.svg");
+                              playerController.avatarChosen = true;
                             });
                           },
                           child: LayoutBuilder(builder: (context, constraint) {
@@ -177,6 +188,8 @@ class _Screening2State extends State<Screening2> {
                               resetColors();
                               colors[5] = Colors.blue.shade100;
                               playerController.avatarAssetPath = "assets/Avatar_6_Boy3.svg";
+                              settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_6_Boy3.svg");
+                              playerController.avatarChosen = true;
                             });
                           },
                           child: LayoutBuilder(builder: (context, constraint) {
