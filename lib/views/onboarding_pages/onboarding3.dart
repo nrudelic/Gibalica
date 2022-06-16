@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -13,10 +14,13 @@ class Onboarding3 extends StatelessWidget {
         ),
         const Expanded(
           child: Center(
-            child: Text(
-              "Umjesto vlastitim tijelom možeš vježbati i s karticama",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 40),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30.0),
+              child: AutoSizeText(
+                "Umjesto vlastitim tijelom možeš vježbati i s karticama",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 40),
+              ),
             ),
           ),
         )

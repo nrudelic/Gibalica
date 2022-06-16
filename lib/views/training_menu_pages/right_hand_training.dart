@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/game_controller.dart';
 import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/training_popup.dart';
+import 'package:lottie/lottie.dart';
 
 class RightHandTraining extends StatefulWidget {
   const RightHandTraining({Key? key}) : super(key: key);
@@ -43,7 +45,7 @@ class _RightHandTrainingState extends State<RightHandTraining> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: GestureDetector(onTap: () {}, child: SvgPicture.asset("assets/Hand_Right.svg")),
+                child: Lottie.asset("assets/lotties/backhand-index-pointing-right.json"),
               ),
             ),
           ]),
@@ -71,7 +73,7 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                     gameController.gameMode = GameMode.training;
                                     gameController.repeatNumber.value = 3;
                                     gameController.gameType.value = GameType.personal;
-                                      gameController.currentMode = GamePlayModes.rightArmUp;
+                                    gameController.currentMode = GamePlayModes.rightArmUp;
 
                                     return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
                                   },
@@ -82,8 +84,9 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
                                     child: SvgPicture.asset(
-                                      "assets/Avatar_1_Girl1.svg",
+                                      "assets/RIGHT_HAND_up_light.svg",
                                     ),
+                                    backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
                                   );
                                 }),
@@ -93,8 +96,9 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                           const Expanded(
                             flex: 2,
                             child: Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 "U vis",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -117,7 +121,7 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                     gameController.gameMode = GameMode.training;
                                     gameController.repeatNumber.value = 3;
                                     gameController.gameType.value = GameType.personal;
-                                      gameController.currentMode = GamePlayModes.rightArmMiddle;
+                                    gameController.currentMode = GamePlayModes.rightArmMiddle;
 
                                     return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
                                   },
@@ -128,8 +132,9 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
                                     child: SvgPicture.asset(
-                                      "assets/Avatar_1_Girl1.svg",
+                                      "assets/RIGHT_HAND_onside_light.svg",
                                     ),
+                                    backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
                                   );
                                 }),
@@ -139,8 +144,9 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                           const Expanded(
                             flex: 2,
                             child: Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 "Sa strane",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -180,8 +186,9 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
                                     child: SvgPicture.asset(
-                                      "assets/Avatar_1_Girl1.svg",
+                                      "assets/RIGHT_HAND_plus_light.svg",
                                     ),
+                                    backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
                                   );
                                 }),
@@ -191,8 +198,9 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                           const Expanded(
                             flex: 2,
                             child: Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 "U vis i sa strane",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                               ),
                             ),

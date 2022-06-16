@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/game_controller.dart';
 import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/training_popup.dart';
+import 'package:lottie/lottie.dart';
 
 class SingleLegTraining extends StatefulWidget {
   const SingleLegTraining({Key? key}) : super(key: key);
@@ -24,10 +26,10 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
         Expanded(
           flex: 1,
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Expanded(
+                       Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: GestureDetector(onTap: () {}, child: SvgPicture.asset("assets/Hand_Left.svg")),
+                child: Lottie.asset("assets/lotties/footprint.json"),
               ),
             ),
             Expanded(
@@ -75,8 +77,9 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                           child: LayoutBuilder(builder: (context, constraint) {
                             return CircleAvatar(
                               child: SvgPicture.asset(
-                                "assets/Avatar_1_Girl1.svg",
+                                "assets/LEFT_LEG_up_light.svg",
                               ),
+                              backgroundColor: Colors.white,
                               minRadius: constraint.biggest.height,
                             );
                           }),
@@ -86,8 +89,9 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                     const Expanded(
                       flex: 2,
                       child: Center(
-                        child: Text(
+                        child: AutoSizeText(
                           "Lijeva u vis",
+                          textAlign: TextAlign.center,
                           style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -121,8 +125,9 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                           child: LayoutBuilder(builder: (context, constraint) {
                             return CircleAvatar(
                               child: SvgPicture.asset(
-                                "assets/Avatar_1_Girl1.svg",
+                                "assets/LEFT_LEG_up_light.svg",
                               ),
+                              backgroundColor: Colors.white,
                               minRadius: constraint.biggest.height,
                             );
                           }),
@@ -132,8 +137,9 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                     const Expanded(
                       flex: 2,
                       child: Center(
-                        child: Text(
+                        child: AutoSizeText(
                           "Desna u vis",
+                          textAlign: TextAlign.center,
                           style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                         ),
                       ),

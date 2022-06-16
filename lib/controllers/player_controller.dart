@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 
 class PlayerController extends GetxController {
   String? playerName;
-  String? avatarAssetPath;
+  var avatarAssetPath = "assets/Avatar_1_Girl1.svg".obs;
   PositionPlayMode? positionPlayMode;
 
   bool avatarChosen = false;

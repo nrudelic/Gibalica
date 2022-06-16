@@ -6,6 +6,7 @@ import 'dart:developer';
 import 'package:camera/camera.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/controllers/game_controller.dart';
 import 'package:gibalica/models/pose_model.dart';
@@ -25,7 +26,7 @@ class CameraView extends StatefulWidget {
   final String title;
   final CustomPaint? customPaint;
   final Function(InputImage inputImage) onImage;
-  final CameraLensDirection initialDirection;
+  CameraLensDirection initialDirection;
   final poseController = Get.find<PoseController>();
 
   @override
@@ -45,6 +46,8 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
   @override
   void initState() {
     super.initState();
+    cameraViewController.cameraOn = true;
+    widget.initialDirection = gameController.gameType.value == GameType.personal ? CameraLensDirection.front : CameraLensDirection.back;
     for (var i = 0; i < cameras.length; i++) {
       if (cameras[i].lensDirection == widget.initialDirection) {
         _cameraIndex = i;
@@ -61,6 +64,8 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
           lottieController.value = 0;
           if (gameController.gameMode == GameMode.training) {
             if (gameController.repeatNumber.value == gameController.currentRepetitionCounter) {
+              print("TU SAM ");
+              print(gameController.currentMode);
               poseController.posePerformance[gameController.currentMode!] = true;
               Get.back();
               return;
@@ -76,18 +81,26 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
             const Duration(seconds: 1),
             () {
               var poseCalculator = new PoseCalculationHelper();
-              cameraViewController.isPoseImageShowing = true;
+              if (poseController.onboardingCompleted) {
+                cameraViewController.isPoseImageShowing = true;
+              } else {
+                cameraViewController.isOnboardingImageShowing = true;
+              }
               Timer(
                 const Duration(seconds: 3),
                 () {
                   resetPosesDict();
-                  if (gameController.gameMode == GameMode.training) {
-                    poseCalculator.setNewTrainingGameModePose();
-                  } else if (gameController.gameMode == GameMode.repeating) {
-                    poseCalculator.setNewRepeatingGameModePose();
-                  }
+                  // if (gameController.gameMode == GameMode.training) {
+                  //   poseCalculator.setNewTrainingGameModePose();
+                  // } else if (gameController.gameMode == GameMode.repeating) {
+                  //   poseCalculator.setNewRepeatingGameModePose();
+                  // }
                   cameraViewController.isProgressBarShowing = true;
-                  cameraViewController.isPoseImageShowing = false;
+                  if (poseController.onboardingCompleted) {
+                    cameraViewController.isPoseImageShowing = false;
+                  } else {
+                    cameraViewController.isOnboardingImageShowing = false;
+                  }
                 },
               );
             },
@@ -144,9 +157,15 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
   }
 
   @override
-  void dispose() {
+  void dispose() async {
+    print("timer ne bi smio");
+    cameraViewController.cameraOn = false;
     _stopLiveFeed();
+
     lottieController.dispose();
+    cameraViewController.cancelOnboardingTimer();
+    cameraViewController.cancelTimer();
+    cameraViewController.cancelInnerTimers();
     super.dispose();
   }
 
@@ -189,55 +208,66 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
         children: <Widget>[
           CameraPreview(_controller!),
           if (widget.customPaint != null) widget.customPaint!,
-          true
-              ? Positioned(
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      color: Colors.white,
-                      margin: const EdgeInsets.only(top: 25),
-                      child: Text(
-                        // poseController.wantedPose!.toStr,
-                        poseController.onboardingCompleted ? "Zauzimanje poze" : "Onboarding",
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 24),
-                      ),
-                    ),
-                  ),
-                )
-              : Container(),
-          poseController.wantedPose != null
-              ? Positioned(
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      color: Colors.white,
-                      margin: const EdgeInsets.only(top: 25),
-                      child: Text(
-                        poseController.wantedPose!.toStr,
-                        //poseController.wantedDayNightPosition.toString(),
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(fontSize: 24),
-                      ),
-                    ),
-                  ),
-                )
-              : Container(),
+          //  Positioned(
+          //     child: Align(
+          //       alignment: Alignment.topRight,
+          //       child: Container(
+          //         color: Colors.white,
+          //         margin: const EdgeInsets.only(top: 25),
+          //         child: Text(
+          //           // poseController.wantedPose!.toStr,
+          //           poseController.onboardingCompleted ? "Zauzimanje poze" : "Onboarding",
+          //           textAlign: TextAlign.center,
+          //           style: const TextStyle(fontSize: 24),
+          //         ),
+          //       ),
+          //     ),
+          //   )
+          // poseController.wantedPose != null
+          //     ? Positioned(
+          //         child: Align(
+          //           alignment: Alignment.topLeft,
+          //           child: Container(
+          //             color: Colors.white,
+          //             margin: const EdgeInsets.only(top: 25),
+          //             child: Text(
+          //               poseController.wantedPose!.toStr,
+          //               //poseController.wantedDayNightPosition.toString(),
+          //               textAlign: TextAlign.center,
+          //               style: const TextStyle(fontSize: 24),
+          //             ),
+          //           ),
+          //         ),
+          //       )
+          //     : Container(),
           cameraViewController.isOnboardingImageShowing
-              ? Positioned(
+              ? Positioned.fill(
+                  child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  color: Colors.white.withOpacity(0.8),
                   child: Align(
                     alignment: Alignment.center,
-                    child: Image.asset('assets/images/onboarding1.png'),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.1),
+                      child: SvgPicture.asset('assets/Gibalica_NEUTRAL.svg'),
+                    ),
                   ),
-                )
+                ))
               : Container(),
+
           cameraViewController.isPoseImageShowing
-              ? Positioned(
+              ? Positioned.fill(
+                  child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  color: (gameController.gameMode == GameMode.training || gameController.gameMode == GameMode.repeating) ? Colors.white.withOpacity(0.8) : (poseController.wantedDayNightPosition == DayNightEnum.day ? Color.fromRGBO(179, 223, 244, 1).withOpacity(0.8) : Color.fromRGBO(16, 8, 56, 1).withOpacity(0.8)),
                   child: Align(
                     alignment: Alignment.center,
-                    child: Image.asset('assets/images/onboarding3.png'),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.1),
+                      child: SvgPicture.asset((gameController.gameMode == GameMode.training || gameController.gameMode == GameMode.repeating) ? determinePoseImage() : determineDayNight()),
+                    ),
                   ),
-                )
+                ))
               : Container(),
           cameraViewController.isProgressBarShowing
               ? Positioned(
@@ -331,5 +361,44 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
 
   void resetPosesDict() {
     poseController.poseCalculationDict.forEach((name, value) => poseController.poseCalculationDict[name] = 0);
+  }
+
+  String determinePoseImage() {
+    print("DEBUGGED ${poseController.wantedPose}");
+    switch (poseController.wantedPose) {
+      case BasePose.leftArmNeutral:
+        return 'assets/statistics.svg';
+      case BasePose.leftArmMiddle:
+        return 'assets/Gibalica_LEFT_ON_SIDE.svg';
+      case BasePose.leftArmUp:
+        return 'assets/Gibalica_LEFT_UP.svg';
+      case BasePose.rightArmNeutral:
+        return 'assets/statistics.svg';
+      case BasePose.rightArmMiddle:
+        return 'assets/Gibalica_RIGHT_ON_SIDE.svg';
+      case BasePose.rightArmUp:
+        return 'assets/Gibalica_RIGHT_UP.svg';
+      case BasePose.leftLegNeutral:
+        return 'assets/statistics.svg';
+      case BasePose.leftLegUp:
+        return 'assets/Gibalica_LEFT_LEG_UP.svg';
+      case BasePose.rightLegNeutral:
+        return 'assets/statistics.svg';
+      case BasePose.rightLegUp:
+        return 'assets/Gibalica_RIGHT_LEG_UP.svg';
+      default:
+        return 'assets/statistics.svg';
+    }
+  }
+
+  determineDayNight() {
+    switch (poseController.wantedDayNightPosition) {
+      case DayNightEnum.day:
+        return 'assets/Gibalica_DAY_no_background.svg';
+      case DayNightEnum.night:
+        return 'assets/Gibalica_NIGHT_no_background.svg';
+      default:
+        return 'assets/statistics.svg';
+    }
   }
 }

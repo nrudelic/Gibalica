@@ -7,19 +7,57 @@ class CameraViewController extends GetxController {
   bool isProgressBarShowing = false;
   bool isOnboardingCompletedAnimationShowing = false;
   bool isPoseSuccessfullAnimationShowing = false;
-  Timer? timer;
+  Timer? poseTimer;
+  Timer? onboardingTimer;
+  Timer? onboardingInnerTimer;
+  Timer? poseInnerTimer;
+  bool cameraOn = false;
 
   void startCameraTimer() {
-    timer = Timer(const Duration(seconds: 7), () {
+    print("TIMER" + cameraOn.toString());
+    if (!cameraOn) return;
+      print("TIMER AGAIEBGOA STARTED");
+
+    poseTimer = Timer(const Duration(seconds: 10), (){
       isPoseImageShowing = true;
-      Timer(const Duration(seconds: 3), () {
+      poseInnerTimer = Timer(const Duration(seconds: 3), () {
+        print("TIMER AGAIEBGOA");
+
         isPoseImageShowing = false;
       });
     });
   }
 
+  void startCameraOnboardingTimer() {
+    if (!cameraOn) return;
+    print("TIMER AHUESE STARTED" );
+
+    onboardingTimer = Timer(const Duration(seconds: 10), ()  {
+      isOnboardingImageShowing = true;
+
+      onboardingInnerTimer = Timer(const Duration(seconds: 3), () {
+        print("TIMER AHUESE");
+        isOnboardingImageShowing = false;
+      });
+    });
+  }
+
   void cancelTimer() {
-    timer?.cancel();
+    poseTimer?.cancel();
+    poseTimer = null;
+    print("TIMER CANCELED");
+  }
+
+  void cancelOnboardingTimer() {
+    onboardingTimer?.cancel();
+    onboardingTimer = null;
+    print("TIMER CANCELED");
+  }
+
+  void cancelInnerTimers() {
+    onboardingInnerTimer?.cancel();
+    onboardingInnerTimer = null;
+    poseInnerTimer?.cancel();
   }
 
   int maxX = 720;

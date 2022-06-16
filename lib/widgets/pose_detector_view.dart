@@ -30,6 +30,7 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
   CameraViewController cameraViewController = Get.find<CameraViewController>();
   PoseCalculationHelper poseCalculationHelper = PoseCalculationHelper();
   GameController gameController = Get.find<GameController>();
+
   bool isBusy = false;
   CustomPaint? customPaint;
   DateTime? timestamp;
@@ -39,15 +40,27 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
   @override
   void initState() {
     super.initState();
+    print("OVO SU POZE ${gameController.possiblePoses}");
+    cameraViewController.isPoseImageShowing = false;
+    cameraViewController.isOnboardingImageShowing = false;
+    cameraViewController.isProgressBarShowing = false;
+    cameraViewController.isPoseSuccessfullAnimationShowing = false;
+    cameraViewController.isOnboardingCompletedAnimationShowing = false;
     widget.poseController.onboardingCompleted = false;
     cameraViewController.isOnboardingImageShowing = true;
     //poseCalculationHelper.setNewPose();
   }
 
   @override
-  void dispose() async {
+  void dispose() {
+    print("timer ne bi smio");
+    cameraViewController.cameraOn = false;
+
+    cameraViewController.cancelOnboardingTimer();
+    cameraViewController.cancelTimer();
+    cameraViewController.cancelInnerTimers();
+    // await poseDetector.close();
     super.dispose();
-    await poseDetector.close();
   }
 
   @override
@@ -192,21 +205,21 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
   }
 
   void isPoseSuccessful() {
-    if (widget.poseController.poseCalculationDict[widget.poseController.wantedPose]! > 1 && cameraViewController.timer != null && cameraViewController.timer!.isActive) {
+    if (widget.poseController.poseCalculationDict[widget.poseController.wantedPose]! > 1 && cameraViewController.poseTimer != null && cameraViewController.poseTimer!.isActive) {
       cameraViewController.cancelTimer();
     }
-    if (widget.poseController.poseCalculationDict[widget.poseController.wantedPose]! < 0.5 && (cameraViewController.timer == null || !cameraViewController.timer!.isActive)) {
+    if (widget.poseController.poseCalculationDict[widget.poseController.wantedPose]! < 0.5 && (cameraViewController.poseTimer == null || !cameraViewController.poseTimer!.isActive)) {
       cameraViewController.startCameraTimer();
     }
     if (widget.poseController.poseCalculationDict[widget.poseController.wantedPose] == 3) {
       playSound();
 
       gameController.currentRepetitionCounter++;
-      if (gameController.gameMode == GameMode.training) {
-        poseCalculationHelper.setNewTrainingGameModePose();
-      } else {
-        poseCalculationHelper.setNewRepeatinGameModePose();
-      }
+      // if (gameController.gameMode == GameMode.training) {
+      //   poseCalculationHelper.setNewTrainingGameModePose();
+      // } else {
+      //   poseCalculationHelper.setNewRepeatinGameModePose();
+      // }
       widget.poseController.updateLottieStatus(true);
 
       cameraViewController.isProgressBarShowing = false;
@@ -215,10 +228,25 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
   }
 
   void isOnboardingSuccessfull() {
+    // Cancelation of timer that is used to show pose image if user didn't stand in a pose for X time
+    if (widget.poseController.poseCalculationDict[BasePose.leftArmNeutral]! > 1 && widget.poseController.poseCalculationDict[BasePose.rightArmNeutral]! > 1 && widget.poseController.poseCalculationDict[BasePose.leftLegNeutral]! > 1 && widget.poseController.poseCalculationDict[BasePose.rightLegNeutral]! > 1 && cameraViewController.onboardingTimer != null && cameraViewController.onboardingTimer!.isActive) {
+      cameraViewController.cancelOnboardingTimer();
+    }
+
+    // Starting timer if user didn't took pose for X time
+    if (widget.poseController.poseCalculationDict[BasePose.leftArmNeutral]! < 0.5 && widget.poseController.poseCalculationDict[BasePose.rightArmNeutral]! < 0.5 && widget.poseController.poseCalculationDict[BasePose.leftLegNeutral]! < 0.5 && widget.poseController.poseCalculationDict[BasePose.rightLegNeutral]! < 0.5 && (cameraViewController.onboardingTimer == null || !cameraViewController.onboardingTimer!.isActive)) {
+      cameraViewController.startCameraOnboardingTimer();
+    }
     if (widget.poseController.poseCalculationDict[BasePose.leftArmNeutral] == 3 && widget.poseController.poseCalculationDict[BasePose.rightArmNeutral] == 3 && widget.poseController.poseCalculationDict[BasePose.leftLegNeutral] == 3 && widget.poseController.poseCalculationDict[BasePose.rightLegNeutral] == 3) {
       playSound();
 
+      if (gameController.gameMode == GameMode.training) {
+        poseCalculationHelper.setNewTrainingGameModePose();
+      } else {
+        poseCalculationHelper.setNewRepeatinGameModePose();
+      }
       poseCalculationHelper.setNewDayNightPosition();
+
       widget.poseController.onboardingCompleted = true;
       widget.poseController.updateLottieStatus(true);
 
@@ -228,12 +256,12 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
 
   void isDayNight() {
     // Cancelation of timer that is used to show pose image if user didn't stand in a pose for X time
-    if (widget.poseController.dayNightDict[widget.poseController.wantedDayNightPosition]! > 1 && cameraViewController.timer != null && cameraViewController.timer!.isActive) {
+    if (widget.poseController.dayNightDict[widget.poseController.wantedDayNightPosition]! > 1 && cameraViewController.poseTimer != null && cameraViewController.poseTimer!.isActive) {
       cameraViewController.cancelTimer();
     }
 
     // Starting timer if user didn't took pose for X time
-    if (widget.poseController.dayNightDict[widget.poseController.wantedDayNightPosition]! < 0.5 && (cameraViewController.timer == null || !cameraViewController.timer!.isActive)) {
+    if (widget.poseController.dayNightDict[widget.poseController.wantedDayNightPosition]! < 0.5 && (cameraViewController.poseTimer == null || !cameraViewController.poseTimer!.isActive)) {
       cameraViewController.startCameraTimer();
     }
 

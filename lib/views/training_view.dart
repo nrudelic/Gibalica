@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -33,14 +34,30 @@ class _TrainingViewState extends State<TrainingView> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          elevation: 0,
-          automaticallyImplyLeading: false,
+          centerTitle: true,
+          toolbarHeight: MediaQuery.of(context).size.height * 0.1,
           backgroundColor: Colors.white,
-          title: const Center(
-            child: Text(
-              "TRENING",
-              style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
+          elevation: 0,
+          leading: Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: GestureDetector(
+              onTap: () {
+                Get.back();
+              },
+              child: Container(
+                decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.darkBlue),
+                child: const Padding(
+                  padding: EdgeInsets.all(4),
+                  child: FittedBox(
+                    child: Icon(Icons.navigate_before),
+                  ),
+                ),
+              ),
             ),
+          ),
+          title: const AutoSizeText(
+            "TRENING",
+            style: TextStyle(color: ColorPalette.lightBlue, fontSize: 40, fontWeight: FontWeight.bold),
           ),
         ),
         body: SingleChildScrollView(

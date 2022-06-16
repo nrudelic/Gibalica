@@ -50,8 +50,8 @@ Future<void> getSettingsFromBox() async {
 
   isOnboardingFinished = box.get("onboardingFinished", defaultValue: false);
 
-  playerController.playerName = box.get("playerName", defaultValue: "Ime igrača");
-  playerController.avatarAssetPath = box.get("avatarAssetPath", defaultValue: "assets/Avatar_1_Girl1.svg");
+  playerController.playerName = box.get("playerName", defaultValue: "");
+  playerController.avatarAssetPath.value = box.get("avatarAssetPath", defaultValue: "assets/Avatar_1_Girl1.svg");
   var playingPosition = box.get("positionPlayMode", defaultValue: "Standing");
   if (playingPosition == "Standing") {
     playerController.positionPlayMode = PositionPlayMode.standing;

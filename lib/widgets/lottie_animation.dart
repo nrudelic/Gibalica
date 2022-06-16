@@ -44,8 +44,8 @@ class LottieAnimation extends StatelessWidget {
     return Positioned(
       child: Align(
         alignment: Alignment.center,
-        child: Lottie.network(
-            'https://assets10.lottiefiles.com/packages/lf20_bevi1628.json',
+        child: Lottie.asset(
+            "assets/lotties/success.json",
             repeat: true,
             controller: lottieController, onLoaded: (comp) {
           lottieController

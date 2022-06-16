@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/controllers/player_controller.dart';
 import 'package:gibalica/controllers/settings_controller.dart';
+import 'package:gibalica/views/screening_pages.dart';
 import 'package:gibalica/views/training_info_view.dart';
 
 import '../color_palette.dart';
@@ -58,7 +59,7 @@ class _ProfileViewState extends State<ProfileView> {
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.yellow),
                 child: IconButton(
                   onPressed: () {
-                    Get.to(() => const TrainingInfoView());
+                    Get.to(() => const ScreeningPages());
                   },
                   icon: const Icon(Icons.mode_edit_outline),
                 ),
@@ -78,7 +79,7 @@ class _ProfileViewState extends State<ProfileView> {
                       return CircleAvatar(
                         backgroundColor: Colors.white,
                         child: SvgPicture.asset(
-                          playerController.avatarAssetPath!,
+                          playerController.avatarAssetPath.value,
                         ),
                         minRadius: constraint.biggest.height,
                       );

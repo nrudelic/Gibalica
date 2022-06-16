@@ -105,6 +105,7 @@ class PoseCalculationHelper {
     log("DEEBUG" + possiblePoses.toString());
     if (possiblePoses != null) {
       var nextPose = possiblePoses[rnd.nextInt(possiblePoses.length)];
+          log("DEEBUG1" + nextPose.toStr);
 
       poseController.wantedPose = nextPose;
 
@@ -157,14 +158,14 @@ class PoseCalculationHelper {
 
 bool isDay(PoseModel poses, CameraViewController cameraController) {
   var rightShoulder = poses.rightShoulder;
-  if (rightShoulder != null && rightShoulder.y < (cameraController.maxY / 2)) return true;
+  if (rightShoulder != null && rightShoulder.y < (cameraController.maxY / 1.67)) return true;
 
   return false;
 }
 
 bool isNight(PoseModel poses, CameraViewController cameraController) {
   var rightShoulder = poses.rightShoulder;
-  if (rightShoulder != null && rightShoulder.y > (cameraController.maxY / 2)) return true;
+  if (rightShoulder != null && rightShoulder.y > (cameraController.maxY / 1.67)) return true;
 
   return false;
 }
@@ -276,7 +277,7 @@ bool isLeftLegUp(PoseModel poses) {
   var rightKnee = poses.rightKnee;
 
   if (rightHip != null && leftKnee != null && rightKnee != null) {
-    var delta = (rightKnee.y - rightHip.y) / 2;
+    var delta = (rightKnee.y - rightHip.y) / 7;
     if (leftKnee.y <= rightKnee.y - delta) {
       return true;
     }
@@ -302,7 +303,7 @@ bool isRightLegUp(PoseModel poses) {
   var leftKnee = poses.leftKnee;
 
   if (leftHip != null && rightKnee != null && leftKnee != null) {
-    var delta = (leftKnee.y - leftHip.y) / 2;
+    var delta = (leftKnee.y - leftHip.y) / 7;
     if (rightKnee.y <= leftKnee.y - delta) {
       return true;
     }

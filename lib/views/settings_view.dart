@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -6,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/settings_controller.dart';
 import 'package:gibalica/views/onboarding_pages.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsView extends StatefulWidget {
   const SettingsView({Key? key}) : super(key: key);
@@ -70,7 +72,16 @@ class _SettingsViewState extends State<SettingsView> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [SvgPicture.asset("assets/cards.svg"), SvgPicture.asset("assets/share.svg")],
+                    children: [
+                      SvgPicture.asset("assets/cards.svg"),
+                      GestureDetector(
+                        onTap: () async {
+                          Uri _url = Uri.parse('https://ferhr-my.sharepoint.com/:u:/g/personal/nr50748_fer_hr/ET8cUdjiAxdAjwzX3O45oUkBI2TEODQqzZzjCybuAzyhFw?e=ZYr92g');
+                          if (!await launchUrl(_url)) throw "Could not launch $_url";
+                        },
+                        child: SvgPicture.asset("assets/share.svg"),
+                      ),
+                    ],
                   ),
                 ),
                 const Padding(
@@ -277,48 +288,36 @@ class _SettingsViewState extends State<SettingsView> {
                   padding: EdgeInsets.only(bottom: 25.0),
                   child: Text("Informacije o aplikaciji", style: TextStyle(fontSize: 20, color: ColorPalette.darkBlue)),
                 ),
-                FittedBox(
-                  fit: BoxFit.fitWidth,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 25.0),
-                    child: SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Expanded(
-                            flex: 8,
-                            child: FittedBox(
-                              child: Padding(
-                                padding: EdgeInsets.only(right: 8.0),
-                                child: Text("Ponovno upoznaj aplikaciju", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue)),
-                              ),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(() => OnboardingPages(1));
-                            },
-                            child: Expanded(
-                              flex: 1,
-                              child: Container(
-                                padding: const EdgeInsets.all(10),
-                                decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.green),
-                                child: const Padding(
-                                  padding: EdgeInsets.all(4),
-                                  child: Center(
-                                    child: Text(
-                                      ">",
-                                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: AutoSizeText("Ponovno upoznaj aplikaciju", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue)),
                       ),
-                    ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(() => OnboardingPages(1));
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.green),
+                          child: const Padding(
+                            padding: EdgeInsets.all(4),
+                            child: Center(
+                              child: AutoSizeText(
+                                ">",
+                                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 )
               ],

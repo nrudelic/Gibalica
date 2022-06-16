@@ -42,7 +42,7 @@ class MainScreen extends StatelessWidget {
                           return CircleAvatar(
                             backgroundColor: Colors.white,
                             child: SvgPicture.asset(
-                              playerController.avatarAssetPath!,
+                              playerController.avatarAssetPath.value,
                             ),
                             minRadius: constraint.biggest.height,
                           );
@@ -80,85 +80,78 @@ class MainScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Expanded(
-                      child: Stack(children: [
-                        Positioned.fill(
-                          child: GestureDetector(
-                              onTap: () {
-                                gameController.gameMode = GameMode.training;
-                                Get.to(() => const TrainingView());
-                              },
-                              child:
-                                  SvgPicture.asset("assets/training_menu.svg")),
-                        ),
-                        const Positioned(
-                          child: Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 50.0),
-                              child: Text("TRENING",
-                                  style: TextStyle(
-                                      fontSize: 30,
-                                      color: ColorPalette.darkBlue,
-                                      fontWeight: FontWeight.bold)),
-                            ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Stack(children: [
+                          Positioned.fill(
+                            child: GestureDetector(
+                                onTap: () {
+                                  gameController.gameMode = GameMode.training;
+                                  Get.to(() => const TrainingView());
+                                },
+                                child: SvgPicture.asset("assets/training_menu.svg")),
                           ),
-                        )
-                      ]),
+                          Positioned(
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: (MediaQuery.of(context).size.width * 0.18)),
+                                child: const Text("TRENING", style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                          )
+                        ]),
+                      ),
                     ),
                     Expanded(
-                      child: GestureDetector(
-                        onTap: () {
-                          gameController.gameMode = GameMode.dayAndNight;
-                          Get.to(() => const DayAndNightMenuView());
-                        },
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            gameController.gameMode = GameMode.dayAndNight;
+                            Get.to(() => const DayAndNightMenuView());
+                          },
+                          child: Stack(
+                            children: [
+                              Positioned.fill(child: SvgPicture.asset("assets/day_night_menu.svg")),
+                              Positioned(
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(right: (MediaQuery.of(context).size.width * 0.18)),
+                                    child: const Text("DAN i NOĆ", style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
                         child: Stack(
                           children: [
                             Positioned.fill(
-                                child: SvgPicture.asset(
-                                    "assets/day_night_menu.svg")),
-                            const Positioned(
+                              child: GestureDetector(
+                                  onTap: () {
+                                    gameController.gameMode = GameMode.repeating;
+                                    Get.to(() => const RepeatingMenuView());
+                                  },
+                                  child: SvgPicture.asset("assets/repeating_menu.svg")),
+                            ),
+                            Positioned(
                               child: Align(
-                                alignment: Alignment.centerRight,
+                                alignment: Alignment.centerLeft,
                                 child: Padding(
-                                  padding: EdgeInsets.only(right: 50.0),
-                                  child: Text("DAN i NOĆ",
-                                      style: TextStyle(
-                                          fontSize: 30,
-                                          color: ColorPalette.darkBlue,
-                                          fontWeight: FontWeight.bold)),
+                                  padding: EdgeInsets.only(left:(MediaQuery.of(context).size.width * 0.10)),
+                                  child: const Text("PONAVLJANJE", style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)),
                                 ),
                               ),
                             )
                           ],
                         ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Stack(
-                        children: [
-                          Positioned.fill(
-                            child: GestureDetector(
-                                onTap: () {
-                                  gameController.gameMode = GameMode.repeating;
-                                  Get.to(() => const RepeatingMenuView());
-                                },
-                                child: SvgPicture.asset(
-                                    "assets/repeating_menu.svg")),
-                          ),
-                          const Positioned(
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 40.0),
-                                child: Text("PONAVLJANJE",
-                                    style: TextStyle(
-                                        fontSize: 30,
-                                        color: ColorPalette.darkBlue,
-                                        fontWeight: FontWeight.bold)),
-                              ),
-                            ),
-                          )
-                        ],
                       ),
                     ),
                   ],

@@ -31,6 +31,8 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
   void initState() {
     super.initState();
     poseController = Get.find<PoseController>();
+        print(poseController.posePerformance);
+
     leftArmProgress = (((poseController.posePerformance[GamePlayModes.leftArmUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftArmMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftArmUpAndMiddle] as bool) ? 1 : 0)) / 3;
     rightArmProgress = (((poseController.posePerformance[GamePlayModes.rightArmUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.rightArmMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.rightArmUpAndMiddle] as bool) ? 1 : 0)) / 3;
     leftAndRightArmProgress = (((poseController.posePerformance[GamePlayModes.leftAndRightArmUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmUpAndMiddleSamePosition] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmUpAndMiddleDiffPosition] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmAll] as bool) ? 1 : 0)) / 5;
@@ -102,7 +104,7 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                             return CircleAvatar(
                               backgroundColor: Colors.white,
                               child: SvgPicture.asset(
-                                playerController.avatarAssetPath!,
+                                playerController.avatarAssetPath.value,
                               ),
                               minRadius: constraint.biggest.height,
                             );

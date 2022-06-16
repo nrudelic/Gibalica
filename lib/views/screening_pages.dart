@@ -33,21 +33,23 @@ class _ScreeningPagesState extends State<ScreeningPages> {
     var height = MediaQuery.of(context).size.height - MediaQuery.of(context).viewPadding.top;
     return SafeArea(
       child: Scaffold(
-        body: Container(
-          color: Colors.white,
-          height: height * 0.85,
-          child: PageView(
-            onPageChanged: (index) {
-              setState(() {
-                isLastPage = index == 2;
-              });
-            },
-            controller: controller,
-            children: [
-              const Screening1(),
-              const Screening2(),
-              Screening4(),
-            ],
+        body: SingleChildScrollView(
+          child: Container(
+            color: Colors.white,
+            height: height * 0.85,
+            child: PageView(
+              onPageChanged: (index) {
+                setState(() {
+                  isLastPage = index == 2;
+                });
+              },
+              controller: controller,
+              children: [
+                const Screening1(),
+                const Screening2(),
+                Screening4(),
+              ],
+            ),
           ),
         ),
         bottomNavigationBar: Container(

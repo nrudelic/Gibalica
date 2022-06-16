@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/game_controller.dart';
 import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/training_popup.dart';
+import 'package:lottie/lottie.dart';
 
 class BothHandsTraining extends StatefulWidget {
   const BothHandsTraining({Key? key}) : super(key: key);
@@ -47,7 +49,7 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: GestureDetector(onTap: () {}, child: SvgPicture.asset("assets/Hand_Right.svg")),
+                child: Lottie.asset("assets/lotties/hand-clap.json"),
               ),
             ),
           ]),
@@ -76,7 +78,7 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                                     gameController.repeatNumber.value = 3;
                                     gameController.gameType.value = GameType.personal;
                                     gameController.currentMode = GamePlayModes.leftAndRightArmUp;
-                                    
+
                                     return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
                                   },
                                 );
@@ -86,8 +88,9 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
                                     child: SvgPicture.asset(
-                                      "assets/Avatar_1_Girl1.svg",
+                                      "assets/HANDS_up_light.svg",
                                     ),
+                                    backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
                                   );
                                 }),
@@ -97,8 +100,9 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                           const Expanded(
                             flex: 2,
                             child: Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 "U vis",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 25, fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -132,8 +136,9 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
                                     child: SvgPicture.asset(
-                                      "assets/Avatar_1_Girl1.svg",
+                                      "assets/HANDS_onside_dark.svg",
                                     ),
+                                    backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
                                   );
                                 }),
@@ -143,8 +148,9 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                           const Expanded(
                             flex: 2,
                             child: Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 "Sa strane",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 25, fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -167,25 +173,26 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                             flex: 6,
                             child: GestureDetector(
                               onTap: () {
-                                gameController.possiblePoses = [BasePose.rightArmMiddle, BasePose.rightArmUp, BasePose.leftArmMiddle, BasePose.leftArmUp];
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      gameController.gameMode = GameMode.training;
-                                      gameController.repeatNumber.value = 3;
-                                      gameController.gameType.value = GameType.personal;
-                                    gameController.currentMode = GamePlayModes.leftAndRightArmUpAndMiddleSamePosition;
+                                // gameController.possiblePoses = [BasePose.rightArmMiddle, BasePose.rightArmUp, BasePose.leftArmMiddle, BasePose.leftArmUp];
+                                // showDialog(
+                                //     context: context,
+                                //     builder: (BuildContext context) {
+                                //       gameController.gameMode = GameMode.training;
+                                //       gameController.repeatNumber.value = 3;
+                                //       gameController.gameType.value = GameType.personal;
+                                //       gameController.currentMode = GamePlayModes.leftAndRightArmUpAndMiddleSamePosition;
 
-                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
-                                    });
+                                //       return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
+                                //     });
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(15),
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
                                     child: SvgPicture.asset(
-                                      "assets/Avatar_1_Girl1.svg",
+                                      "assets/HANDS_equally_light.svg",
                                     ),
+                                    backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
                                   );
                                 }),
@@ -195,7 +202,7 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                           const Expanded(
                             flex: 2,
                             child: Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 "U vis i sa strane isti položaj",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 25, fontWeight: FontWeight.bold),
@@ -224,26 +231,27 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                             flex: 6,
                             child: GestureDetector(
                               onTap: () {
-                                gameController.possiblePoses = [BasePose.rightArmMiddle, BasePose.rightArmUp, BasePose.leftArmMiddle, BasePose.leftArmUp];
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    gameController.gameMode = GameMode.training;
-                                    gameController.repeatNumber.value = 3;
-                                    gameController.gameType.value = GameType.personal;
-                                    gameController.currentMode = GamePlayModes.leftAndRightArmUpAndMiddleDiffPosition;
+                                // gameController.possiblePoses = [BasePose.rightArmMiddle, BasePose.rightArmUp, BasePose.leftArmMiddle, BasePose.leftArmUp];
+                                // showDialog(
+                                //   context: context,
+                                //   builder: (BuildContext context) {
+                                //     gameController.gameMode = GameMode.training;
+                                //     gameController.repeatNumber.value = 3;
+                                //     gameController.gameType.value = GameType.personal;
+                                //     gameController.currentMode = GamePlayModes.leftAndRightArmUpAndMiddleDiffPosition;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
-                                  },
-                                );
+                                //     return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
+                                //   },
+                                // );
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(15),
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
                                     child: SvgPicture.asset(
-                                      "assets/Avatar_1_Girl1.svg",
+                                      "assets/HANDS_differently_light.svg",
                                     ),
+                                    backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
                                   );
                                 }),
@@ -253,8 +261,9 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                           const Expanded(
                             flex: 2,
                             child: Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 "U vis i sa strane razičiti položaj",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 25, fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -288,8 +297,9 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
                                     child: SvgPicture.asset(
-                                      "assets/Avatar_1_Girl1.svg",
+                                      "assets/HANDS_all_light.svg",
                                     ),
+                                    backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
                                   );
                                 }),
@@ -299,8 +309,9 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                           const Expanded(
                             flex: 2,
                             child: Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 "Sve",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 25, fontWeight: FontWeight.bold),
                               ),
                             ),

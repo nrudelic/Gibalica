@@ -5,6 +5,7 @@ import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/game_controller.dart';
 import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/training_popup.dart';
+import 'package:lottie/lottie.dart';
 
 class EverythingTraining extends StatefulWidget {
   const EverythingTraining({Key? key}) : super(key: key);
@@ -24,10 +25,10 @@ class _EverythingTrainingState extends State<EverythingTraining> {
         Expanded(
           flex: 2,
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
-            Expanded(
+                       Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: GestureDetector(onTap: () {}, child: SvgPicture.asset("assets/Hand_Left.svg")),
+                child: Lottie.asset("assets/lotties/warm-up-guy.json"),
               ),
             ),
             Expanded(
@@ -80,8 +81,9 @@ class _EverythingTrainingState extends State<EverythingTraining> {
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
                                     child: SvgPicture.asset(
-                                      "assets/Avatar_1_Girl1.svg",
+                                      "assets/ALL_light.svg",
                                     ),
+                                    backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
                                   );
                                 }),

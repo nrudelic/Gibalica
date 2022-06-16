@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -5,6 +6,7 @@ import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/game_controller.dart';
 import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/training_popup.dart';
+import 'package:lottie/lottie.dart';
 
 class BothLegsTraining extends StatefulWidget {
   const BothLegsTraining({Key? key}) : super(key: key);
@@ -27,7 +29,7 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: GestureDetector(onTap: () {}, child: SvgPicture.asset("assets/Hand_Left.svg")),
+                child: Lottie.asset("assets/lotties/footprints.json"),
               ),
             ),
             Expanded(
@@ -81,8 +83,9 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
                                     child: SvgPicture.asset(
-                                      "assets/Avatar_1_Girl1.svg",
+                                      "assets/LEGS_up_light.svg",
                                     ),
+                                    backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
                                   );
                                 }),
@@ -92,7 +95,7 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                           const Expanded(
                             flex: 2,
                             child: Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 "Lijeva ili desna u vis",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
@@ -121,26 +124,27 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                             flex: 6,
                             child: GestureDetector(
                               onTap: () {
-                                gameController.possiblePoses = [BasePose.rightArmUp];
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    gameController.gameMode = GameMode.training;
-                                    gameController.repeatNumber.value = 3;
-                                    gameController.gameType.value = GameType.personal;
-                                    gameController.currentMode = GamePlayModes.legGap;
+                                // gameController.possiblePoses = [BasePose.rightArmUp];
+                                // showDialog(
+                                //   context: context,
+                                //   builder: (BuildContext context) {
+                                //     gameController.gameMode = GameMode.training;
+                                //     gameController.repeatNumber.value = 3;
+                                //     gameController.gameType.value = GameType.personal;
+                                //     gameController.currentMode = GamePlayModes.legGap;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
-                                  },
-                                );
+                                //     return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
+                                //   },
+                                // );
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(15),
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
                                     child: SvgPicture.asset(
-                                      "assets/Avatar_1_Girl1.svg",
+                                      "assets/LEGS_gap_light.svg",
                                     ),
+                                    backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
                                   );
                                 }),
@@ -150,8 +154,9 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                           const Expanded(
                             flex: 2,
                             child: Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 "Raskorak",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -167,26 +172,27 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                             flex: 6,
                             child: GestureDetector(
                               onTap: () {
-                                gameController.possiblePoses = [BasePose.rightArmMiddle];
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    gameController.gameMode = GameMode.training;
-                                    gameController.repeatNumber.value = 3;
-                                    gameController.gameType.value = GameType.personal;
-                                    gameController.currentMode = GamePlayModes.squat;
+                                // gameController.possiblePoses = [BasePose.rightArmMiddle];
+                                // showDialog(
+                                //   context: context,
+                                //   builder: (BuildContext context) {
+                                //     gameController.gameMode = GameMode.training;
+                                //     gameController.repeatNumber.value = 3;
+                                //     gameController.gameType.value = GameType.personal;
+                                //     gameController.currentMode = GamePlayModes.squat;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
-                                  },
-                                );
+                                //     return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
+                                //   },
+                                // );
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(15),
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
                                     child: SvgPicture.asset(
-                                      "assets/Avatar_1_Girl1.svg",
+                                      "assets/LEGS_squat_light.svg",
                                     ),
+                                    backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
                                   );
                                 }),
@@ -196,8 +202,9 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                           const Expanded(
                             flex: 2,
                             child: Center(
-                              child: Text(
+                              child: AutoSizeText(
                                 "Čučanj",
+                                textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                               ),
                             ),
