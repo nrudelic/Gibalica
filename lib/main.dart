@@ -49,7 +49,9 @@ Future<void> getSettingsFromBox() async {
   settingsController.gibalicaBox = box;
 
   isOnboardingFinished = box.get("onboardingFinished", defaultValue: false);
-
+  if (isOnboardingFinished) {
+    playerController.avatarChosen = true;
+  }
   playerController.playerName = box.get("playerName", defaultValue: "");
   playerController.avatarAssetPath.value = box.get("avatarAssetPath", defaultValue: "assets/Avatar_1_Girl1.svg");
   var playingPosition = box.get("positionPlayMode", defaultValue: "Standing");
@@ -92,6 +94,24 @@ Future<void> getSettingsFromBox() async {
   poseController.posePerformance[GamePlayModes.legGap] = box.get("legGap", defaultValue: false);
   poseController.posePerformance[GamePlayModes.squat] = box.get("squat", defaultValue: false);
   poseController.posePerformance[GamePlayModes.all] = box.get("all", defaultValue: false);
+
+  gameController.isPoseFinished['leftArmUp']!.value = box.get("leftArmUp", defaultValue: false);
+  gameController.isPoseFinished['leftArmMiddle']!.value = box.get("leftArmMiddle", defaultValue: false);
+  gameController.isPoseFinished['leftArmUpAndMiddle']!.value = box.get("leftArmUpAndMiddle", defaultValue: false);
+  gameController.isPoseFinished['rightArmUp']!.value = box.get("rightArmUp", defaultValue: false);
+  gameController.isPoseFinished['rightArmMiddle']!.value = box.get("rightArmMiddle", defaultValue: false);
+  gameController.isPoseFinished['rightArmUpAndMiddle']!.value = box.get("rightArmUpAndMiddle", defaultValue: false);
+  gameController.isPoseFinished['leftAndRightArmUp']!.value = box.get("leftAndRightArmUp", defaultValue: false);
+  gameController.isPoseFinished['leftAndRightArmMiddle']!.value = box.get("leftAndRightArmMiddle", defaultValue: false);
+  gameController.isPoseFinished['leftAndRightArmUpAndMiddleSamePosition']!.value = box.get("leftAndRightArmUpAndMiddleSamePosition", defaultValue: false);
+  gameController.isPoseFinished['leftAndRightArmUpAndMiddleDiffPosition']!.value = box.get("leftAndRightArmUpAndMiddleDiffPosition", defaultValue: false);
+  gameController.isPoseFinished['leftAndRightArmAll']!.value = box.get("leftAndRightArmAll", defaultValue: false);
+  gameController.isPoseFinished['leftLegUp']!.value = box.get("leftLegUp", defaultValue: false);
+  gameController.isPoseFinished['rightLegUp']!.value = box.get("rightLegUp", defaultValue: false);
+  gameController.isPoseFinished['leftAndRightLegUp']!.value = box.get("leftAndRightLegUp", defaultValue: false);
+  gameController.isPoseFinished['legGap']!.value = box.get("legGap", defaultValue: false);
+  gameController.isPoseFinished['squat']!.value = box.get("squat", defaultValue: false);
+  gameController.isPoseFinished['all']!.value = box.get("all", defaultValue: false);
 }
 
 class MyApp extends StatelessWidget {
@@ -105,7 +125,7 @@ class MyApp extends StatelessWidget {
       title: 'Gibalica',
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(
-          TextTheme(
+          const TextTheme(
             headline1: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
             headline2: TextStyle(fontSize: 35.0, fontWeight: FontWeight.bold),
             headline3: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
@@ -140,7 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromRGBO(0, 176, 240, 1),
+        backgroundColor: const Color.fromRGBO(0, 176, 240, 1),
         body: SafeArea(child: isOnboardingFinished ? MainScreen() : const StartView()),
       ),
     );

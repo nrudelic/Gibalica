@@ -145,7 +145,7 @@ class MainScreen extends StatelessWidget {
                               child: Align(
                                 alignment: Alignment.centerLeft,
                                 child: Padding(
-                                  padding: EdgeInsets.only(left:(MediaQuery.of(context).size.width * 0.10)),
+                                padding: EdgeInsets.only(left: (MediaQuery.of(context).size.width * 0.18)),
                                   child: const Text("PONAVLJANJE", style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)),
                                 ),
                               ),

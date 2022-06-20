@@ -48,7 +48,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
         ),
         body: Container(
           color: Colors.white,
-          height: height * 0.85,
+          height: height * 0.80,
           child: PageView(
             onPageChanged: (index) {
               setState(() {

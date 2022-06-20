@@ -26,7 +26,7 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
         Expanded(
           flex: 1,
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                       Expanded(
+            Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Lottie.asset("assets/lotties/footprint.json"),
@@ -68,7 +68,7 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                               gameController.gameType.value = GameType.personal;
                               gameController.currentMode = GamePlayModes.leftLegUp;
 
-                              return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
+                              return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Lijeva noga - u vis')));
                             },
                           );
                         },
@@ -76,8 +76,10 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                           padding: const EdgeInsets.all(15),
                           child: LayoutBuilder(builder: (context, constraint) {
                             return CircleAvatar(
-                              child: SvgPicture.asset(
-                                "assets/LEFT_LEG_up_light.svg",
+                              child: Obx(
+                                () => SvgPicture.asset(
+                                  gameController.isPoseFinished['leftLegUp']!.value ? "assets/LEFT_LEG_up_dark.svg" : "assets/LEFT_LEG_up_light.svg",
+                                ),
                               ),
                               backgroundColor: Colors.white,
                               minRadius: constraint.biggest.height,
@@ -116,7 +118,7 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                               gameController.gameType.value = GameType.personal;
                               gameController.currentMode = GamePlayModes.rightLegUp;
 
-                              return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
+                              return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Desna noga u vis')));
                             },
                           );
                         },
@@ -124,8 +126,10 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                           padding: const EdgeInsets.all(15),
                           child: LayoutBuilder(builder: (context, constraint) {
                             return CircleAvatar(
-                              child: SvgPicture.asset(
-                                "assets/LEFT_LEG_up_light.svg",
+                              child: Obx(
+                                () => SvgPicture.asset(
+                                  gameController.isPoseFinished['rightLegUp']!.value ? "assets/LEFT_LEG_up_dark.svg" : "assets/LEFT_LEG_up_light.svg",
+                                ),
                               ),
                               backgroundColor: Colors.white,
                               minRadius: constraint.biggest.height,

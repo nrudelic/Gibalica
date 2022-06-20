@@ -8,6 +8,7 @@ import 'package:gibalica/views/screening_pages/screening3.dart';
 import 'package:gibalica/views/screening_pages/screening4.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../color_palette.dart';
 import 'everything_ready_view.dart';
 
 class ScreeningPages extends StatefulWidget {
@@ -38,6 +39,7 @@ class _ScreeningPagesState extends State<ScreeningPages> {
             color: Colors.white,
             height: height * 0.85,
             child: PageView(
+              physics: (playerController.playerName != null && playerController.playerName!.length > 0) ? ScrollPhysics() : NeverScrollableScrollPhysics(),
               onPageChanged: (index) {
                 setState(() {
                   isLastPage = index == 2;
@@ -62,9 +64,14 @@ class _ScreeningPagesState extends State<ScreeningPages> {
               child: Container(
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(36, 80, 128, 1)),
                 padding: const EdgeInsets.all(20),
-                child: const Text(
-                  "<",
-                  style: TextStyle(fontSize: 40),
+                child: Container(
+                  decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.darkBlue),
+                  child: const Padding(
+                    padding: EdgeInsets.all(4),
+                    child: FittedBox(
+                      child: Icon(Icons.navigate_before),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -76,6 +83,8 @@ class _ScreeningPagesState extends State<ScreeningPages> {
             ),
             GestureDetector(
               onTap: () {
+                if((playerController.playerName == null || playerController.playerName!.isEmpty)) return;
+                
                 if (isLastPage) {
                   if (playerController.playerName != null && playerController.playerName != "Ime igrača" && playerController.playerName!.isNotEmpty && playerController.avatarChosen && (playerController.leftHandPref.value || playerController.rightHandPref.value || playerController.squatPref.value || playerController.leftLegPref.value || playerController.rightLegPref.value)) {
                     Get.to(() => EverythingReady());
@@ -89,9 +98,11 @@ class _ScreeningPagesState extends State<ScreeningPages> {
               child: Container(
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(112, 173, 71, 1)),
                 padding: const EdgeInsets.all(20),
-                child: const Text(
-                  ">",
-                  style: TextStyle(fontSize: 40),
+                child: const Padding(
+                  padding: EdgeInsets.all(4),
+                  child: FittedBox(
+                    child: Icon(Icons.navigate_next),
+                  ),
                 ),
               ),
             ),

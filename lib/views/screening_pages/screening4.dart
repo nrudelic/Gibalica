@@ -74,7 +74,7 @@ class _Screening4State extends State<Screening4> {
                                   return Obx(
                                     () => CircleAvatar(
                                       child: SvgPicture.asset("assets/Hand_Left.svg"),
-                                      backgroundColor: playerController.leftHandPref.value ? ColorPalette.green : ColorPalette.pink,
+                                      backgroundColor: playerController.leftHandPref.value ? ColorPalette.green : Colors.grey.shade400,
                                       minRadius: constraint.biggest.height,
                                     ),
                                   );
@@ -101,7 +101,7 @@ class _Screening4State extends State<Screening4> {
                                   return Obx(
                                     () => CircleAvatar(
                                       child: SvgPicture.asset("assets/Hand_Right.svg"),
-                                      backgroundColor: playerController.rightHandPref.value ? ColorPalette.green : ColorPalette.pink,
+                                      backgroundColor: playerController.rightHandPref.value ? ColorPalette.green : Colors.grey.shade400,
                                       minRadius: constraint.biggest.height,
                                     ),
                                   );
@@ -135,7 +135,7 @@ class _Screening4State extends State<Screening4> {
                                   return Obx(
                                     () => CircleAvatar(
                                       child: SvgPicture.asset("assets/Gibalica_squat.svg"),
-                                      backgroundColor: playerController.squatPref.value ? ColorPalette.green : ColorPalette.pink,
+                                      backgroundColor: playerController.squatPref.value ? ColorPalette.green : Colors.grey.shade400,
                                       minRadius: constraint.biggest.height,
                                     ),
                                   );
@@ -169,7 +169,7 @@ class _Screening4State extends State<Screening4> {
                                   return Obx(
                                     () => CircleAvatar(
                                       child: SvgPicture.asset("assets/Leg_Left.svg"),
-                                      backgroundColor: playerController.leftLegPref.value ? ColorPalette.green : ColorPalette.pink,
+                                      backgroundColor: playerController.leftLegPref.value ? ColorPalette.green : Colors.grey.shade400,
                                       minRadius: constraint.biggest.height,
                                     ),
                                   );
@@ -196,7 +196,7 @@ class _Screening4State extends State<Screening4> {
                                   return Obx(
                                     () => CircleAvatar(
                                       child: SvgPicture.asset("assets/Leg_Right.svg"),
-                                      backgroundColor: playerController.rightLegPref.value ? ColorPalette.green : ColorPalette.pink,
+                                      backgroundColor: playerController.rightLegPref.value ? ColorPalette.green : Colors.grey.shade400,
                                       minRadius: constraint.biggest.height,
                                     ),
                                   );

@@ -75,15 +75,17 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                                       gameController.gameType.value = GameType.personal;
                                       gameController.currentMode = GamePlayModes.leftAndRightLegUp;
 
-                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
+                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Lijeva i desna noga - u vis')));
                                     });
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(15),
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
-                                    child: SvgPicture.asset(
-                                      "assets/LEGS_up_light.svg",
+                                    child: Obx(
+                                      () => SvgPicture.asset(
+                                        gameController.isPoseFinished['leftAndRightLegUp']!.value ? "assets/LEGS_up_dark.svg" : "assets/LEGS_up_light.svg",
+                                      ),
                                     ),
                                     backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
@@ -124,25 +126,27 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                             flex: 6,
                             child: GestureDetector(
                               onTap: () {
-                                // gameController.possiblePoses = [BasePose.rightArmUp];
-                                // showDialog(
-                                //   context: context,
-                                //   builder: (BuildContext context) {
-                                //     gameController.gameMode = GameMode.training;
-                                //     gameController.repeatNumber.value = 3;
-                                //     gameController.gameType.value = GameType.personal;
-                                //     gameController.currentMode = GamePlayModes.legGap;
+                                gameController.possiblePoses = [BasePose.gap];
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    gameController.gameMode = GameMode.training;
+                                    gameController.repeatNumber.value = 3;
+                                    gameController.gameType.value = GameType.personal;
+                                    gameController.currentMode = GamePlayModes.legGap;
 
-                                //     return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
-                                //   },
-                                // );
+                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Raskorak')));
+                                  },
+                                );
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(15),
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
-                                    child: SvgPicture.asset(
-                                      "assets/LEGS_gap_light.svg",
+                                    child: Obx(
+                                      () => SvgPicture.asset(
+                                        gameController.isPoseFinished['legGap']!.value ? "assets/LEGS_gap_dark.svg" : "assets/LEGS_gap_light.svg",
+                                      ),
                                     ),
                                     backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
@@ -172,25 +176,27 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                             flex: 6,
                             child: GestureDetector(
                               onTap: () {
-                                // gameController.possiblePoses = [BasePose.rightArmMiddle];
-                                // showDialog(
-                                //   context: context,
-                                //   builder: (BuildContext context) {
-                                //     gameController.gameMode = GameMode.training;
-                                //     gameController.repeatNumber.value = 3;
-                                //     gameController.gameType.value = GameType.personal;
-                                //     gameController.currentMode = GamePlayModes.squat;
+                                gameController.possiblePoses = [BasePose.rightArmMiddle];
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    gameController.gameMode = GameMode.training;
+                                    gameController.repeatNumber.value = 3;
+                                    gameController.gameType.value = GameType.personal;
+                                    gameController.currentMode = GamePlayModes.squat;
 
-                                //     return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
-                                //   },
-                                // );
+                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Čučanj')));
+                                  },
+                                );
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(15),
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
-                                    child: SvgPicture.asset(
-                                      "assets/LEGS_squat_light.svg",
+                                    child: Obx(
+                                      () => SvgPicture.asset(
+                                        gameController.isPoseFinished['squat']!.value ? "assets/LEGS_squat_light.svg" : "assets/LEGS_squat_light.svg",
+                                      ),
                                     ),
                                     backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,

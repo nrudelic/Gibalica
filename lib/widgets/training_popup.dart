@@ -5,25 +5,24 @@ import 'package:gibalica/controllers/game_controller.dart';
 import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/pose_detector_view.dart';
 
-Widget buildPopupDialog(GameController gameController, StateSetter setState) {
+Widget buildPopupDialog(GameController gameController, StateSetter setState, String title) {
   return SimpleDialog(
     backgroundColor: ColorPalette.darkBlue,
     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))),
-    title: Column(
-      children: [
-        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: const [
+    title: SizedBox(
+      width: MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width * 0.5,
+      child: Column(
+        children: [
           Text(
-            "Vježba odrađena",
+            title,
+            textAlign: TextAlign.center,
             style: TextStyle(fontSize: 25, color: Colors.white),
           ),
-          Icon(
-            Icons.star_outline,
+          const Divider(
+            thickness: 2,
           )
-        ]),
-        const Divider(
-          thickness: 2,
-        )
-      ],
+        ],
+      ),
     ),
     children: [
       Column(
@@ -41,7 +40,7 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState) {
                 },
                 child: Obx(
                   () => Container(
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.symmetric(horizontal:25, vertical: 15),
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
                           Radius.circular(15),
@@ -60,7 +59,7 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState) {
                 },
                 child: Obx(
                   () => Container(
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.symmetric(horizontal:25, vertical: 15),
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
                           Radius.circular(15),
@@ -79,7 +78,7 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState) {
                 },
                 child: Obx(
                   () => Container(
-                    padding: const EdgeInsets.all(15),
+                    padding: const EdgeInsets.symmetric(horizontal:25, vertical: 15),
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
                           Radius.circular(15),
@@ -93,6 +92,10 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState) {
                 ),
               ),
             ],
+          ),
+          const Text(
+            "Gibalica gleda?",
+            style: TextStyle(fontSize: 20, color: Colors.white),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -110,7 +113,7 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState) {
                         ),
                         color: (gameController.gameType.value == GameType.personal ? ColorPalette.pink : const Color.fromRGBO(26, 63, 103, 1))),
                     child: const Text(
-                      'OSOBNO',
+                      'MENE',
                       style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),

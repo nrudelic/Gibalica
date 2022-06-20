@@ -11,7 +11,10 @@ class Onboarding7 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: SvgPicture.asset('assets/Gibalica_repeating.svg'),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
+            child: SvgPicture.asset('assets/Gibalica_repeating.svg'),
+          ),
         ),
         Expanded(
           child: Center(

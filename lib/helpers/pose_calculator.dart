@@ -105,7 +105,7 @@ class PoseCalculationHelper {
     log("DEEBUG" + possiblePoses.toString());
     if (possiblePoses != null) {
       var nextPose = possiblePoses[rnd.nextInt(possiblePoses.length)];
-          log("DEEBUG1" + nextPose.toStr);
+      log("DEEBUG1" + nextPose.toStr);
 
       poseController.wantedPose = nextPose;
 
@@ -148,6 +148,11 @@ class PoseCalculationHelper {
     BasePose.leftLegUp: isLeftLegUp,
     BasePose.rightLegNeutral: isRightLegNeutral,
     BasePose.rightLegUp: isRightLegUp,
+    BasePose.gap: isGap,
+    BasePose.leftArmUpRightArmMiddle: isLeftArmUpRightArmMiddle,
+    BasePose.leftArmUpRightArmUp: isLeftArmUpRightArmUp,
+    BasePose.leftArmMiddleRightArmUp: isLeftArmMiddleRightArmUp,
+    BasePose.leftArmMiddleRightArmMiddle: isLeftArmMiddleRightArmMiddle,
   };
 
   var dayNightFunctions = {
@@ -201,7 +206,7 @@ bool isLeftArmMiddle(PoseModel poses) {
 
   double r = calculateAngle(p1, p2, p3);
 
-  if (r > 80 && r < 100) {
+  if (r > 80 && r < 100 && isRightArmNeutral(poses)) {
     return true;
   }
   return false;
@@ -214,7 +219,7 @@ bool isLeftArmUp(PoseModel poses) {
 
   double r = calculateAngle(p1, p2, p3);
 
-  if (r > 110) {
+  if (r > 110 && isRightArmNeutral(poses)) {
     return true;
   }
   return false;
@@ -240,7 +245,7 @@ bool isRightArmMiddle(PoseModel poses) {
 
   double r = calculateAngle(p1, p2, p3);
 
-  if (r > 80 && r < 100) {
+  if (r > 80 && r < 100 && isLeftArmNeutral(poses)) {
     return true;
   }
   return false;
@@ -253,7 +258,7 @@ bool isRightArmUp(PoseModel poses) {
 
   double r = calculateAngle(p1, p2, p3);
 
-  if (r > 110) {
+  if (r > 110 && isLeftArmNeutral(poses)) {
     return true;
   }
   return false;
@@ -307,6 +312,54 @@ bool isRightLegUp(PoseModel poses) {
     if (rightKnee.y <= leftKnee.y - delta) {
       return true;
     }
+  }
+  return false;
+}
+
+bool isGap(PoseModel poses) {
+  var p11 = poses.leftShoulder;
+  var p21 = poses.leftHip;
+  var p31 = poses.leftKnee;
+
+  double r1 = calculateAngle(p11, p21, p31);
+
+  var p12 = poses.rightShoulder;
+  var p22 = poses.rightHip;
+  var p32 = poses.rightKnee;
+
+  double r2 = calculateAngle(p12, p22, p32);
+
+  if (r1 < 168 && r2 < 168) {
+    return true;
+  }
+
+  return false;
+}
+
+bool isLeftArmUpRightArmMiddle(PoseModel poses) {
+  if(isLeftArmUp(poses) && isRightArmMiddle(poses)){
+    return true;
+  }
+  return false;
+}
+
+bool isLeftArmUpRightArmUp(PoseModel poses) {
+  if(isLeftArmUp(poses) && isRightArmUp(poses)){
+    return true;
+  }
+  return false;
+}
+
+bool isLeftArmMiddleRightArmUp(PoseModel poses) {
+  if(isLeftArmMiddle(poses) && isRightArmUp(poses)){
+    return true;
+  }
+  return false;
+}
+
+bool isLeftArmMiddleRightArmMiddle(PoseModel poses) {
+  if(isLeftArmMiddle(poses) && isRightArmMiddle(poses)){
+    return true;
   }
   return false;
 }

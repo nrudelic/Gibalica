@@ -67,6 +67,8 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
               print("TU SAM ");
               print(gameController.currentMode);
               poseController.posePerformance[gameController.currentMode!] = true;
+              gameController.isPoseFinished[gameController.currentMode!.toStr]!.value = true;
+              settingsController.gibalicaBox.put(gameController.currentMode!.toStr, true);
               Get.back();
               return;
             }
@@ -386,6 +388,16 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
         return 'assets/statistics.svg';
       case BasePose.rightLegUp:
         return 'assets/Gibalica_RIGHT_LEG_UP.svg';
+      case BasePose.gap:
+        return 'assets/Gibalica_LUNGES.svg';
+      case BasePose.leftArmUpRightArmMiddle:
+        return 'assets/Gibalica_RIGHT_ON_SIDE_LEFT_UP.svg';
+      case BasePose.leftArmUpRightArmUp:
+        return 'assets/Gibalica_RIGHT_LEFT_UP.svg';
+      case BasePose.leftArmMiddleRightArmUp:
+        return 'assets/Gibalica_LEFT_ON_SIDE_RIGHT_UP.svg';
+      case BasePose.leftArmMiddleRightArmMiddle:
+        return 'assets/Gibalica_RIGHT_LEFT_ON_SIDE.svg';
       default:
         return 'assets/statistics.svg';
     }

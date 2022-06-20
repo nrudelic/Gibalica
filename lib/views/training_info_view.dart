@@ -79,11 +79,8 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.darkBlue),
                 child: const Padding(
                   padding: EdgeInsets.all(4),
-                  child: Center(
-                    child: Text(
-                      "<",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
+                  child: FittedBox(
+                    child: Icon(Icons.navigate_before),
                   ),
                 ),
               ),

@@ -10,6 +10,7 @@ import 'package:gibalica/controllers/device_controller.dart';
 import 'package:gibalica/controllers/game_controller.dart';
 import 'package:gibalica/controllers/pose_controller.dart';
 import 'package:gibalica/helpers/pose_calculator.dart';
+import 'package:gibalica/main.dart';
 import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/camera_view.dart';
 import 'package:gibalica/widgets/pose_painter.dart';
@@ -212,7 +213,7 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
       cameraViewController.startCameraTimer();
     }
     if (widget.poseController.poseCalculationDict[widget.poseController.wantedPose] == 3) {
-      playSound();
+      if(settingsController.isSoundOn.value) playSound();
 
       gameController.currentRepetitionCounter++;
       // if (gameController.gameMode == GameMode.training) {
@@ -238,7 +239,7 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
       cameraViewController.startCameraOnboardingTimer();
     }
     if (widget.poseController.poseCalculationDict[BasePose.leftArmNeutral] == 3 && widget.poseController.poseCalculationDict[BasePose.rightArmNeutral] == 3 && widget.poseController.poseCalculationDict[BasePose.leftLegNeutral] == 3 && widget.poseController.poseCalculationDict[BasePose.rightLegNeutral] == 3) {
-      playSound();
+      if(settingsController.isSoundOn.value) playSound();
 
       if (gameController.gameMode == GameMode.training) {
         poseCalculationHelper.setNewTrainingGameModePose();
@@ -266,7 +267,7 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
     }
 
     if (widget.poseController.dayNightDict[widget.poseController.wantedDayNightPosition] == 3) {
-      playSound();
+      if(settingsController.isSoundOn.value) playSound();
 
       gameController.currentRepetitionCounter++;
       poseCalculationHelper.setNewDayNightPosition();

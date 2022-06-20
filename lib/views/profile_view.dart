@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -42,11 +43,8 @@ class _ProfileViewState extends State<ProfileView> {
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.darkBlue),
                 child: const Padding(
                   padding: EdgeInsets.all(4),
-                  child: Center(
-                    child: Text(
-                      "<",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                    ),
+                  child: FittedBox(
+                    child: Icon(Icons.navigate_before),
                   ),
                 ),
               ),
@@ -115,7 +113,7 @@ class _ProfileViewState extends State<ProfileView> {
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30)), color: ColorPalette.lightBlue),
-                        child: const Text(
+                        child: const AutoSizeText(
                           'Klikni za više!',
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
@@ -145,21 +143,15 @@ class _ProfileViewState extends State<ProfileView> {
                                 Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        playerController.leftHandPref.value = !playerController.leftHandPref.value;
-                                        settingsController.gibalicaBox.put("leftHandPref", playerController.leftHandPref.value);
-                                      },
-                                      child: LayoutBuilder(builder: (context, constraint) {
-                                        return Obx(
-                                          () => CircleAvatar(
-                                            child: SvgPicture.asset("assets/Hand_Left.svg"),
-                                            backgroundColor: playerController.leftHandPref.value ? ColorPalette.green : ColorPalette.pink,
-                                            minRadius: constraint.biggest.height,
-                                          ),
-                                        );
-                                      }),
-                                    ),
+                                    child: LayoutBuilder(builder: (context, constraint) {
+                                      return Obx(
+                                        () => CircleAvatar(
+                                          child: SvgPicture.asset("assets/Hand_Left.svg"),
+                                          backgroundColor: playerController.leftHandPref.value ? ColorPalette.green : Colors.grey.shade400,
+                                          minRadius: constraint.biggest.height,
+                                        ),
+                                      );
+                                    }),
                                   ),
                                 ),
                                 const Text("Lijeva ruka", style: TextStyle(fontSize: 28))
@@ -172,21 +164,15 @@ class _ProfileViewState extends State<ProfileView> {
                                 Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        playerController.rightHandPref.value = !playerController.rightHandPref.value;
-                                        settingsController.gibalicaBox.put("rightHandPref", playerController.rightHandPref.value);
-                                      },
-                                      child: LayoutBuilder(builder: (context, constraint) {
-                                        return Obx(
-                                          () => CircleAvatar(
-                                            child: SvgPicture.asset("assets/Hand_Right.svg"),
-                                            backgroundColor: playerController.rightHandPref.value ? ColorPalette.green : ColorPalette.pink,
-                                            minRadius: constraint.biggest.height,
-                                          ),
-                                        );
-                                      }),
-                                    ),
+                                    child: LayoutBuilder(builder: (context, constraint) {
+                                      return Obx(
+                                        () => CircleAvatar(
+                                          child: SvgPicture.asset("assets/Hand_Right.svg"),
+                                          backgroundColor: playerController.rightHandPref.value ? ColorPalette.green : Colors.grey.shade400,
+                                          minRadius: constraint.biggest.height,
+                                        ),
+                                      );
+                                    }),
                                   ),
                                 ),
                                 const Text("Desna ruka", style: TextStyle(fontSize: 28))
@@ -206,21 +192,15 @@ class _ProfileViewState extends State<ProfileView> {
                                 Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        playerController.squatPref.value = !playerController.squatPref.value;
-                                        settingsController.gibalicaBox.put("squatPref", playerController.squatPref.value);
-                                      },
-                                      child: LayoutBuilder(builder: (context, constraint) {
-                                        return Obx(
-                                          () => CircleAvatar(
-                                            child: SvgPicture.asset("assets/Gibalica_squat.svg"),
-                                            backgroundColor: playerController.squatPref.value ? ColorPalette.green : ColorPalette.pink,
-                                            minRadius: constraint.biggest.height,
-                                          ),
-                                        );
-                                      }),
-                                    ),
+                                    child: LayoutBuilder(builder: (context, constraint) {
+                                      return Obx(
+                                        () => CircleAvatar(
+                                          child: SvgPicture.asset("assets/Gibalica_squat.svg"),
+                                          backgroundColor: playerController.squatPref.value ? ColorPalette.green : Colors.grey.shade400,
+                                          minRadius: constraint.biggest.height,
+                                        ),
+                                      );
+                                    }),
                                   ),
                                 ),
                                 const Text("Čučanj", style: TextStyle(fontSize: 28))
@@ -240,21 +220,15 @@ class _ProfileViewState extends State<ProfileView> {
                                 Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        playerController.leftLegPref.value = !playerController.leftLegPref.value;
-                                        settingsController.gibalicaBox.put("leftLegPref", playerController.leftLegPref.value);
-                                      },
-                                      child: LayoutBuilder(builder: (context, constraint) {
-                                        return Obx(
-                                          () => CircleAvatar(
-                                            child: SvgPicture.asset("assets/Leg_Left.svg"),
-                                            backgroundColor: playerController.leftLegPref.value ? ColorPalette.green : ColorPalette.pink,
-                                            minRadius: constraint.biggest.height,
-                                          ),
-                                        );
-                                      }),
-                                    ),
+                                    child: LayoutBuilder(builder: (context, constraint) {
+                                      return Obx(
+                                        () => CircleAvatar(
+                                          child: SvgPicture.asset("assets/Leg_Left.svg"),
+                                          backgroundColor: playerController.leftLegPref.value ? ColorPalette.green : Colors.grey.shade400,
+                                          minRadius: constraint.biggest.height,
+                                        ),
+                                      );
+                                    }),
                                   ),
                                 ),
                                 const Text("Lijeva noga", style: TextStyle(fontSize: 28))
@@ -267,21 +241,15 @@ class _ProfileViewState extends State<ProfileView> {
                                 Expanded(
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        playerController.rightLegPref.value = !playerController.rightLegPref.value;
-                                        settingsController.gibalicaBox.put("rightLegPref", playerController.rightLegPref.value);
-                                      },
-                                      child: LayoutBuilder(builder: (context, constraint) {
-                                        return Obx(
-                                          () => CircleAvatar(
-                                            child: SvgPicture.asset("assets/Leg_Right.svg"),
-                                            backgroundColor: playerController.rightLegPref.value ? ColorPalette.green : ColorPalette.pink,
-                                            minRadius: constraint.biggest.height,
-                                          ),
-                                        );
-                                      }),
-                                    ),
+                                    child: LayoutBuilder(builder: (context, constraint) {
+                                      return Obx(
+                                        () => CircleAvatar(
+                                          child: SvgPicture.asset("assets/Leg_Right.svg"),
+                                          backgroundColor: playerController.rightLegPref.value ? ColorPalette.green : Colors.grey.shade400,
+                                          minRadius: constraint.biggest.height,
+                                        ),
+                                      );
+                                    }),
                                   ),
                                 ),
                                 const Text("Desna noga", style: TextStyle(fontSize: 28))

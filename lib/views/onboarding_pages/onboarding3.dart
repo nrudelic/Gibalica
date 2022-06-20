@@ -10,7 +10,10 @@ class Onboarding3 extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: SvgPicture.asset('assets/Gibalica_cards.svg'),
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
+            child: SvgPicture.asset('assets/Gibalica_cards.svg'),
+          ),
         ),
         const Expanded(
           child: Center(

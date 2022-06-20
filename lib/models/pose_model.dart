@@ -157,6 +157,11 @@ enum BasePose{
   leftLegUp,
   rightLegNeutral,
   rightLegUp,
+  gap,
+  leftArmUpRightArmMiddle,
+  leftArmUpRightArmUp,
+  leftArmMiddleRightArmUp,
+  leftArmMiddleRightArmMiddle
 }
 
 extension BasePoseExtension on BasePose {
@@ -176,14 +181,15 @@ extension BasePoseExtension on BasePose {
         return "RIGHT ARM UP";
       case BasePose.leftLegNeutral:
         return "LEFT LEG NEUTRAL";
-      
       case BasePose.leftLegUp:
         return "LEFT LEG UP";
       case BasePose.rightLegNeutral:
         return "RIGHT LEG NEUTRAL";
-      
       case BasePose.rightLegUp:
         return "RIGHT LEG UP";
+      case BasePose.gap:
+        return "GAP";
+
       default:
         return "";
     }

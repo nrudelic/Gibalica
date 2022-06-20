@@ -75,7 +75,7 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                     gameController.gameType.value = GameType.personal;
                                     gameController.currentMode = GamePlayModes.rightArmUp;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
+                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Desna ruka - u vis')));
                                   },
                                 );
                               },
@@ -83,8 +83,10 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                 padding: const EdgeInsets.all(15),
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
-                                    child: SvgPicture.asset(
-                                      "assets/RIGHT_HAND_up_light.svg",
+                                    child: Obx(
+                                      () => SvgPicture.asset(
+                                        gameController.isPoseFinished['rightArmUp']!.value ? "assets/RIGHT_HAND_up_dark.svg" : "assets/RIGHT_HAND_up_light.svg",
+                                      ),
                                     ),
                                     backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
@@ -123,7 +125,7 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                     gameController.gameType.value = GameType.personal;
                                     gameController.currentMode = GamePlayModes.rightArmMiddle;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
+                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Desna ruka - sa strane')));
                                   },
                                 );
                               },
@@ -131,8 +133,10 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                 padding: const EdgeInsets.all(15),
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
-                                    child: SvgPicture.asset(
-                                      "assets/RIGHT_HAND_onside_light.svg",
+                                    child: Obx(
+                                      () => SvgPicture.asset(
+                                        gameController.isPoseFinished['rightArmMiddle']!.value ? "assets/RIGHT_HAND_onside_dark.svg" : "assets/RIGHT_HAND_onside_light.svg",
+                                      ),
                                     ),
                                     backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
@@ -178,15 +182,17 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                       gameController.gameType.value = GameType.personal;
                                       gameController.currentMode = GamePlayModes.rightArmUpAndMiddle;
 
-                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
+                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Desna ruka - u vis i sa strane')));
                                     });
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(15),
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
-                                    child: SvgPicture.asset(
-                                      "assets/RIGHT_HAND_plus_light.svg",
+                                    child: Obx(
+                                      () => SvgPicture.asset(
+                                        gameController.isPoseFinished['rightArmUpAndMiddle']!.value ? "assets/RIGHT_HAND_plus_dark.svg" : "assets/RIGHT_HAND_plus_light.svg",
+                                      ),
                                     ),
                                     backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,

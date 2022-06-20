@@ -25,7 +25,7 @@ class _EverythingTrainingState extends State<EverythingTraining> {
         Expanded(
           flex: 2,
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                       Expanded(
+            Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Lottie.asset("assets/lotties/warm-up-guy.json"),
@@ -72,16 +72,19 @@ class _EverythingTrainingState extends State<EverythingTraining> {
                                       gameController.gameMode = GameMode.training;
                                       gameController.repeatNumber.value = 3;
                                       gameController.gameType.value = GameType.personal;
+                                      gameController.currentMode = GamePlayModes.all;
 
-                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState)));
+                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Sve')));
                                     });
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(15),
                                 child: LayoutBuilder(builder: (context, constraint) {
                                   return CircleAvatar(
-                                    child: SvgPicture.asset(
-                                      "assets/ALL_light.svg",
+                                    child: Obx(
+                                      () => SvgPicture.asset(
+                                        gameController.isPoseFinished['all']!.value ? "assets/ALL_dark.svg" : "assets/ALL_light.svg",
+                                      ),
                                     ),
                                     backgroundColor: Colors.white,
                                     minRadius: constraint.biggest.height,
