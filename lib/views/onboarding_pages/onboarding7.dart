@@ -14,27 +14,31 @@ class Onboarding7 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
-            child: SvgPicture.asset('assets/Gibalica_repeating.svg'),
-          ),
+          child: SvgPicture.asset('assets/Gibalica_repeating.svg'),
         ),
         Expanded(
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                AutoSizeText(
-                  "Ponavljanje".tr,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+                Expanded(
+                  flex:1,
+                  child: Center(
+                    child: AutoSizeText(
+                      "Ponavljanje".tr,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+                    ),
+                  ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.0),
-                  child: AutoSizeText(
-                    "IgraPamćenjaRedoslijedaVježbi".tr,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
+                Expanded(
+                  flex:2,
+                  child: Center(
+                    child: AutoSizeText(
+                      "IgraPamćenjaRedoslijedaVježbi".tr,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
+                    ),
                   ),
                 ),
               ],

@@ -37,6 +37,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
     var height = MediaQuery.of(context).size.height - MediaQuery.of(context).viewPadding.top;
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           elevation: 0,
           toolbarHeight: height * 0.07,
@@ -44,8 +45,12 @@ class _OnboardingPagesState extends State<OnboardingPages> {
           actions: [
             TextButton(
               onPressed: () {
-                widget.i == 0 ? Get.to(() => MeetupView(),                              transition: Transition.fadeIn,
-) : Get.back();
+                widget.i == 0
+                    ? Get.to(
+                        () => MeetupView(),
+                        transition: Transition.fadeIn,
+                      )
+                    : Get.back();
               },
               style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
               child: Padding(
@@ -59,6 +64,7 @@ class _OnboardingPagesState extends State<OnboardingPages> {
           ],
         ),
         body: Container(
+          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.08),
           color: Colors.white,
           height: height * 0.75,
           child: PageView(
@@ -83,37 +89,46 @@ class _OnboardingPagesState extends State<OnboardingPages> {
         bottomSheet: Container(
           color: Colors.white,
           height: height * 0.15,
-          padding: const EdgeInsets.symmetric(horizontal: 30),
+          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.03),
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            GestureDetector(
-              onTap: () => controller.previousPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut),
-              child: Container(
-                decoration: const BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(36, 80, 128, 1)),
-                padding: const EdgeInsets.all(10),
-                child: Icon(
-                  Icons.navigate_before,
-                  color: Colors.white,
-                  size: MediaQuery.of(context).size.width * 0.1,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.18,
+              child: GestureDetector(
+                onTap: () => controller.previousPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut),
+                child: Container(
+                  decoration: const BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(36, 80, 128, 1)),
+                  padding: const EdgeInsets.all(10),
+                  child: Icon(
+                    Icons.navigate_before,
+                    color: Colors.white,
+                    size: MediaQuery.of(context).size.width * 0.1,
+                  ),
                 ),
               ),
             ),
-            Center(
-              child: SmoothPageIndicator(
-                controller: controller,
-                count: 8,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.50,
+              child: Center(
+                child: SmoothPageIndicator(
+                  controller: controller,
+                  count: 8,
+                ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                isLastPage ? (widget.i == 0 ? Get.off(() => MeetupView()) : Get.back()) : controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
-              },
-              child: Container(
-                decoration: const BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(112, 173, 71, 1)),
-                padding: const EdgeInsets.all(10),
-                child: Icon(
-                  Icons.navigate_next,
-                  color: Colors.white,
-                  size: MediaQuery.of(context).size.width * 0.1,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.18,
+              child: GestureDetector(
+                onTap: () {
+                  isLastPage ? (widget.i == 0 ? Get.off(() => MeetupView()) : Get.back()) : controller.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+                },
+                child: Container(
+                  decoration: const BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(112, 173, 71, 1)),
+                  padding: const EdgeInsets.all(10),
+                  child: Icon(
+                    Icons.navigate_next,
+                    color: Colors.white,
+                    size: MediaQuery.of(context).size.width * 0.1,
+                  ),
                 ),
               ),
             ),

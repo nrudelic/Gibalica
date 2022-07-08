@@ -18,13 +18,10 @@ class Onboarding8 extends StatelessWidget {
         ),
         Expanded(
           child: Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.0),
-              child: AutoSizeText(
-                "GibalicaPratiTvojNapredakZaSvakuOdIgara".tr,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
-              ),
+            child: AutoSizeText(
+              "GibalicaPratiTvojNapredakZaSvakuOdIgara".tr,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
             ),
           ),
         )

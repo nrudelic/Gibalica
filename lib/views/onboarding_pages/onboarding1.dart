@@ -16,18 +16,14 @@ class Onboarding1 extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
             child: SvgPicture.asset('assets/Gibalica_running.svg'),
-          ),//Image.asset('assets/images/Gibalica_running.png'),
+          ), //Image.asset('assets/images/Gibalica_running.png'),
         ),
         Expanded(
           child: Center(
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: AutoSizeText(
-                "appsluzi".tr,
-                
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
-              ),
+            child: AutoSizeText(
+              "appsluzi".tr,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
             ),
           ),
         )

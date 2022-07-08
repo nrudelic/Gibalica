@@ -14,68 +14,73 @@ class StartView extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorPalette.lightBlue,
-        body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Gibalica".tr,
-                      style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
-                    Text(
-                      "KažeBok".tr,
-                      style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
-                    ),
-                  ],
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1, vertical: MediaQuery.of(context).size.height * 0.04),
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AutoSizeText(
+                        "Gibalica".tr,
+                        style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                      AutoSizeText(
+                        "KažeBok".tr,
+                        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                flex: 2,
-                child: SvgPicture.asset('assets/Gibalica_hello_white_circle.svg'),
-              ),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "DragoMiTeVidjetiOvdje".tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 30, color: Colors.white),
-                    ),
-                    Text(
-                      "DobroDošaola".tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 30, color: Colors.white),
-                    ),
-                  ],
+                Expanded(
+                  flex: 2,
+                  child: SvgPicture.asset('assets/Gibalica_hello_white_circle.svg'),
                 ),
-              ),
-              Expanded(
-                flex: 1,
-                child: TextButton(
-                  onPressed: () {
-                    Get.off(() => OnboardingPages(0),                              transition: Transition.fadeIn,
-);
-                  },
-                  style: ButtonStyle(overlayColor: MaterialStateProperty.all(ColorPalette.lightBlue)),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60),
-                    decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(50)), color: Colors.white),
-                    child: AutoSizeText(
-                      "Kreni".tr,
-                      style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AutoSizeText(
+                        "DragoMiTeVidjetiOvdje".tr,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      ),
+                      AutoSizeText(
+                        "DobroDošaola".tr,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 30, color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: TextButton(
+                    onPressed: () {
+                      Get.off(
+                        () => OnboardingPages(0),
+                        transition: Transition.fadeIn,
+                      );
+                    },
+                    style: ButtonStyle(overlayColor: MaterialStateProperty.all(ColorPalette.lightBlue)),
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 60),
+                      decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(50)), color: Colors.white),
+                      child: AutoSizeText(
+                        "Kreni".tr,
+                        style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

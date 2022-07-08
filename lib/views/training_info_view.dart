@@ -39,24 +39,7 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
 
     legsProgress = (((poseController.posePerformance[GamePlayModes.leftLegUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.rightLegUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightLegUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.legGap] as bool) ? 1 : 0)) / 4;
     legsAndSquatProgress = (legsProgress * 4 + ((poseController.posePerformance[GamePlayModes.squat] as bool) ? 1 : 0)) / 5;
-    allProgress = ((((poseController.posePerformance[GamePlayModes.leftArmUp] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.leftArmMiddle] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.leftArmUpAndMiddle] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.rightArmUp] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.rightArmMiddle] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.rightArmUpAndMiddle] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.leftAndRightArmUp] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.leftAndRightArmMiddle] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.leftAndRightArmUpAndMiddleSamePosition] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.leftAndRightArmUpAndMiddleDiffPosition] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.leftAndRightArmAll] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.leftLegUp] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.rightLegUp] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.leftAndRightLegUp] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.legGap] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.squat] as bool) ? 1 : 0) +
-            ((poseController.posePerformance[GamePlayModes.all] as bool) ? 1 : 0)) /
-        17);
+    allProgress = ((((poseController.posePerformance[GamePlayModes.leftArmUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftArmMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftArmUpAndMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.rightArmUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.rightArmMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.rightArmUpAndMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmUpAndMiddleSamePosition] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmUpAndMiddleDiffPosition] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmAll] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftLegUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.rightLegUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightLegUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.legGap] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.squat] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.all] as bool) ? 1 : 0)) / 17);
   }
 
   @override
@@ -89,39 +72,39 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
         ),
         body: Container(
           height: MediaQuery.of(context).size.height * 0.9,
+          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.04),
           child: Column(
             children: [
               Expanded(
-                  flex: 3,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: (() => Get.to(
-                                () => const TrainingInfoView(),
-                                transition: Transition.fadeIn,
-                              )),
-                          child: LayoutBuilder(builder: (context, constraint) {
-                            return CircleAvatar(
-                              backgroundColor: Colors.white,
-                              child: SvgPicture.asset(
-                                playerController.avatarAssetPath.value,
-                              ),
-                              minRadius: constraint.biggest.height,
-                            );
-                          }),
+                flex: 3,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: LayoutBuilder(builder: (context, constraint) {
+                        return CircleAvatar(
+                          backgroundColor: Colors.white,
+                          child: SvgPicture.asset(
+                            playerController.avatarAssetPath.value,
+                          ),
+                          minRadius: constraint.biggest.height,
+                        );
+                      }),
+                    ),
+                    Expanded(
+                      child: FittedBox(
+                        child: AutoSizeText(
+                          playerController.playerName as String,
+                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: ColorPalette.darkBlue),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: AutoSizeText(playerController.playerName as String, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: ColorPalette.darkBlue)),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.25),
-                        child: const Divider(),
-                      )
-                    ],
-                  )),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.25),
+                      child: const Divider(),
+                    )
+                  ],
+                ),
+              ),
               Expanded(
                 flex: 4,
                 child: Row(
@@ -130,18 +113,18 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                   children: [
                     Expanded(
                       child: CircularPercentIndicator(
-                        radius: 80.0,
-                        lineWidth: 15.0,
+                        radius: MediaQuery.of(context).size.width * 0.23,
+                        lineWidth: MediaQuery.of(context).size.width * 0.05,
                         animation: true,
                         percent: (leftArmProgress + leftAndRightArmProgress + rightArmProgress) / 3,
                         center: CircularPercentIndicator(
-                          radius: 60.0,
-                          lineWidth: 15.0,
+                          radius: MediaQuery.of(context).size.width * 0.16,
+                          lineWidth: MediaQuery.of(context).size.width * 0.05,
                           animation: true,
                           percent: legsAndSquatProgress,
                           center: CircularPercentIndicator(
-                            radius: 40.0,
-                            lineWidth: 15.0,
+                          radius: MediaQuery.of(context).size.width * 0.09,
+                          lineWidth: MediaQuery.of(context).size.width * 0.05,
                             animation: true,
                             percent: allProgress,
                             circularStrokeCap: CircularStrokeCap.round,
@@ -155,50 +138,83 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                       ),
                     ),
                     Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          AutoSizeText("GornjiDioTijela".tr,
-                              style: const TextStyle(
-                                color: ColorPalette.pink,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 12.0),
-                            child: AutoSizeText(((leftArmProgress + leftAndRightArmProgress + rightArmProgress) / 3 * 100).toInt().toString() + " %",
-                                style: const TextStyle(
-                                  color: ColorPalette.darkBlue,
-                                  fontWeight: FontWeight.normal,
-                                )),
-                          ),
-                          AutoSizeText("DonjiDioTijela".tr,
-                              style: const TextStyle(
-                                color: ColorPalette.yellow,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 12.0),
-                            child: AutoSizeText((legsAndSquatProgress * 100).toInt().toString() + " %",
-                                style: const TextStyle(
-                                  color: ColorPalette.darkBlue,
-                                  fontWeight: FontWeight.normal,
-                                )),
-                          ),
-                          AutoSizeText("Sve".tr,
-                              style: const TextStyle(
-                                color: ColorPalette.green,
-                                fontWeight: FontWeight.bold,
-                              )),
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 12.0),
-                            child: AutoSizeText((allProgress * 100).toInt().toString() + " %",
-                                style: const TextStyle(
-                                  color: ColorPalette.darkBlue,
-                                  fontWeight: FontWeight.normal,
-                                )),
-                          ),
-                        ],
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.01),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: FittedBox(
+                                child: AutoSizeText("GornjiDioTijela".tr,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      color: ColorPalette.pink,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 12.0),
+                                child: FittedBox(
+                                  child: AutoSizeText(((leftArmProgress + leftAndRightArmProgress + rightArmProgress) / 3 * 100).toInt().toString() + " %",
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        color: ColorPalette.darkBlue,
+                                        fontWeight: FontWeight.normal,
+                                      )),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: FittedBox(
+                                child: AutoSizeText("DonjiDioTijela".tr,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      color: ColorPalette.yellow,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 12.0),
+                                child: FittedBox(
+                                  child: AutoSizeText((legsAndSquatProgress * 100).toInt().toString() + " %",
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        color: ColorPalette.darkBlue,
+                                        fontWeight: FontWeight.normal,
+                                      )),
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: FittedBox(
+                                child: AutoSizeText("Sve".tr,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      color: ColorPalette.green,
+                                      fontWeight: FontWeight.bold,
+                                    )),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.only(bottom: 12.0),
+                                child: FittedBox(
+                                  child: AutoSizeText((allProgress * 100).toInt().toString() + " %",
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        color: ColorPalette.darkBlue,
+                                        fontWeight: FontWeight.normal,
+                                      )),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     )
                   ],
@@ -206,164 +222,147 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
               ),
               Expanded(
                 flex: 4,
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Expanded(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: AutoSizeText("LijevaRuka".tr, style: const TextStyle(color: ColorPalette.darkBlue)),
-                                      ),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 15.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: FittedBox(child: AutoSizeText("LijevaRuka".tr, textAlign: TextAlign.center, style: const TextStyle(color: ColorPalette.darkBlue))),
+                                  ),
+                                  Expanded(
+                                    child: LinearPercentIndicator(
+                                      animation: true,
+                                      animationDuration: 1000,
+                                      lineHeight: 20.0,
+                                      percent: leftArmProgress,
+                                      progressColor: ColorPalette.pink,
+                                      barRadius: const Radius.circular(10),
                                     ),
-                                    Expanded(
-                                      child: LinearPercentIndicator(
-                                        animation: true,
-                                        animationDuration: 1000,
-                                        lineHeight: 20.0,
-                                        percent: leftArmProgress,
-                                        progressColor: ColorPalette.pink,
-                                        barRadius: const Radius.circular(10),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: AutoSizeText("DesnaRuka".tr, style: const TextStyle(color: ColorPalette.darkBlue)),
-                                      ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: FittedBox(child: AutoSizeText("DesnaRuka".tr, textAlign: TextAlign.center, style: const TextStyle(color: ColorPalette.darkBlue))),
+                                  ),
+                                  Expanded(
+                                    child: LinearPercentIndicator(
+                                      animation: true,
+                                      animationDuration: 1000,
+                                      lineHeight: 20.0,
+                                      percent: rightArmProgress,
+                                      progressColor: ColorPalette.pink,
+                                      barRadius: const Radius.circular(10),
                                     ),
-                                    Expanded(
-                                      child: LinearPercentIndicator(
-                                        animation: true,
-                                        animationDuration: 1000,
-                                        lineHeight: 20.0,
-                                        percent: rightArmProgress,
-                                        progressColor: ColorPalette.pink,
-                                        barRadius: const Radius.circular(10),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: AutoSizeText(
-                                          "LijevaIDesnaRuka".tr,
-                                          style: const TextStyle(color: ColorPalette.darkBlue),
-                                        ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: FittedBox(
+                                      child: AutoSizeText(
+                                        "LijevaIDesnaRuka".tr,
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(color: ColorPalette.darkBlue),
                                       ),
                                     ),
-                                    Expanded(
-                                      child: LinearPercentIndicator(
-                                        animation: true,
-                                        animationDuration: 1000,
-                                        lineHeight: 20.0,
-                                        percent: leftAndRightArmProgress,
-                                        progressColor: ColorPalette.pink,
-                                        barRadius: const Radius.circular(10),
-                                      ),
+                                  ),
+                                  Expanded(
+                                    child: LinearPercentIndicator(
+                                      animation: true,
+                                      animationDuration: 1000,
+                                      lineHeight: 20.0,
+                                      percent: leftAndRightArmProgress,
+                                      progressColor: ColorPalette.pink,
+                                      barRadius: const Radius.circular(10),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        Expanded(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: AutoSizeText("Noge".tr, style: const TextStyle(color: ColorPalette.darkBlue)),
-                                      ),
+                      ),
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: FittedBox(child: AutoSizeText("Noge".tr, textAlign: TextAlign.center, style: const TextStyle(color: ColorPalette.darkBlue))),
+                                  ),
+                                  Expanded(
+                                    child: LinearPercentIndicator(
+                                      animation: true,
+                                      animationDuration: 1000,
+                                      lineHeight: 20.0,
+                                      percent: legsProgress,
+                                      progressColor: ColorPalette.yellow,
+                                      barRadius: const Radius.circular(10),
                                     ),
-                                    Expanded(
-                                      child: LinearPercentIndicator(
-                                        animation: true,
-                                        animationDuration: 1000,
-                                        lineHeight: 20.0,
-                                        percent: legsProgress,
-                                        progressColor: ColorPalette.yellow,
-                                        barRadius: const Radius.circular(10),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: AutoSizeText("NogeIČučanj".tr, style: const TextStyle(color: ColorPalette.darkBlue)),
-                                      ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: FittedBox(child: AutoSizeText("NogeIČučanj".tr, textAlign: TextAlign.center, style: const TextStyle(color: ColorPalette.darkBlue))),
+                                  ),
+                                  Expanded(
+                                    child: LinearPercentIndicator(
+                                      animation: true,
+                                      animationDuration: 1000,
+                                      lineHeight: 20.0,
+                                      percent: legsAndSquatProgress,
+                                      progressColor: ColorPalette.yellow,
+                                      barRadius: const Radius.circular(10),
                                     ),
-                                    Expanded(
-                                      child: LinearPercentIndicator(
-                                        animation: true,
-                                        animationDuration: 1000,
-                                        lineHeight: 20.0,
-                                        percent: legsAndSquatProgress,
-                                        progressColor: ColorPalette.yellow,
-                                        barRadius: const Radius.circular(10),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: AutoSizeText("Sve".tr, style: const TextStyle(color: ColorPalette.darkBlue)),
-                                      ),
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  Expanded(
+                                    child: FittedBox(child: AutoSizeText("Sve".tr, textAlign: TextAlign.center, style: const TextStyle(color: ColorPalette.darkBlue))),
+                                  ),
+                                  Expanded(
+                                    child: LinearPercentIndicator(
+                                      animation: true,
+                                      animationDuration: 1000,
+                                      lineHeight: 20.0,
+                                      percent: allProgress,
+                                      progressColor: ColorPalette.green,
+                                      barRadius: const Radius.circular(10),
                                     ),
-                                    Expanded(
-                                      child: LinearPercentIndicator(
-                                        animation: true,
-                                        animationDuration: 1000,
-                                        lineHeight: 20.0,
-                                        percent: allProgress,
-                                        progressColor: ColorPalette.green,
-                                        barRadius: const Radius.circular(10),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),

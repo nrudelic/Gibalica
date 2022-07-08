@@ -25,7 +25,7 @@ class _Screening3State extends State<Screening3> {
         Expanded(
           flex: 2,
           child: Padding(
-            padding: EdgeInsets.only(top: 30, left: 20, right: 20),
+            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
             child: AutoSizeText(
               "KojiProgramVježbeŽeliš".tr,
               style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
@@ -34,95 +34,87 @@ class _Screening3State extends State<Screening3> {
         ),
         Expanded(
           flex: 1,
-          child: Padding(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: AutoSizeText(
-              "OdaberiProgram".tr,
-              style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
-            ),
+          child: AutoSizeText(
+            "OdaberiProgram".tr,
+            style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
           ),
         ),
         Expanded(
           flex: 8,
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
-            child: Column(
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 8,
-                                child: GestureDetector(
-                                  onTap: () {
-                                    playerController.exerciseProgram.value = ExerciseProgram.all;
-                                    playerController.leftHandPref.value = true;
-                                    playerController.rightHandPref.value = true;
-                                    playerController.leftLegPref.value = true;
-                                    playerController.rightLegPref.value = true;
-                                    playerController.squatPref.value = true;
-                                    // settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_1_Girl1.svg");
-                                  },
-                                  child: LayoutBuilder(builder: (context, constraint) {
-                                    return Obx(
-                                      () => CircleAvatar(
-                                        child: SvgPicture.asset("assets/Gibalica_all.svg"),
-                                        backgroundColor: playerController.exerciseProgram.value == ExerciseProgram.all ? ColorPalette.green : Colors.grey.shade300,
-                                        minRadius: constraint.biggest.height,
-                                      ),
-                                    );
-                                  }),
-                                ),
-                              ),
-                              Expanded(flex: 2, child: AutoSizeText("Cijeli".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)))
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Column(
-                          children: [
-                            Expanded(
-                              flex: 8,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Expanded(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      playerController.exerciseProgram.value = ExerciseProgram.special;
-                                      // settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_2_Girl2.svg");
-                                    },
-                                    child: LayoutBuilder(builder: (context, constraint) {
-                                      return Obx(
-                                        () => CircleAvatar(
-                                          child: SvgPicture.asset("assets/Gibalica_special.svg"),
-                                          backgroundColor: playerController.exerciseProgram.value == ExerciseProgram.special ? ColorPalette.green : Colors.grey.shade300,
-                                          minRadius: constraint.biggest.height,
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                                ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 4,
+                      child: GestureDetector(
+                        onTap: () {
+                          playerController.exerciseProgram.value = ExerciseProgram.all;
+                          playerController.leftHandPref.value = true;
+                          playerController.rightHandPref.value = true;
+                          playerController.leftLegPref.value = true;
+                          playerController.rightLegPref.value = true;
+                          playerController.squatPref.value = true;
+                          settingsController.gibalicaBox.put("leftHandPref", playerController.leftHandPref.value);
+                          settingsController.gibalicaBox.put("rightHandPref", playerController.rightHandPref.value);
+                          settingsController.gibalicaBox.put("squatPref", playerController.squatPref.value);
+                          settingsController.gibalicaBox.put("leftLegPref", playerController.leftLegPref.value);
+                          settingsController.gibalicaBox.put("rightLegPref", playerController.rightLegPref.value);
+                        },
+                        child: LayoutBuilder(builder: (context, constraint) {
+                          return Obx(
+                            () => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircleAvatar(
+                                child: SvgPicture.asset("assets/Gibalica_all.svg"),
+                                backgroundColor: playerController.exerciseProgram.value == ExerciseProgram.all ? ColorPalette.green : Colors.grey.shade300,
+                                minRadius: constraint.biggest.height,
                               ),
                             ),
-                            Expanded(flex: 2, child: AutoSizeText("Prilagođeni".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)))
-                          ],
-                        ),
+                          );
+                        }),
                       ),
-                    ],
-                  ),
+                    ),
+                    Expanded(flex: 2, child: AutoSizeText("Cijeli".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)))
+                  ],
                 ),
-              ],
-            ),
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      flex: 8,
+                      child: GestureDetector(
+                        onTap: () {
+                          playerController.exerciseProgram.value = ExerciseProgram.special;
+                          // settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_2_Girl2.svg");
+                        },
+                        child: LayoutBuilder(builder: (context, constraint) {
+                          return Obx(
+                            () => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: CircleAvatar(
+                                child: SvgPicture.asset("assets/Gibalica_special.svg"),
+                                backgroundColor: playerController.exerciseProgram.value == ExerciseProgram.special ? ColorPalette.green : Colors.grey.shade300,
+                                minRadius: constraint.biggest.height,
+                              ),
+                            ),
+                          );
+                        }),
+                      ),
+                    ),
+                    Expanded(flex: 4, child: AutoSizeText("Prilagođeni".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)))
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ],

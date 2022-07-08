@@ -17,25 +17,30 @@ class Onboarding6 extends StatelessWidget {
           child: Lottie.asset('assets/lotties/day-night.json'),
         ),
         Expanded(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                AutoSizeText(
-                  "DanINoć".tr,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Center(
+                  child: AutoSizeText(
+                    "DanINoć".tr,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+                  ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.0),
+              ),
+              Expanded(
+                flex: 2,
+                child: Center(
                   child: AutoSizeText(
                     "ZabavnaIgraKoncentracije".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         )
       ],

@@ -58,8 +58,10 @@ class _ProfileViewState extends State<ProfileView> {
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.yellow),
                 child: IconButton(
                   onPressed: () {
-                    Get.to(() => const ScreeningPages(),                              transition: Transition.fadeIn,
-);
+                    Get.to(
+                      () => const ScreeningPages(),
+                      transition: Transition.fadeIn,
+                    );
                   },
                   icon: const Icon(Icons.mode_edit_outline),
                 ),
@@ -67,7 +69,8 @@ class _ProfileViewState extends State<ProfileView> {
             )
           ],
         ),
-        body: SizedBox(
+        body: Container(
+          padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.04, right: MediaQuery.of(context).size.width * 0.04, bottom: MediaQuery.of(context).size.height * 0.04),
           height: MediaQuery.of(context).size.height * 0.9,
           child: Column(children: [
             Expanded(
@@ -85,11 +88,12 @@ class _ProfileViewState extends State<ProfileView> {
                       );
                     }),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: AutoSizeText(
-                      playerController.playerName as String,
-                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: ColorPalette.darkBlue),
+                  Expanded(
+                    child: FittedBox(
+                      child: AutoSizeText(
+                        playerController.playerName as String,
+                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: ColorPalette.darkBlue),
+                      ),
                     ),
                   ),
                   Padding(
@@ -101,31 +105,41 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             Expanded(
               flex: 2,
-              child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                SvgPicture.asset("assets/statistics.svg"),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    AutoSizeText("PodatciOVježbanju".tr, style: TextStyle(color: ColorPalette.darkBlue)),
-                    TextButton(
-                      onPressed: () {
-                        Get.to(() => const TrainingInfoView(),                              transition: Transition.fadeIn,
-);
-                      },
-                      style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30)), color: ColorPalette.lightBlue),
-                        child: AutoSizeText(
-                          "KlikniZaViše".tr,
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+              child: Row(
+                children: [
+                  Expanded(child: SvgPicture.asset("assets/statistics.svg")),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        FittedBox(
+                          child: AutoSizeText("PodatciOVježbanju".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)),
                         ),
-                      ),
+                        FittedBox(
+                          child: TextButton(
+                            onPressed: () {
+                              Get.to(
+                                () => const TrainingInfoView(),
+                                transition: Transition.fadeIn,
+                              );
+                            },
+                            style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
+                            child: Container(
+                              padding: EdgeInsets.all(5),
+                              decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30)), color: ColorPalette.lightBlue),
+                              child: AutoSizeText(
+                                "KlikniZaViše".tr,
+                                style: TextStyle(fontSize: 20, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
-                )
-              ]),
+                  ),
+                ],
+              ),
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.25),
@@ -133,138 +147,125 @@ class _ProfileViewState extends State<ProfileView> {
             ),
             Expanded(
               flex: 6,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 15.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: LayoutBuilder(builder: (context, constraint) {
-                                      return Obx(
-                                        () => CircleAvatar(
-                                          child: SvgPicture.asset("assets/Hand_Left.svg"),
-                                          backgroundColor: playerController.leftHandPref.value ? ColorPalette.green : Colors.grey.shade400,
-                                          minRadius: constraint.biggest.height,
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                                ),
-                                AutoSizeText("LijevaRuka".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
-                              ],
-                            ),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: LayoutBuilder(builder: (context, constraint) {
+                                  return Obx(
+                                    () => CircleAvatar(
+                                      child: SvgPicture.asset("assets/Hand_Left.svg"),
+                                      backgroundColor: playerController.leftHandPref.value ? ColorPalette.green : Colors.grey.shade400,
+                                      minRadius: constraint.biggest.height,
+                                    ),
+                                  );
+                                }),
+                              ),
+                              Expanded(flex: 1, child: FittedBox(child: AutoSizeText("LijevaRuka".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: LayoutBuilder(builder: (context, constraint) {
-                                      return Obx(
-                                        () => CircleAvatar(
-                                          child: SvgPicture.asset("assets/Hand_Right.svg"),
-                                          backgroundColor: playerController.rightHandPref.value ? ColorPalette.green : Colors.grey.shade400,
-                                          minRadius: constraint.biggest.height,
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                                ),
-                                AutoSizeText("DesnaRuka".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: LayoutBuilder(builder: (context, constraint) {
+                                  return Obx(
+                                    () => CircleAvatar(
+                                      child: SvgPicture.asset("assets/Hand_Right.svg"),
+                                      backgroundColor: playerController.rightHandPref.value ? ColorPalette.green : Colors.grey.shade400,
+                                      minRadius: constraint.biggest.height,
+                                    ),
+                                  );
+                                }),
+                              ),
+                              Expanded(flex: 1, child: FittedBox(child: AutoSizeText("DesnaRuka".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: LayoutBuilder(builder: (context, constraint) {
-                                      return Obx(
-                                        () => CircleAvatar(
-                                          child: SvgPicture.asset("assets/Gibalica_squat.svg"),
-                                          backgroundColor: playerController.squatPref.value ? ColorPalette.green : Colors.grey.shade400,
-                                          minRadius: constraint.biggest.height,
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                                ),
-                                AutoSizeText("Čučanj".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
-                              ],
-                            ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: LayoutBuilder(builder: (context, constraint) {
+                                  return Obx(
+                                    () => CircleAvatar(
+                                      child: SvgPicture.asset("assets/Gibalica_squat.svg"),
+                                      backgroundColor: playerController.squatPref.value ? ColorPalette.green : Colors.grey.shade400,
+                                      minRadius: constraint.biggest.height,
+                                    ),
+                                  );
+                                }),
+                              ),
+                              Expanded(flex: 1, child: FittedBox(child: AutoSizeText("Čučanj".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: LayoutBuilder(builder: (context, constraint) {
-                                      return Obx(
-                                        () => CircleAvatar(
-                                          child: SvgPicture.asset("assets/Leg_Left.svg"),
-                                          backgroundColor: playerController.leftLegPref.value ? ColorPalette.green : Colors.grey.shade400,
-                                          minRadius: constraint.biggest.height,
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                                ),
-                                AutoSizeText("LijevaNoga".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
-                              ],
-                            ),
+                  ),
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: LayoutBuilder(builder: (context, constraint) {
+                                  return Obx(
+                                    () => CircleAvatar(
+                                      child: SvgPicture.asset("assets/Leg_Left.svg"),
+                                      backgroundColor: playerController.leftLegPref.value ? ColorPalette.green : Colors.grey.shade400,
+                                      minRadius: constraint.biggest.height,
+                                    ),
+                                  );
+                                }),
+                              ),
+                              Expanded(flex: 1, child: FittedBox(child: AutoSizeText("LijevaNoga".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                            ],
                           ),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: LayoutBuilder(builder: (context, constraint) {
-                                      return Obx(
-                                        () => CircleAvatar(
-                                          child: SvgPicture.asset("assets/Leg_Right.svg"),
-                                          backgroundColor: playerController.rightLegPref.value ? ColorPalette.green : Colors.grey.shade400,
-                                          minRadius: constraint.biggest.height,
-                                        ),
-                                      );
-                                    }),
-                                  ),
-                                ),
-                                AutoSizeText("DesnaNoga".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
-                              ],
-                            ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Expanded(
+                                flex: 3,
+                                child: LayoutBuilder(builder: (context, constraint) {
+                                  return Obx(
+                                    () => CircleAvatar(
+                                      child: SvgPicture.asset("assets/Leg_Right.svg"),
+                                      backgroundColor: playerController.rightLegPref.value ? ColorPalette.green : Colors.grey.shade400,
+                                      minRadius: constraint.biggest.height,
+                                    ),
+                                  );
+                                }),
+                              ),
+                              Expanded(flex: 1, child: FittedBox(child: AutoSizeText("DesnaNoga".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                            ],
                           ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
               ),
             ),
           ]),

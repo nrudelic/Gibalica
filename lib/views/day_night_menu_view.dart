@@ -44,9 +44,11 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
               ),
             ),
           ),
-          title: AutoSizeText(
-            "DanINoć".tr,
-            style: TextStyle(color: ColorPalette.lightBlue, fontSize: 40, fontWeight: FontWeight.bold),
+          title: FittedBox(
+            child: AutoSizeText(
+              "DanINoć".tr,
+              style: TextStyle(color: ColorPalette.lightBlue, fontSize: 40, fontWeight: FontWeight.bold),
+            ),
           ),
         ),
         body: SizedBox(
@@ -58,112 +60,118 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
               Expanded(
                 flex: 4,
                 child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: AutoSizeText(
-                      "BrojPonavljanjaVježbe".tr,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: ColorPalette.darkBlue,
-                        fontSize: 35,
-                        fontWeight: FontWeight.normal,
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: AutoSizeText(
+                        "BrojPonavljanjaVježbe".tr,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: ColorPalette.darkBlue,
+                          fontSize: 35,
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            if (gameController.dayNightCounter.value > 1) {
-                              gameController.dayNightCounter.value--;
-                            }
-                          },
+                  Expanded(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              if (gameController.dayNightCounter.value > 1) {
+                                gameController.dayNightCounter.value--;
+                              }
+                            },
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.1,
+                              width: MediaQuery.of(context).size.height * 0.1,
+                              decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.lightBlue),
+                              child: const Padding(
+                                padding: EdgeInsets.all(4),
+                                child: FittedBox(
+                                  fit: BoxFit.cover,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Icon(
+                                      Icons.navigate_before,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
                           child: Container(
-                            height: MediaQuery.of(context).size.height * 0.1,
-                            width: MediaQuery.of(context).size.height * 0.1,
-                            decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.lightBlue),
-                            child: const Padding(
-                              padding: EdgeInsets.all(4),
-                              child: FittedBox(
-                                fit: BoxFit.cover,
-                                child: Padding(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Icon(
-                                    Icons.navigate_before,
-                                    color: Colors.white,
+                            height: MediaQuery.of(context).size.width * 0.35,
+                            width: MediaQuery.of(context).size.width * 0.25,
+                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: ColorPalette.yellow),
+                            child: Padding(
+                              padding: const EdgeInsets.all(4),
+                              child: Obx(
+                                () => FittedBox(
+                                  fit: BoxFit.contain,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(4.0),
+                                    child: AutoSizeText(
+                                      gameController.dayNightCounter.value.toString(),
+                                      // style: TextStyle(
+                                      //   color: ColorPalette.darkBlue,
+                                      //   fontWeight: FontWeight.bold,
+                                      // ),
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: MediaQuery.of(context).size.width * 0.35,
-                          width: MediaQuery.of(context).size.width * 0.25,
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: ColorPalette.yellow),
-                          child: Padding(
-                            padding: const EdgeInsets.all(4),
-                            child: Obx(
-                              () => FittedBox(
-                                fit: BoxFit.contain,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: AutoSizeText(
-                                    gameController.dayNightCounter.value.toString(),
-                                    // style: TextStyle(
-                                    //   color: ColorPalette.darkBlue,
-                                    //   fontWeight: FontWeight.bold,
-                                    // ),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              gameController.dayNightCounter.value++;
+                            },
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.1,
+                              width: MediaQuery.of(context).size.height * 0.1,
+                              decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.lightBlue),
+                              child: const Padding(
+                                padding: EdgeInsets.all(4),
+                                child: FittedBox(
+                                  fit: BoxFit.cover,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(2.0),
+                                    child: Icon(
+                                      Icons.navigate_next,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            gameController.dayNightCounter.value++;
-                          },
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.1,
-                            width: MediaQuery.of(context).size.height * 0.1,
-                            decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.lightBlue),
-                            child: const Padding(
-                              padding: EdgeInsets.all(4),
-                              child: FittedBox(
-                                fit: BoxFit.cover,
-                                child: Padding(
-                                  padding: EdgeInsets.all(2.0),
-                                  child: Icon(
-                                    Icons.navigate_next,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ]),
               ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 10),
-                child: AutoSizeText(
-                  "GibalicaGleda".tr,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: ColorPalette.darkBlue,
-                    fontSize: 35,
-                    fontWeight: FontWeight.normal,
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 10),
+                  child: AutoSizeText(
+                    "GibalicaGleda".tr,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: ColorPalette.darkBlue,
+                      fontSize: 35,
+                      fontWeight: FontWeight.normal,
+                    ),
                   ),
                 ),
               ),
@@ -235,16 +243,13 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
                   },
                   style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
                   child: Container(
-                    height: MediaQuery.of(context).size.width * 0.14,
+                    //height: MediaQuery.of(context).size.width * 0.14,
                     width: MediaQuery.of(context).size.width * 0.5,
                     padding: const EdgeInsets.all(10),
                     decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30)), color: ColorPalette.green),
-                    child: FittedBox(
-                      fit: BoxFit.contain,
-                      child: AutoSizeText(
-                        "IGRAJ".tr,
-                        style: TextStyle(color: Colors.white),
-                      ),
+                    child: AutoSizeText(
+                      "IGRAJ".tr, textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.white,fontSize: 30),
                     ),
                   ),
                 ),

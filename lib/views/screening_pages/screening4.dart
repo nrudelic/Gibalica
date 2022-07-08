@@ -21,51 +21,48 @@ class _Screening4State extends State<Screening4> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(
-          flex: 1,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children:    [
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(top: 30, left: 20, right: 20),
-                  child: AutoSizeText(
-                    "PrilagodiSvojTrening".tr,
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            flex: 1,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
+                    child: AutoSizeText(
+                      "PrilagodiSvojTrening".tr,
+                      style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                Expanded(
                   child: AutoSizeText(
                     "OdaberiVježbe".tr,
                     style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          flex: 3,
-          child: Column(
-            children: [
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+          Expanded(
+            flex: 3,
+            child: Column(
+              children: [
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Expanded(
+                              flex: 3,
                               child: GestureDetector(
                                 onTap: () {
                                   playerController.leftHandPref.value = !playerController.leftHandPref.value;
@@ -82,17 +79,14 @@ class _Screening4State extends State<Screening4> {
                                 }),
                               ),
                             ),
-                          ),
-                             AutoSizeText("LijevaRuka".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
-                        ],
+                            Expanded(flex: 1, child: FittedBox(child: AutoSizeText("LijevaRuka".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Expanded(flex: 3, 
                               child: GestureDetector(
                                 onTap: () {
                                   playerController.rightHandPref.value = !playerController.rightHandPref.value;
@@ -109,24 +103,21 @@ class _Screening4State extends State<Screening4> {
                                 }),
                               ),
                             ),
-                          ),
-                             AutoSizeText("DesnaRuka".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
-                        ],
+                            Expanded(flex: 1, child: FittedBox(child: AutoSizeText("DesnaRuka".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Expanded(flex: 3, 
                               child: GestureDetector(
                                 onTap: () {
                                   playerController.squatPref.value = !playerController.squatPref.value;
@@ -143,24 +134,21 @@ class _Screening4State extends State<Screening4> {
                                 }),
                               ),
                             ),
-                          ),
-                             AutoSizeText("Čučanj".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
-                        ],
+                            Expanded(flex: 1, child: AutoSizeText("Čučanj".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)))
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Expanded(flex: 3, 
                               child: GestureDetector(
                                 onTap: () {
                                   playerController.leftLegPref.value = !playerController.leftLegPref.value;
@@ -177,17 +165,14 @@ class _Screening4State extends State<Screening4> {
                                 }),
                               ),
                             ),
-                          ),
-                             AutoSizeText("LijevaNoga".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
-                        ],
+                            Expanded(flex: 1, child: FittedBox(child: AutoSizeText("LijevaNoga".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                          ],
+                        ),
                       ),
-                    ),
-                    Expanded(
-                      child: Column(
-                        children: [
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Expanded(flex: 3, 
                               child: GestureDetector(
                                 onTap: () {
                                   playerController.rightLegPref.value = !playerController.rightLegPref.value;
@@ -204,18 +189,18 @@ class _Screening4State extends State<Screening4> {
                                 }),
                               ),
                             ),
-                          ),
-                             AutoSizeText("DesnaNoga".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
-                        ],
+                            Expanded(flex: 1, child: FittedBox(child: AutoSizeText("DesnaNoga".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

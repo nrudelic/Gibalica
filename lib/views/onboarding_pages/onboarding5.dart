@@ -14,31 +14,33 @@ class Onboarding5 extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
-            child: SvgPicture.asset('assets/Gibalica_training.svg'),
-          ),
+          child: SvgPicture.asset('assets/Gibalica_training.svg'),
         ),
         Expanded(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children:  [
-                AutoSizeText(
-                  "Trening".tr,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                flex: 1,
+                child: Center(
+                  child: AutoSizeText(
+                    "Trening".tr,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+                  ),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30.0),
+              ),
+              Expanded(
+                flex: 2,
+                child: Center(
                   child: AutoSizeText(
                     "IgraSVježbamaZaRukeINoge".tr,
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         )
       ],

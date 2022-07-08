@@ -22,24 +22,21 @@ class _Screening2State extends State<Screening2> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-           Expanded(
+        Expanded(
           flex: 2,
           child: Padding(
-            padding: EdgeInsets.only(top: 30, left: 20, right: 20),
+            padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
             child: AutoSizeText(
               "OdaberiJedanOdPonuđenihAvataraKojiTiSeNajvišeSviđa".tr,
               style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
             ),
           ),
         ),
-           Expanded(
+        Expanded(
           flex: 1,
-          child: Padding(
-            padding: EdgeInsets.only(left: 20, right: 20),
-            child: AutoSizeText(
-              "OdaberiAvatar".tr,
-              style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
-            ),
+          child: AutoSizeText(
+            "OdaberiAvatar".tr,
+            style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
           ),
         ),
         Expanded(
@@ -51,66 +48,57 @@ class _Screening2State extends State<Screening2> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            playerController.avatarAssetPath.value = "assets/Avatar_1_Girl1.svg";
-                            settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_1_Girl1.svg");
-                            playerController.avatarChosen = true;
-                          },
-                          child: LayoutBuilder(builder: (context, constraint) {
-                            return Obx(
-                              () => CircleAvatar(
-                                child: SvgPicture.asset("assets/Avatar_1_Girl1.svg"),
-                                backgroundColor: playerController.avatarAssetPath.value == "assets/Avatar_1_Girl1.svg" ? ColorPalette.green : Colors.white,
-                                minRadius: constraint.biggest.height,
-                              ),
-                            );
-                          }),
-                        ),
+                      child: GestureDetector(
+                        onTap: () {
+                          playerController.avatarAssetPath.value = "assets/Avatar_1_Girl1.svg";
+                          settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_1_Girl1.svg");
+                          playerController.avatarChosen = true;
+                        },
+                        child: LayoutBuilder(builder: (context, constraint) {
+                          return Obx(
+                            () => CircleAvatar(
+                              child: SvgPicture.asset("assets/Avatar_1_Girl1.svg"),
+                              backgroundColor: playerController.avatarAssetPath.value == "assets/Avatar_1_Girl1.svg" ? ColorPalette.green : Colors.white,
+                              minRadius: constraint.biggest.height,
+                            ),
+                          );
+                        }),
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            playerController.avatarAssetPath.value = "assets/Avatar_2_Girl2.svg";
-                            settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_2_Girl2.svg");
-                            playerController.avatarChosen = true;
-                          },
-                          child: LayoutBuilder(builder: (context, constraint) {
-                            return Obx(
-                              () => CircleAvatar(
-                                child: SvgPicture.asset("assets/Avatar_2_Girl2.svg"),
-                                backgroundColor: playerController.avatarAssetPath.value == "assets/Avatar_2_Girl2.svg" ? ColorPalette.green : Colors.white,
-                                minRadius: constraint.biggest.height,
-                              ),
-                            );
-                          }),
-                        ),
+                      child: GestureDetector(
+                        onTap: () {
+                          playerController.avatarAssetPath.value = "assets/Avatar_2_Girl2.svg";
+                          settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_2_Girl2.svg");
+                          playerController.avatarChosen = true;
+                        },
+                        child: LayoutBuilder(builder: (context, constraint) {
+                          return Obx(
+                            () => CircleAvatar(
+                              child: SvgPicture.asset("assets/Avatar_2_Girl2.svg"),
+                              backgroundColor: playerController.avatarAssetPath.value == "assets/Avatar_2_Girl2.svg" ? ColorPalette.green : Colors.white,
+                              minRadius: constraint.biggest.height,
+                            ),
+                          );
+                        }),
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            playerController.avatarAssetPath.value = "assets/Avatar_3_girl3.svg";
-                            settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_3_girl3.svg");
-                            playerController.avatarChosen = true;
-                          },
-                          child: LayoutBuilder(builder: (context, constraint) {
-                            return Obx(
-                              () => CircleAvatar(
-                                child: SvgPicture.asset("assets/Avatar_3_girl3.svg"),
-                                backgroundColor: playerController.avatarAssetPath.value == "assets/Avatar_3_girl3.svg" ? ColorPalette.green : Colors.white,
-                                minRadius: constraint.biggest.height,
-                              ),
-                            );
-                          }),
-                        ),
+                      child: GestureDetector(
+                        onTap: () {
+                          playerController.avatarAssetPath.value = "assets/Avatar_3_girl3.svg";
+                          settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_3_girl3.svg");
+                          playerController.avatarChosen = true;
+                        },
+                        child: LayoutBuilder(builder: (context, constraint) {
+                          return Obx(
+                            () => CircleAvatar(
+                              child: SvgPicture.asset("assets/Avatar_3_girl3.svg"),
+                              backgroundColor: playerController.avatarAssetPath.value == "assets/Avatar_3_girl3.svg" ? ColorPalette.green : Colors.white,
+                              minRadius: constraint.biggest.height,
+                            ),
+                          );
+                        }),
                       ),
                     ),
                   ],
@@ -121,66 +109,57 @@ class _Screening2State extends State<Screening2> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            playerController.avatarAssetPath.value = "assets/Avatar_4_Boy1.svg";
-                            settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_4_Boy1.svg");
-                            playerController.avatarChosen = true;
-                          },
-                          child: LayoutBuilder(builder: (context, constraint) {
-                            return Obx(
-                              () => CircleAvatar(
-                                child: SvgPicture.asset("assets/Avatar_4_Boy1.svg"),
-                                backgroundColor: playerController.avatarAssetPath.value == "assets/Avatar_4_Boy1.svg" ? ColorPalette.green : Colors.white,
-                                minRadius: constraint.biggest.height,
-                              ),
-                            );
-                          }),
-                        ),
+                      child: GestureDetector(
+                        onTap: () {
+                          playerController.avatarAssetPath.value = "assets/Avatar_4_Boy1.svg";
+                          settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_4_Boy1.svg");
+                          playerController.avatarChosen = true;
+                        },
+                        child: LayoutBuilder(builder: (context, constraint) {
+                          return Obx(
+                            () => CircleAvatar(
+                              child: SvgPicture.asset("assets/Avatar_4_Boy1.svg"),
+                              backgroundColor: playerController.avatarAssetPath.value == "assets/Avatar_4_Boy1.svg" ? ColorPalette.green : Colors.white,
+                              minRadius: constraint.biggest.height,
+                            ),
+                          );
+                        }),
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            playerController.avatarAssetPath.value = "assets/Avatar_5_Boy2.svg";
-                            settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_5_Boy2.svg");
-                            playerController.avatarChosen = true;
-                          },
-                          child: LayoutBuilder(builder: (context, constraint) {
-                            return Obx(
-                              () => CircleAvatar(
-                                child: SvgPicture.asset("assets/Avatar_5_Boy2.svg"),
-                                backgroundColor: playerController.avatarAssetPath.value == "assets/Avatar_5_Boy2.svg" ? ColorPalette.green : Colors.white,
-                                minRadius: constraint.biggest.height,
-                              ),
-                            );
-                          }),
-                        ),
+                      child: GestureDetector(
+                        onTap: () {
+                          playerController.avatarAssetPath.value = "assets/Avatar_5_Boy2.svg";
+                          settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_5_Boy2.svg");
+                          playerController.avatarChosen = true;
+                        },
+                        child: LayoutBuilder(builder: (context, constraint) {
+                          return Obx(
+                            () => CircleAvatar(
+                              child: SvgPicture.asset("assets/Avatar_5_Boy2.svg"),
+                              backgroundColor: playerController.avatarAssetPath.value == "assets/Avatar_5_Boy2.svg" ? ColorPalette.green : Colors.white,
+                              minRadius: constraint.biggest.height,
+                            ),
+                          );
+                        }),
                       ),
                     ),
                     Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: GestureDetector(
-                          onTap: () {
-                            playerController.avatarAssetPath.value = "assets/Avatar_6_Boy3.svg";
-                            settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_6_Boy3.svg");
-                            playerController.avatarChosen = true;
-                          },
-                          child: LayoutBuilder(builder: (context, constraint) {
-                            return Obx(
-                              () => CircleAvatar(
-                                child: SvgPicture.asset("assets/Avatar_6_Boy3.svg"),
-                                backgroundColor: playerController.avatarAssetPath.value == "assets/Avatar_6_Boy3.svg" ? ColorPalette.green : Colors.white,
-                                minRadius: constraint.biggest.height,
-                              ),
-                            );
-                          }),
-                        ),
+                      child: GestureDetector(
+                        onTap: () {
+                          playerController.avatarAssetPath.value = "assets/Avatar_6_Boy3.svg";
+                          settingsController.gibalicaBox.put("avatarAssetPath", "assets/Avatar_6_Boy3.svg");
+                          playerController.avatarChosen = true;
+                        },
+                        child: LayoutBuilder(builder: (context, constraint) {
+                          return Obx(
+                            () => CircleAvatar(
+                              child: SvgPicture.asset("assets/Avatar_6_Boy3.svg"),
+                              backgroundColor: playerController.avatarAssetPath.value == "assets/Avatar_6_Boy3.svg" ? ColorPalette.green : Colors.white,
+                              minRadius: constraint.biggest.height,
+                            ),
+                          );
+                        }),
                       ),
                     ),
                   ],

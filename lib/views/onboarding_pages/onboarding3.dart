@@ -13,20 +13,14 @@ class Onboarding3 extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
-            child: SvgPicture.asset('assets/Gibalica_cards_with_Gibalica.svg'),
-          ),
+          child: SvgPicture.asset('assets/Gibalica_cards_with_Gibalica.svg'),
         ),
         Expanded(
           child: Center(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30.0),
-              child: AutoSizeText(
-                "UmjestoVlastitimTijelomMožešVježbatiISKarticama".tr,
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
-              ),
+            child: AutoSizeText(
+              "UmjestoVlastitimTijelomMožešVježbatiISKarticama".tr,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
             ),
           ),
         )

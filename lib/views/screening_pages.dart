@@ -41,10 +41,11 @@ class _ScreeningPagesState extends State<ScreeningPages> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
+            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
             color: Colors.white,
             height: height * 0.85,
             child: PageView(
-              physics: (playerController.playerName != null && playerController.playerName!.length > 0) ? ScrollPhysics() : NeverScrollableScrollPhysics(),
+              physics: NeverScrollableScrollPhysics(),
               onPageChanged: (index) {
                 currentPage = index;
                 setState(() {
@@ -71,7 +72,7 @@ class _ScreeningPagesState extends State<ScreeningPages> {
         bottomNavigationBar: Container(
           color: Colors.white,
           height: height * 0.15,
-          padding: const EdgeInsets.symmetric(horizontal: 30),
+          padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.05),
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             GestureDetector(
               onTap: () {
@@ -137,7 +138,10 @@ class _ScreeningPagesState extends State<ScreeningPages> {
   showAlertDialog(BuildContext context) {
     // set up the button
     Widget okButton = TextButton(
-      child: const Text("OK"),
+      child: const Text(
+        "OK",
+        style: TextStyle(fontSize: 15),
+      ),
       onPressed: () {
         Navigator.of(context).pop();
       },
@@ -145,16 +149,33 @@ class _ScreeningPagesState extends State<ScreeningPages> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Oooops".tr),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("KakoBiNastaviolaDaljePotrebnoJeZadovoljitiSljedećeUvjete".tr),
-          Text("UpisatiSvojeIme".tr),
-          Text("OdabratiAvatar".tr),
-          Text("OdabratiBaremJednuVježbu".tr),
-        ],
+      title: Text(
+        "Oooops".tr,
+        style: TextStyle(fontSize: 15),
+      ),
+      content: Container(
+        height: MediaQuery.of(context).size.height * 0.5,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "KakoBiNastaviolaDaljePotrebnoJeZadovoljitiSljedećeUvjete".tr,
+              style: TextStyle(fontSize: 15),
+            ),
+            Text(
+              "UpisatiSvojeIme".tr,
+              style: TextStyle(fontSize: 15),
+            ),
+            Text(
+              "OdabratiAvatar".tr,
+              style: TextStyle(fontSize: 15),
+            ),
+            Text(
+              "OdabratiBaremJednuVježbu".tr,
+              style: TextStyle(fontSize: 15),
+            ),
+          ],
+        ),
       ),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
       actions: [

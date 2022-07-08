@@ -7,11 +7,11 @@ class PlayerController extends GetxController {
   var exerciseProgram = ExerciseProgram.all.obs;
   bool avatarChosen = false;
   
-  var leftHandPref = false.obs; 
-  var rightHandPref = false.obs;
-  var squatPref = false.obs;
-  var leftLegPref = false.obs;
-  var rightLegPref = false.obs;
+  var leftHandPref = true.obs; 
+  var rightHandPref = true.obs;
+  var squatPref = true.obs;
+  var leftLegPref = true.obs;
+  var rightLegPref = true.obs;
 }
 
 enum PositionPlayMode{
