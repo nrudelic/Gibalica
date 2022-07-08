@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:get/get.dart';
+import 'package:gibalica/controllers/game_controller.dart';
+import 'package:pausable_timer/pausable_timer.dart';
 
 class CameraViewController extends GetxController {
   bool isPoseImageShowing = false;
@@ -13,16 +16,43 @@ class CameraViewController extends GetxController {
   Timer? poseInnerTimer;
   bool cameraOn = false;
 
+  PausableTimer? repetitionTimer;
+
+  void startRepetitionTimer(var repetitionTime) {
+    log("START TIMER");
+    repetitionTimer = PausableTimer(
+      Duration(seconds: repetitionTime),
+      () {
+        var gameController = Get.find<GameController>();
+        gameController.isCurrentGameFinished = true;
+        isProgressBarShowing = false;
+        isPoseImageShowing = false;
+        isOnboardingImageShowing = false;
+        poseTimer!.cancel();
+        poseTimer!.cancel();
+        onboardingTimer!.cancel();
+        onboardingInnerTimer!.cancel();
+        poseInnerTimer!.cancel();
+      },
+    );
+    repetitionTimer!.start();
+    log("IS TIMER NULL" + (repetitionTimer == null).toString());
+  }
+
+  void pauseRepetitionTimer() {
+    repetitionTimer!.pause();
+  }
+
+  void resumeRepetitionTimer() {
+    repetitionTimer!.start();
+  }
+
   void startCameraTimer() {
-    print("TIMER" + cameraOn.toString());
     if (!cameraOn) return;
-      print("TIMER AGAIEBGOA STARTED");
 
-    poseTimer = Timer(const Duration(seconds: 10), (){
+    poseTimer = Timer(const Duration(seconds: 10), () {
       isPoseImageShowing = true;
-      poseInnerTimer = Timer(const Duration(seconds: 3), () {
-        print("TIMER AGAIEBGOA");
-
+      poseInnerTimer = Timer(const Duration(seconds: 4), () {
         isPoseImageShowing = false;
       });
     });
@@ -30,13 +60,10 @@ class CameraViewController extends GetxController {
 
   void startCameraOnboardingTimer() {
     if (!cameraOn) return;
-    print("TIMER AHUESE STARTED" );
-
-    onboardingTimer = Timer(const Duration(seconds: 10), ()  {
+    onboardingTimer = Timer(const Duration(seconds: 10), () {
       isOnboardingImageShowing = true;
 
-      onboardingInnerTimer = Timer(const Duration(seconds: 3), () {
-        print("TIMER AHUESE");
+      onboardingInnerTimer = Timer(const Duration(seconds: 4), () {
         isOnboardingImageShowing = false;
       });
     });
@@ -45,13 +72,11 @@ class CameraViewController extends GetxController {
   void cancelTimer() {
     poseTimer?.cancel();
     poseTimer = null;
-    print("TIMER CANCELED");
   }
 
   void cancelOnboardingTimer() {
     onboardingTimer?.cancel();
     onboardingTimer = null;
-    print("TIMER CANCELED");
   }
 
   void cancelInnerTimers() {

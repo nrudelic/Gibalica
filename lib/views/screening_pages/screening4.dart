@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -29,22 +30,22 @@ class _Screening4State extends State<Screening4> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children:    [
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(top: 30, left: 20, right: 20),
-                  child: Text(
-                    "Prilagodi svoj trening",
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                  child: AutoSizeText(
+                    "PrilagodiSvojTrening".tr,
+                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
                   ),
                 ),
               ),
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
-                  child: Text(
-                    "Odaberi vježbe",
-                    style: TextStyle(fontSize: 30),
+                  child: AutoSizeText(
+                    "OdaberiVježbe".tr,
+                    style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
                   ),
                 ),
               ),
@@ -82,7 +83,7 @@ class _Screening4State extends State<Screening4> {
                               ),
                             ),
                           ),
-                          const Text("Lijeva ruka", style: TextStyle(fontSize: 28))
+                             AutoSizeText("LijevaRuka".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
                         ],
                       ),
                     ),
@@ -109,7 +110,7 @@ class _Screening4State extends State<Screening4> {
                               ),
                             ),
                           ),
-                          const Text("Desna ruka", style: TextStyle(fontSize: 28))
+                             AutoSizeText("DesnaRuka".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
                         ],
                       ),
                     ),
@@ -143,7 +144,7 @@ class _Screening4State extends State<Screening4> {
                               ),
                             ),
                           ),
-                          const Text("Čučanj", style: TextStyle(fontSize: 28))
+                             AutoSizeText("Čučanj".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
                         ],
                       ),
                     ),
@@ -177,7 +178,7 @@ class _Screening4State extends State<Screening4> {
                               ),
                             ),
                           ),
-                          const Text("Lijeva noga", style: TextStyle(fontSize: 28))
+                             AutoSizeText("LijevaNoga".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
                         ],
                       ),
                     ),
@@ -204,7 +205,7 @@ class _Screening4State extends State<Screening4> {
                               ),
                             ),
                           ),
-                          const Text("Desna noga", style: TextStyle(fontSize: 28))
+                             AutoSizeText("DesnaNoga".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
                         ],
                       ),
                     ),

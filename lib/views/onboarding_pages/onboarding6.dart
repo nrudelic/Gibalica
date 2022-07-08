@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+
+import '../../color_palette.dart';
 
 class Onboarding6 extends StatelessWidget {
   const Onboarding6({Key? key}) : super(key: key);
@@ -17,18 +20,18 @@ class Onboarding6 extends StatelessWidget {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 AutoSizeText(
-                  "DAN I NOĆ",
+                  "DanINoć".tr,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.0),
                   child: AutoSizeText(
-                    "zabavna igra koncentracije",
+                    "ZabavnaIgraKoncentracije".tr,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 40),
+                    style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
                   ),
                 ),
               ],

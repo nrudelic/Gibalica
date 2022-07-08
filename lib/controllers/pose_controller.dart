@@ -28,6 +28,7 @@ class PoseController extends GetxController {
     BasePose.leftArmUpRightArmUp: 0.0,
     BasePose.leftArmMiddleRightArmUp: 0.0,
     BasePose.leftArmMiddleRightArmMiddle: 0.0,
+    BasePose.squat: 0.0,
   };
 
   var dayNightDict = {DayNightEnum.day: 0.0, DayNightEnum.night: 0.0};

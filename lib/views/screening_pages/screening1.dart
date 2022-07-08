@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/main.dart';
 
 import '../../controllers/player_controller.dart';
@@ -31,31 +32,31 @@ class _Screening1State extends State<Screening1> {
       children: [
         Expanded(
           flex: 2,
-          child: const Padding(
+          child:   Padding(
             padding: EdgeInsets.only(top: 30, left: 20, right: 20, bottom: 20),
             child: AutoSizeText(
-              "Molim te podijeli sa mnom nekoliko informacija kako bih te bolje upoznala",
-              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+              "MolimTePodijeliSaMnomNekolikoInformacijaKakoBihTeBoljeUpoznala".tr,
+              style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
             ),
           ),
         ),
         Expanded(
           flex: 2,
-          child: const Padding(
+          child:   Padding(
             padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: AutoSizeText(
-              "Sve informacije koje mi sada podijeliš moći češ kasnije promijeniti u postavkama",
-              style: TextStyle(fontSize: 30),
+              "SveInformacijeKojeMiSadaPodijelišMoćiČešKasnijePromijenitiUPostavkama".tr,
+              style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
             ),
           ),
         ),
         Expanded(
           flex: 1,
-          child: const Padding(
+          child:   Padding(
             padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
             child: AutoSizeText(
-              "Kako se zoveš?",
-              style: TextStyle(fontSize: 35),
+              "KakoSeZoveš".tr,
+              style: TextStyle(fontSize: 35, color: ColorPalette.darkBlue),
             ),
           ),
         ),
@@ -69,7 +70,7 @@ class _Screening1State extends State<Screening1> {
                 playerController.playerName = text;
                 settingsController.gibalicaBox.put("playerName", text);
               },
-              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
               decoration: InputDecoration(
                 filled: true,
                 fillColor: const Color.fromRGBO(255, 232, 161, 1),

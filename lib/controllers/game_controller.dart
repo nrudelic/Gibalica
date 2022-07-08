@@ -9,8 +9,10 @@ class GameController extends GetxController {
   var dayNightCounter = 5.obs;
   var currentRepetitionCounter = 0;
   var repeatGameModeCounter = 5.obs;
+  var repetitionTime = 15.obs;
+  bool isCurrentGameFinished = false;
   List<BasePose>? possiblePoses;
-
+  bool repetitionGameStarted = false;
   GamePlayModes? currentMode;
 
   var isPoseFinished = {

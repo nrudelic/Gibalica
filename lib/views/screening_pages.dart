@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:audioplayers/audioplayers.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/controllers/game_controller.dart';
@@ -22,6 +26,7 @@ class _ScreeningPagesState extends State<ScreeningPages> {
   final controller = PageController();
   var playerController = Get.find<PlayerController>();
   bool isLastPage = false;
+  int currentPage = 0;
 
   @override
   void dispose() {
@@ -41,14 +46,23 @@ class _ScreeningPagesState extends State<ScreeningPages> {
             child: PageView(
               physics: (playerController.playerName != null && playerController.playerName!.length > 0) ? ScrollPhysics() : NeverScrollableScrollPhysics(),
               onPageChanged: (index) {
+                currentPage = index;
                 setState(() {
-                  isLastPage = index == 2;
+                  log(playerController.exerciseProgram.value.toString());
+                  if (playerController.exerciseProgram.value == ExerciseProgram.all && index == 2) {
+                    isLastPage = true;
+                  } else if (playerController.exerciseProgram.value == ExerciseProgram.special && index == 3) {
+                    isLastPage = true;
+                  } else {
+                    isLastPage = false;
+                  }
                 });
               },
               controller: controller,
               children: [
                 const Screening1(),
                 const Screening2(),
+                Screening3(),
                 Screening4(),
               ],
             ),
@@ -60,34 +74,43 @@ class _ScreeningPagesState extends State<ScreeningPages> {
           padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             GestureDetector(
-              onTap: () => controller.previousPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut),
+              onTap: () {
+                if (controller.page == 0) {
+                  Get.back();
+                } else {
+                  controller.previousPage(duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+                }
+              },
               child: Container(
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(36, 80, 128, 1)),
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.darkBlue),
-                  child: const Padding(
-                    padding: EdgeInsets.all(4),
-                    child: FittedBox(
-                      child: Icon(Icons.navigate_before),
-                    ),
-                  ),
+                padding: const EdgeInsets.all(10),
+                child: Icon(
+                  Icons.navigate_before,
+                  color: Colors.white,
+                  size: MediaQuery.of(context).size.width * 0.1,
                 ),
               ),
             ),
             Center(
               child: SmoothPageIndicator(
                 controller: controller,
-                count: 3,
+                count: 4,
               ),
             ),
             GestureDetector(
               onTap: () {
-                if((playerController.playerName == null || playerController.playerName!.isEmpty)) return;
-                
-                if (isLastPage) {
-                  if (playerController.playerName != null && playerController.playerName != "Ime igrača" && playerController.playerName!.isNotEmpty && playerController.avatarChosen && (playerController.leftHandPref.value || playerController.rightHandPref.value || playerController.squatPref.value || playerController.leftLegPref.value || playerController.rightLegPref.value)) {
-                    Get.to(() => EverythingReady());
+                if ((playerController.playerName == null || playerController.playerName!.isEmpty)) return;
+                log(isLastPage.toString());
+
+                if (playerController.exerciseProgram.value == ExerciseProgram.all && currentPage == 2) {
+                  if (playerController.playerName != null && playerController.playerName != "Ime igrača" && playerController.playerName!.isNotEmpty && (playerController.leftHandPref.value || playerController.rightHandPref.value || playerController.squatPref.value || playerController.leftLegPref.value || playerController.rightLegPref.value)) {
+                    Get.off(() => EverythingReady());
+                  } else {
+                    showAlertDialog(context);
+                  }
+                } else if (playerController.exerciseProgram.value == ExerciseProgram.special && currentPage == 3) {
+                  if (playerController.playerName != null && playerController.playerName != "Ime igrača" && playerController.playerName!.isNotEmpty && (playerController.leftHandPref.value || playerController.rightHandPref.value || playerController.squatPref.value || playerController.leftLegPref.value || playerController.rightLegPref.value)) {
+                    Get.off(() => EverythingReady());
                   } else {
                     showAlertDialog(context);
                   }
@@ -97,12 +120,11 @@ class _ScreeningPagesState extends State<ScreeningPages> {
               },
               child: Container(
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: Color.fromRGBO(112, 173, 71, 1)),
-                padding: const EdgeInsets.all(20),
-                child: const Padding(
-                  padding: EdgeInsets.all(4),
-                  child: FittedBox(
-                    child: Icon(Icons.navigate_next),
-                  ),
+                padding: const EdgeInsets.all(10),
+                child: Icon(
+                  Icons.navigate_next,
+                  color: Colors.white,
+                  size: MediaQuery.of(context).size.width * 0.1,
                 ),
               ),
             ),
@@ -123,15 +145,15 @@ class _ScreeningPagesState extends State<ScreeningPages> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: const Text("Oooops... :("),
+      title: Text("Oooops".tr),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text("Kako bi nastavio/la dalje potrebno je zadovoljiti sljedeće uvjete:"),
-          Text(" - upisati svoje ime"),
-          Text(" - odabrati avatar"),
-          Text(" - odabrati barem jednu vježbu"),
+        children: [
+          Text("KakoBiNastaviolaDaljePotrebnoJeZadovoljitiSljedećeUvjete".tr),
+          Text("UpisatiSvojeIme".tr),
+          Text("OdabratiAvatar".tr),
+          Text("OdabratiBaremJednuVježbu".tr),
         ],
       ),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),

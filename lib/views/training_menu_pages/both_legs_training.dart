@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/game_controller.dart';
+import 'package:gibalica/controllers/player_controller.dart';
 import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/training_popup.dart';
 import 'package:lottie/lottie.dart';
@@ -17,7 +18,7 @@ class BothLegsTraining extends StatefulWidget {
 
 class _BothLegsTrainingState extends State<BothLegsTraining> {
   final GameController gameController = Get.find<GameController>();
-
+  final PlayerController playerController = Get.find<PlayerController>();
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -36,13 +37,13 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Text(
-                    "OBJE",
+                children: [
+                  AutoSizeText(
+                    "Obje".tr,
                     style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    "NOGE",
+                  AutoSizeText(
+                    "Noge".tr,
                     style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -54,170 +55,176 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
           flex: 2,
           child: Column(
             children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    Expanded(flex: 1, child: Container()),
-                    Expanded(
-                      flex: 2,
-                      child: Column(
+              (playerController.leftLegPref.value && playerController.rightLegPref.value)
+                  ? Expanded(
+                      child: Row(
                         children: [
+                          Expanded(flex: 1, child: Container()),
                           Expanded(
-                            flex: 6,
-                            child: GestureDetector(
-                              onTap: () {
-                                gameController.possiblePoses = [BasePose.leftArmUp, BasePose.rightLegUp];
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      gameController.gameMode = GameMode.training;
-                                      gameController.repeatNumber.value = 3;
-                                      gameController.gameType.value = GameType.personal;
-                                      gameController.currentMode = GamePlayModes.leftAndRightLegUp;
-
-                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Lijeva i desna noga - u vis')));
-                                    });
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: LayoutBuilder(builder: (context, constraint) {
-                                  return CircleAvatar(
-                                    child: Obx(
-                                      () => SvgPicture.asset(
-                                        gameController.isPoseFinished['leftAndRightLegUp']!.value ? "assets/LEGS_up_dark.svg" : "assets/LEGS_up_light.svg",
-                                      ),
-                                    ),
-                                    backgroundColor: Colors.white,
-                                    minRadius: constraint.biggest.height,
-                                  );
-                                }),
-                              ),
-                            ),
-                          ),
-                          const Expanded(
                             flex: 2,
-                            child: Center(
-                              child: AutoSizeText(
-                                "Lijeva ili desna u vis",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
-                              ),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  flex: 6,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      gameController.possiblePoses = [BasePose.leftArmUp, BasePose.rightLegUp];
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            gameController.gameMode = GameMode.training;
+                                            gameController.repeatNumber.value = 3;
+                                            gameController.gameType.value = GameType.personal;
+                                            gameController.currentMode = GamePlayModes.leftAndRightLegUp;
+
+                                            return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Lijeva i desna noga - u vis')));
+                                          });
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15),
+                                      child: LayoutBuilder(builder: (context, constraint) {
+                                        return CircleAvatar(
+                                          child: Obx(
+                                            () => SvgPicture.asset(
+                                              gameController.isPoseFinished['leftAndRightLegUp']!.value ? "assets/LEGS_up_dark.svg" : "assets/LEGS_up_light.svg",
+                                            ),
+                                          ),
+                                          backgroundColor: Colors.white,
+                                          minRadius: constraint.biggest.height,
+                                        );
+                                      }),
+                                    ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Center(
+                                    child: AutoSizeText(
+                                      "LijevaIliDesnaUVis".tr,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(),
+                          )
                         ],
                       ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(),
                     )
-                  ],
-                ),
-              ),
+                  : Container(),
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            flex: 6,
-                            child: GestureDetector(
-                              onTap: () {
-                                gameController.possiblePoses = [BasePose.gap];
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    gameController.gameMode = GameMode.training;
-                                    gameController.repeatNumber.value = 3;
-                                    gameController.gameType.value = GameType.personal;
-                                    gameController.currentMode = GamePlayModes.legGap;
+                    (playerController.leftLegPref.value && playerController.rightLegPref.value)
+                        ? Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  flex: 6,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      gameController.possiblePoses = [BasePose.gap];
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          gameController.gameMode = GameMode.training;
+                                          gameController.repeatNumber.value = 3;
+                                          gameController.gameType.value = GameType.personal;
+                                          gameController.currentMode = GamePlayModes.legGap;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Raskorak')));
-                                  },
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: LayoutBuilder(builder: (context, constraint) {
-                                  return CircleAvatar(
-                                    child: Obx(
-                                      () => SvgPicture.asset(
-                                        gameController.isPoseFinished['legGap']!.value ? "assets/LEGS_gap_dark.svg" : "assets/LEGS_gap_light.svg",
-                                      ),
+                                          return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Raskorak')));
+                                        },
+                                      );
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15),
+                                      child: LayoutBuilder(builder: (context, constraint) {
+                                        return CircleAvatar(
+                                          child: Obx(
+                                            () => SvgPicture.asset(
+                                              gameController.isPoseFinished['legGap']!.value ? "assets/LEGS_gap_dark.svg" : "assets/LEGS_gap_light.svg",
+                                            ),
+                                          ),
+                                          backgroundColor: Colors.white,
+                                          minRadius: constraint.biggest.height,
+                                        );
+                                      }),
                                     ),
-                                    backgroundColor: Colors.white,
-                                    minRadius: constraint.biggest.height,
-                                  );
-                                }),
-                              ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Center(
+                                    child: AutoSizeText(
+                                      "Raskorak".tr,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                          const Expanded(
-                            flex: 2,
-                            child: Center(
-                              child: AutoSizeText(
-                                "Raskorak",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: [
-                          Expanded(
-                            flex: 6,
-                            child: GestureDetector(
-                              onTap: () {
-                                gameController.possiblePoses = [BasePose.rightArmMiddle];
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    gameController.gameMode = GameMode.training;
-                                    gameController.repeatNumber.value = 3;
-                                    gameController.gameType.value = GameType.personal;
-                                    gameController.currentMode = GamePlayModes.squat;
+                          )
+                        : Container(),
+                    (playerController.squatPref.value)
+                        ? Expanded(
+                            flex: 1,
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  flex: 6,
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      gameController.possiblePoses = [BasePose.squat];
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          gameController.gameMode = GameMode.training;
+                                          gameController.repeatNumber.value = 3;
+                                          gameController.gameType.value = GameType.personal;
+                                          gameController.currentMode = GamePlayModes.squat;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Čučanj')));
-                                  },
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: LayoutBuilder(builder: (context, constraint) {
-                                  return CircleAvatar(
-                                    child: Obx(
-                                      () => SvgPicture.asset(
-                                        gameController.isPoseFinished['squat']!.value ? "assets/LEGS_squat_light.svg" : "assets/LEGS_squat_light.svg",
-                                      ),
+                                          return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Čučanj')));
+                                        },
+                                      );
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(15),
+                                      child: LayoutBuilder(builder: (context, constraint) {
+                                        return CircleAvatar(
+                                          child: Obx(
+                                            () => SvgPicture.asset(
+                                              gameController.isPoseFinished['squat']!.value ? "assets/LEGS_squat_dark.svg" : "assets/LEGS_squat_light.svg",
+                                            ),
+                                          ),
+                                          backgroundColor: Colors.white,
+                                          minRadius: constraint.biggest.height,
+                                        );
+                                      }),
                                     ),
-                                    backgroundColor: Colors.white,
-                                    minRadius: constraint.biggest.height,
-                                  );
-                                }),
-                              ),
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Center(
+                                    child: AutoSizeText(
+                                      "Čučanj".tr,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                          const Expanded(
-                            flex: 2,
-                            child: Center(
-                              child: AutoSizeText(
-                                "Čučanj",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          )
+                        : Container(),
                   ],
                 ),
               ),

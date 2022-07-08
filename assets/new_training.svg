@@ -1,34 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   viewBox="0 0 59.333332 73.333336"
-   height="73.333336"
-   width="59.333332"
-   xml:space="preserve"
-   id="svg2"
-   version="1.1"><metadata
-     id="metadata8"><rdf:RDF><cc:Work
-         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
-     id="defs6" /><g
-     transform="matrix(1.3333333,0,0,-1.3333333,0,73.333333)"
-     id="g10"><g
-       transform="translate(3,-3)"
-       id="g12"><path
-         id="path14"
-         style="fill:#245080;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         d="m 33,26.5 c 0,1.656855 -1.343145,3 -3,3 -1.656855,0 -3,-1.343145 -3,-3 z M 10.5,43 c 1.656855,0 3,1.343147 3,3 0,1.656853 -1.343145,3 -3,3 z M -3,44 V 8 H 3 V 44 Z M 2,3 H 28 V 9 H 2 Z M 33,8 V 26.5 H 27 V 8 Z M 2,43 h 8.5 v 6 H 2 Z M 28,3 c 2.761423,0 5,2.238575 5,5 h -6 c 0,0.552284 0.447716,1 1,1 z M -3,8 C -3,5.238579 -0.761424,3 2,3 V 9 C 2.552286,9 3,8.552284 3,8 Z M 3,44 C 3,43.447716 2.552285,43 2,43 v 6 c -2.761424,0 -5,-2.238575 -5,-5 z" /></g><g
-       transform="translate(23,37.5)"
-       id="g16"><path
-         id="path18"
-         style="fill:#245080;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         d="M 0,9 C -1.656854,9 -3,7.656854 -3,6 -3,4.343146 -1.656854,3 0,3 Z M 18.5,3 c 1.656855,0 3,1.343146 3,3 0,1.656854 -1.343145,3 -3,3 z M 0,3 H 18.5 V 9 H 0 Z" /></g><g
-       transform="rotate(-90,30,22)"
-       id="g20"><path
-         id="path22"
-         style="fill:#245080;fill-opacity:1;fill-rule:nonzero;stroke:none"
-         d="m 0,27.5 c -1.656854,0 -3,-1.343145 -3,-3 0,-1.656855 1.343146,-3 3,-3 z m 18.5,-6 c 1.656855,0 3,1.343145 3,3 0,1.656855 -1.343145,3 -3,3 z M 0,21.5 h 18.5 v 6 H 0 Z" /></g></g></svg>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="44.5pt" height="55pt" viewBox="0 0 44.5 55">
+<g enable-background="new">
+<path transform="matrix(1,0,0,-1,3,58)" d="M 33 26.5 C 33 28.156855 31.656855 29.5 30 29.5 C 28.343146 29.5 27 28.156855 27 26.5 L 33 26.5 Z M 10.5 43 C 12.156855 43 13.5 44.343149 13.5 46 C 13.5 47.656854 12.156855 49 10.5 49 L 10.5 43 Z M -3 44 L -3 8 L 3 8 L 3 44 L -3 44 Z M 2 3 L 28 3 L 28 9 L 2 9 L 2 3 Z M 33 8 L 33 26.5 L 27 26.5 L 27 8 L 33 8 Z M 2 43 L 10.5 43 L 10.5 49 L 2 49 L 2 43 Z M 28 3 C 30.761424 3 33 5.238575 33 8 L 27 8 C 27 8.552284 27.447716 9 28 9 L 28 3 Z M -3 8 C -3 5.238579 -.761424 3 2 3 L 2 9 C 2.552286 9 3 8.552284 3 8 L -3 8 Z M 3 44 C 3 43.447717 2.552285 43 2 43 L 2 49 C -.761424 49 -3 46.761426 -3 44 L 3 44 Z " fill="#245080"/>
+<path transform="matrix(1,0,0,-1,23,17.5)" d="M 0 9 C -1.656854 9 -3 7.656854 -3 6 C -3 4.343146 -1.656854 3 0 3 L 0 9 Z M 18.5 3 C 20.156855 3 21.5 4.343146 21.5 6 C 21.5 7.656854 20.156855 9 18.5 9 L 18.5 3 Z M 0 3 L 18.5 3 L 18.5 9 L 0 9 L 0 3 Z " fill="#245080"/>
+<path transform="matrix(0,1,1,0,8,3)" d="M 0 27.5 C -1.656854 27.5 -3 26.156855 -3 24.5 C -3 22.843146 -1.656854 21.5 0 21.5 L 0 27.5 Z M 18.5 21.5 C 20.156855 21.5 21.5 22.843146 21.5 24.5 C 21.5 26.156855 20.156855 27.5 18.5 27.5 L 18.5 21.5 Z M 0 21.5 L 18.5 21.5 L 18.5 27.5 L 0 27.5 L 0 21.5 Z " fill="#245080"/>
+</g>
+</svg>

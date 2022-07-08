@@ -30,17 +30,17 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Text(
-                    "LIJEVA i",
+                children: [
+                  AutoSizeText(
+                    "LijevaI".tr,
                     style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    "DESNA",
+                  AutoSizeText(
+                    "Desna".tr,
                     style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    "RUKA",
+                  AutoSizeText(
+                    "Ruka".tr,
                     style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -99,11 +99,11 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                               ),
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             flex: 2,
                             child: Center(
                               child: AutoSizeText(
-                                "U vis",
+                                "UVis".tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 25, fontWeight: FontWeight.bold),
                               ),
@@ -149,11 +149,11 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                               ),
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             flex: 2,
                             child: Center(
                               child: AutoSizeText(
-                                "Sa strane",
+                                "SaStrane".tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 25, fontWeight: FontWeight.bold),
                               ),
@@ -177,7 +177,7 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                             flex: 6,
                             child: GestureDetector(
                               onTap: () {
-                                gameController.possiblePoses = [BasePose.rightArmMiddle, BasePose.rightArmUp, BasePose.leftArmMiddle, BasePose.leftArmUp];
+                                gameController.possiblePoses = [BasePose.leftArmUpRightArmUp, BasePose.leftArmMiddleRightArmMiddle];
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
@@ -205,11 +205,11 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                               ),
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             flex: 2,
                             child: Center(
                               child: AutoSizeText(
-                                "U vis i sa strane isti položaj",
+                                "UVisISaStraneIstiPoložaj".tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 25, fontWeight: FontWeight.bold),
                               ),
@@ -237,7 +237,7 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                             flex: 6,
                             child: GestureDetector(
                               onTap: () {
-                                gameController.possiblePoses = [BasePose.rightArmMiddle, BasePose.rightArmUp, BasePose.leftArmMiddle, BasePose.leftArmUp];
+                                gameController.possiblePoses = [BasePose.leftArmMiddleRightArmUp, BasePose.leftArmUpRightArmMiddle];
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -266,11 +266,11 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                               ),
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             flex: 2,
                             child: Center(
                               child: AutoSizeText(
-                                "U vis i sa strane razičiti položaj",
+                                "UVisISaStraneRazičitiPoložaj".tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 25, fontWeight: FontWeight.bold),
                               ),
@@ -287,7 +287,7 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                             flex: 6,
                             child: GestureDetector(
                               onTap: () {
-                                gameController.possiblePoses = [BasePose.rightArmMiddle, BasePose.rightArmUp, BasePose.leftArmMiddle, BasePose.leftArmUp];
+                                gameController.possiblePoses = [BasePose.rightArmMiddle, BasePose.rightArmUp, BasePose.leftArmMiddle, BasePose.leftArmUp, BasePose.leftArmMiddleRightArmMiddle, BasePose.leftArmUpRightArmMiddle, BasePose.leftArmUpRightArmUp, BasePose.leftArmUpRightArmUp];
                                 showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -316,11 +316,11 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                               ),
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             flex: 2,
                             child: Center(
                               child: AutoSizeText(
-                                "Sve",
+                                "Sve".tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 25, fontWeight: FontWeight.bold),
                               ),

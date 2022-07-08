@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/game_controller.dart';
-import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/pose_detector_view.dart';
 
 Widget buildPopupDialog(GameController gameController, StateSetter setState, String title) {
@@ -16,7 +15,7 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
           Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 25, color: Colors.white),
+            style: const TextStyle(fontSize: 25, color: Colors.white),
           ),
           const Divider(
             thickness: 2,
@@ -27,9 +26,13 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
     children: [
       Column(
         children: [
-          const Text(
-            "Broj ponavljanja vježbe",
-            style: TextStyle(fontSize: 20, color: Colors.white),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Text(
+              "BrojPonavljanjaVježbe".tr,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 20, color: Colors.white),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -38,9 +41,10 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
                 onPressed: () {
                   gameController.repeatNumber.value = 1;
                 },
+                style: ButtonStyle(overlayColor: MaterialStateProperty.all(ColorPalette.darkBlue)),
                 child: Obx(
                   () => Container(
-                    padding: const EdgeInsets.symmetric(horizontal:25, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
                           Radius.circular(15),
@@ -57,9 +61,10 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
                 onPressed: () {
                   gameController.repeatNumber.value = 3;
                 },
+                style: ButtonStyle(overlayColor: MaterialStateProperty.all(ColorPalette.darkBlue)),
                 child: Obx(
                   () => Container(
-                    padding: const EdgeInsets.symmetric(horizontal:25, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
                           Radius.circular(15),
@@ -76,9 +81,10 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
                 onPressed: () {
                   gameController.repeatNumber.value = 5;
                 },
+                style: ButtonStyle(overlayColor: MaterialStateProperty.all(ColorPalette.darkBlue)),
                 child: Obx(
                   () => Container(
-                    padding: const EdgeInsets.symmetric(horizontal:25, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     decoration: BoxDecoration(
                         borderRadius: const BorderRadius.all(
                           Radius.circular(15),
@@ -93,9 +99,9 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
               ),
             ],
           ),
-          const Text(
-            "Gibalica gleda?",
-            style: TextStyle(fontSize: 20, color: Colors.white),
+          Text(
+            "GibalicaGleda".tr,
+            style: const TextStyle(fontSize: 20, color: Colors.white),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -104,6 +110,7 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
                 onPressed: () {
                   gameController.gameType.value = GameType.personal;
                 },
+                style: ButtonStyle(overlayColor: MaterialStateProperty.all(ColorPalette.darkBlue)),
                 child: Obx(
                   () => Container(
                     padding: const EdgeInsets.all(15),
@@ -112,9 +119,9 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
                           Radius.circular(15),
                         ),
                         color: (gameController.gameType.value == GameType.personal ? ColorPalette.pink : const Color.fromRGBO(26, 63, 103, 1))),
-                    child: const Text(
-                      'MENE',
-                      style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                    child: Text(
+                      "Mene".tr,
+                      style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -123,6 +130,7 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
                 onPressed: () {
                   gameController.gameType.value = GameType.cards;
                 },
+                style: ButtonStyle(overlayColor: MaterialStateProperty.all(ColorPalette.darkBlue)),
                 child: Obx(
                   () => Container(
                     padding: const EdgeInsets.all(15),
@@ -131,9 +139,9 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
                           Radius.circular(15),
                         ),
                         color: (gameController.gameType.value == GameType.cards ? ColorPalette.pink : const Color.fromRGBO(26, 63, 103, 1))),
-                    child: const Text(
-                      'KARTICE',
-                      style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                    child: Text(
+                      "Kartice".tr,
+                      style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -143,15 +151,18 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
           TextButton(
             onPressed: () {
               gameController.currentRepetitionCounter = 0;
-
-              Get.to(() => PoseDetectorView());
+              Get.to(
+                () => PoseDetectorView(),
+                transition: Transition.fadeIn,
+              );
             },
+            style: ButtonStyle(overlayColor: MaterialStateProperty.all(ColorPalette.darkBlue)),
             child: Container(
               padding: const EdgeInsets.all(15),
               decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15)), color: ColorPalette.green),
-              child: const Text(
-                'IGRAJ',
-                style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+              child: Text(
+                "Igraj".tr,
+                style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
           ),

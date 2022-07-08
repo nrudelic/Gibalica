@@ -36,9 +36,9 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Text(
-                    "NOGE",
+                children: [
+                  AutoSizeText(
+                    "Noge".tr,
                     style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -88,11 +88,11 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                         ),
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       flex: 2,
                       child: Center(
                         child: AutoSizeText(
-                          "Lijeva u vis",
+                          "LijevaUVis".tr,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                         ),
@@ -138,11 +138,11 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                         ),
                       ),
                     ),
-                    const Expanded(
+                     Expanded(
                       flex: 2,
                       child: Center(
                         child: AutoSizeText(
-                          "Desna u vis",
+                          "DesnaUVis".tr,
                           textAlign: TextAlign.center,
                           style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                         ),

@@ -1,14 +1,16 @@
 import 'dart:async';
 import 'dart:developer';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/device_controller.dart';
 import 'package:gibalica/controllers/player_controller.dart';
 import 'package:gibalica/controllers/pose_controller.dart';
 import 'package:gibalica/controllers/settings_controller.dart';
-import 'package:gibalica/helpers/localization_test.dart';
+import 'package:gibalica/helpers/localization.dart';
 import 'package:gibalica/views/main_screen_view.dart';
 import 'package:gibalica/views/start_view.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -28,6 +30,7 @@ late final bool isOnboardingFinished;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   poseController = Get.put(PoseController());
   deviceController = Get.put(DeviceController());
@@ -70,11 +73,26 @@ Future<void> getSettingsFromBox() async {
   settingsController.isLightMode.value = box.get('lightMode', defaultValue: true);
   settingsController.isBiggerText.value = box.get('isBiggetText', defaultValue: false);
   settingsController.isSoundOn.value = box.get('isSoundOn', defaultValue: true);
+
   var language = box.get("language", defaultValue: "Croatian");
-  if (language == "Croatian") {
+  var typeOfLetters = box.get("uppercaseLetters", defaultValue: false);
+  settingsController.isUppercase.value = typeOfLetters;
+  if (language == "Croatian" && typeOfLetters) {
+    var locale = const Locale('HR', 'HR');
+    Get.updateLocale(locale);
+    settingsController.language.value = Language.Croatian;
+  } else if (language == "English" && typeOfLetters) {
+    var locale = const Locale('EN', 'US');
+    Get.updateLocale(locale);
+    settingsController.language.value = Language.English;
+  } else if (language == "Croatian" && !typeOfLetters) {
+    var locale = const Locale('hr', 'HR');
+    Get.updateLocale(locale);
     settingsController.language.value = Language.Croatian;
   } else {
     settingsController.language.value = Language.English;
+    var locale = const Locale('en', 'US');
+    Get.updateLocale(locale);
   }
 
   poseController.posePerformance[GamePlayModes.leftArmUp] = box.get("leftArmUp", defaultValue: false);
@@ -120,8 +138,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      translations: LocalizationTest(), // your translations
-      locale: const Locale('en', 'US'),
+      debugShowCheckedModeBanner: false,
+      translations: Localization(), // your translations
       title: 'Gibalica',
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(
@@ -135,7 +153,7 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Gibalica Demo'),
+      home: const MyHomePage(title: 'Gibalica'),
     );
   }
 }
@@ -153,6 +171,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
+    Timer(const Duration(seconds: 2), () => Get.off(isOnboardingFinished ? ()=> MainScreen() : ()=> const StartView()));
+
     super.initState();
   }
 
@@ -160,8 +180,42 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color.fromRGBO(0, 176, 240, 1),
-        body: SafeArea(child: isOnboardingFinished ? MainScreen() : const StartView()),
+        backgroundColor: ColorPalette.yellow,
+        body: Stack(
+          children: <Widget>[
+            Positioned(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.65,
+                decoration: const BoxDecoration(borderRadius: BorderRadius.only(bottomLeft: Radius.circular(100), bottomRight: Radius.circular(100)), color: Colors.white),
+              ),
+            ),
+            Positioned(
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AutoSizeText(
+                        "BokJaSam".tr,
+                        //poseController.wantedDayNightPosition.toString(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
+                      ),
+                      AutoSizeText(
+                        "Gibalica".tr,
+                        //poseController.wantedDayNightPosition.toString(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -35,9 +36,12 @@ class MainScreen extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: const EdgeInsets.all(15),
+                      padding: EdgeInsets.all(15),
                       child: GestureDetector(
-                        onTap: (() => Get.to(() => const ProfileView())),
+                        onTap: (() => Get.to(
+                              () => const ProfileView(),
+                              transition: Transition.rightToLeftWithFade,
+                            )),
                         child: LayoutBuilder(builder: (context, constraint) {
                           return CircleAvatar(
                             backgroundColor: Colors.white,
@@ -56,7 +60,10 @@ class MainScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(15),
                       child: GestureDetector(
                         onTap: (() {
-                          Get.to(() => const SettingsView());
+                          Get.to(
+                            () => const SettingsView(),
+                            transition: Transition.rightToLeftWithFade,
+                          );
                         }),
                         child: LayoutBuilder(builder: (context, constraint) {
                           return Icon(
@@ -74,7 +81,7 @@ class MainScreen extends StatelessWidget {
             Expanded(
               flex: 6,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -82,46 +89,27 @@ class MainScreen extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: Stack(children: [
-                          Positioned.fill(
-                            child: GestureDetector(
-                                onTap: () {
-                                  gameController.gameMode = GameMode.training;
-                                  Get.to(() => const TrainingView());
-                                },
-                                child: SvgPicture.asset("assets/training_menu.svg")),
-                          ),
-                          Positioned(
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: (MediaQuery.of(context).size.width * 0.18)),
-                                child: const Text("TRENING", style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)),
-                              ),
-                            ),
-                          )
-                        ]),
-                      ),
-                    ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
                         child: GestureDetector(
                           onTap: () {
-                            gameController.gameMode = GameMode.dayAndNight;
-                            Get.to(() => const DayAndNightMenuView());
+                            gameController.gameMode = GameMode.training;
+                            Get.to(
+                              () => const TrainingView(),
+                              transition: Transition.fadeIn,
+                            );
                           },
                           child: Stack(
                             children: [
-                              Positioned.fill(child: SvgPicture.asset("assets/day_night_menu.svg")),
+                              Positioned.fill(child: SvgPicture.asset("assets/training_menu.svg")),
                               Positioned(
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(right: (MediaQuery.of(context).size.width * 0.18)),
-                                    child: const Text("DAN i NOĆ", style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)),
-                                  ),
-                                ),
+                                child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                                  return Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(left: constraints.maxWidth * 0.18),
+                                      child: AutoSizeText("Trening".tr, style: const TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)),
+                                    ),
+                                  );
+                                }),
                               )
                             ],
                           ),
@@ -131,26 +119,60 @@ class MainScreen extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
-                        child: Stack(
-                          children: [
-                            Positioned.fill(
-                              child: GestureDetector(
-                                  onTap: () {
-                                    gameController.gameMode = GameMode.repeating;
-                                    Get.to(() => const RepeatingMenuView());
-                                  },
-                                  child: SvgPicture.asset("assets/repeating_menu.svg")),
-                            ),
-                            Positioned(
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Padding(
-                                padding: EdgeInsets.only(left: (MediaQuery.of(context).size.width * 0.18)),
-                                  child: const Text("PONAVLJANJE", style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)),
-                                ),
-                              ),
-                            )
-                          ],
+                        child: GestureDetector(
+                          onTap: () {
+                            gameController.gameMode = GameMode.dayAndNight;
+                            Get.to(
+                              () => const DayAndNightMenuView(),
+                              transition: Transition.fadeIn,
+                            );
+                          },
+                          child: Stack(
+                            children: [
+                              Positioned.fill(child: SvgPicture.asset("assets/day_night_menu.svg")),
+                              Positioned(
+                                child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                                  return Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(right: constraints.maxWidth * 0.18),
+                                      child: AutoSizeText("DanINoć".tr, style: const TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)),
+                                    ),
+                                  );
+                                }),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            gameController.gameMode = GameMode.repeating;
+                            Get.to(
+                              () => const RepeatingMenuView(),
+                              transition: Transition.fadeIn,
+                            );
+                          },
+                          child: Stack(
+                            children: [
+                              Positioned.fill(child: SvgPicture.asset("assets/repeating_menu.svg")),
+                              Positioned(
+                                child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                                  return Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(left: constraints.maxWidth * 0.18),
+                                      child: AutoSizeText("PONAVLJANJE1".tr, style: const TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)),
+                                    ),
+                                  );
+                                }),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

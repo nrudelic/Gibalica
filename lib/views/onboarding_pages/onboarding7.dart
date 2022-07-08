@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+
+import '../../color_palette.dart';
 
 class Onboarding7 extends StatelessWidget {
   const Onboarding7({Key? key}) : super(key: key);
@@ -20,18 +23,18 @@ class Onboarding7 extends StatelessWidget {
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 AutoSizeText(
-                  "PONAVLJANJE",
+                  "Ponavljanje".tr,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 30.0),
                   child: AutoSizeText(
-                    "igra pamćenja redoslijeda vježbi",
+                    "IgraPamćenjaRedoslijedaVježbi".tr,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 40),
+                    style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
                   ),
                 ),
               ],

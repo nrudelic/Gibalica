@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+
+import '../../color_palette.dart';
 
 class Onboarding3 extends StatelessWidget {
   const Onboarding3({Key? key}) : super(key: key);
@@ -12,17 +15,17 @@ class Onboarding3 extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.1),
-            child: SvgPicture.asset('assets/Gibalica_cards.svg'),
+            child: SvgPicture.asset('assets/Gibalica_cards_with_Gibalica.svg'),
           ),
         ),
-        const Expanded(
+        Expanded(
           child: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               child: AutoSizeText(
-                "Umjesto vlastitim tijelom možeš vježbati i s karticama",
+                "UmjestoVlastitimTijelomMožešVježbatiISKarticama".tr,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 40),
+                style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
               ),
             ),
           ),

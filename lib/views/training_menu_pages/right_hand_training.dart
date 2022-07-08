@@ -30,13 +30,13 @@ class _RightHandTrainingState extends State<RightHandTraining> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Text(
-                    "DESNA",
+                children:  [
+                  AutoSizeText(
+                    "Desna".tr,
                     style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    "RUKA",
+                  AutoSizeText(
+                    "Ruka".tr,
                     style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -95,11 +95,11 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                               ),
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             flex: 2,
                             child: Center(
                               child: AutoSizeText(
-                                "U vis",
+                                "UVis".tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                               ),
@@ -145,11 +145,11 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                               ),
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             flex: 2,
                             child: Center(
                               child: AutoSizeText(
-                                "Sa strane",
+                                "SaStrane".tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                               ),
@@ -201,11 +201,11 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                               ),
                             ),
                           ),
-                          const Expanded(
+                          Expanded(
                             flex: 2,
                             child: Center(
                               child: AutoSizeText(
-                                "U vis i sa strane",
+                                "UVisISaStrane".tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                               ),

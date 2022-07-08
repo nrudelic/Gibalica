@@ -32,9 +32,10 @@ class _ProfileViewState extends State<ProfileView> {
         appBar: AppBar(
           toolbarHeight: MediaQuery.of(context).size.height * 0.1,
           elevation: 0,
+          centerTitle: true,
           backgroundColor: Colors.white,
           leading: Padding(
-            padding: const EdgeInsets.only(left: 8.0),
+            padding: const EdgeInsets.only(left: 10.0),
             child: GestureDetector(
               onTap: () {
                 Get.back();
@@ -52,12 +53,13 @@ class _ProfileViewState extends State<ProfileView> {
           ),
           actions: [
             Padding(
-              padding: const EdgeInsets.only(right: 8.0),
+              padding: const EdgeInsets.only(right: 10.0),
               child: Container(
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.yellow),
                 child: IconButton(
                   onPressed: () {
-                    Get.to(() => const ScreeningPages());
+                    Get.to(() => const ScreeningPages(),                              transition: Transition.fadeIn,
+);
                   },
                   icon: const Icon(Icons.mode_edit_outline),
                 ),
@@ -85,7 +87,7 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Text(
+                    child: AutoSizeText(
                       playerController.playerName as String,
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: ColorPalette.darkBlue),
                     ),
@@ -105,16 +107,18 @@ class _ProfileViewState extends State<ProfileView> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Text("Podatci o vježbanju"),
+                    AutoSizeText("PodatciOVježbanju".tr, style: TextStyle(color: ColorPalette.darkBlue)),
                     TextButton(
                       onPressed: () {
-                        Get.to(() => const TrainingInfoView());
+                        Get.to(() => const TrainingInfoView(),                              transition: Transition.fadeIn,
+);
                       },
+                      style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30)), color: ColorPalette.lightBlue),
-                        child: const AutoSizeText(
-                          'Klikni za više!',
+                        child: AutoSizeText(
+                          "KlikniZaViše".tr,
                           style: TextStyle(fontSize: 20, color: Colors.white),
                         ),
                       ),
@@ -154,7 +158,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     }),
                                   ),
                                 ),
-                                const Text("Lijeva ruka", style: TextStyle(fontSize: 28))
+                                AutoSizeText("LijevaRuka".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
                               ],
                             ),
                           ),
@@ -175,7 +179,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     }),
                                   ),
                                 ),
-                                const Text("Desna ruka", style: TextStyle(fontSize: 28))
+                                AutoSizeText("DesnaRuka".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
                               ],
                             ),
                           ),
@@ -203,7 +207,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     }),
                                   ),
                                 ),
-                                const Text("Čučanj", style: TextStyle(fontSize: 28))
+                                AutoSizeText("Čučanj".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
                               ],
                             ),
                           ),
@@ -231,7 +235,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     }),
                                   ),
                                 ),
-                                const Text("Lijeva noga", style: TextStyle(fontSize: 28))
+                                AutoSizeText("LijevaNoga".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
                               ],
                             ),
                           ),
@@ -252,7 +256,7 @@ class _ProfileViewState extends State<ProfileView> {
                                     }),
                                   ),
                                 ),
-                                const Text("Desna noga", style: TextStyle(fontSize: 28))
+                                AutoSizeText("DesnaNoga".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))
                               ],
                             ),
                           ),

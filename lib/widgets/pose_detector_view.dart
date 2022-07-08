@@ -41,7 +41,6 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
   @override
   void initState() {
     super.initState();
-    print("OVO SU POZE ${gameController.possiblePoses}");
     cameraViewController.isPoseImageShowing = false;
     cameraViewController.isOnboardingImageShowing = false;
     cameraViewController.isProgressBarShowing = false;
@@ -49,18 +48,18 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
     cameraViewController.isOnboardingCompletedAnimationShowing = false;
     widget.poseController.onboardingCompleted = false;
     cameraViewController.isOnboardingImageShowing = true;
-    //poseCalculationHelper.setNewPose();
+    widget.poseController.dayNightDict.forEach((name, value) => widget.poseController.dayNightDict[name] = 0);
+    widget.poseController.poseCalculationDict.forEach((name, value) => widget.poseController.poseCalculationDict[name] = 0);
+    widget.poseController.poseCalculationOnboardingDict.forEach((name, value) => widget.poseController.poseCalculationOnboardingDict[name] = 0);
   }
 
   @override
   void dispose() {
-    print("timer ne bi smio");
     cameraViewController.cameraOn = false;
 
     cameraViewController.cancelOnboardingTimer();
     cameraViewController.cancelTimer();
     cameraViewController.cancelInnerTimers();
-    // await poseDetector.close();
     super.dispose();
   }
 
@@ -97,9 +96,7 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
 
     if (!cameraViewController.isProgressBarShowing) {
       widget.poseController.poseCalculationDict.forEach((name, value) => widget.poseController.poseCalculationDict[name] = 0);
-    }
-
-    if (cameraViewController.isProgressBarShowing) {
+    } else if (cameraViewController.isProgressBarShowing) {
       poseCalculationHelper.processBasePoses(poses, true);
 
       if (widget.poseController.onboardingCompleted) {
@@ -179,7 +176,7 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
       poseCalculationHelper.processBasePoses(poses, true);
 
       if (widget.poseController.onboardingCompleted) {
-        isPoseSuccessful();
+        isRepeatingPoseSuccessful();
       } else {
         isOnboardingSuccessfull();
       }
@@ -213,14 +210,10 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
       cameraViewController.startCameraTimer();
     }
     if (widget.poseController.poseCalculationDict[widget.poseController.wantedPose] == 3) {
-      if(settingsController.isSoundOn.value) playSound();
+      if (settingsController.isSoundOn.value) playSound();
 
       gameController.currentRepetitionCounter++;
-      // if (gameController.gameMode == GameMode.training) {
-      //   poseCalculationHelper.setNewTrainingGameModePose();
-      // } else {
-      //   poseCalculationHelper.setNewRepeatinGameModePose();
-      // }
+
       widget.poseController.updateLottieStatus(true);
 
       cameraViewController.isProgressBarShowing = false;
@@ -239,7 +232,7 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
       cameraViewController.startCameraOnboardingTimer();
     }
     if (widget.poseController.poseCalculationDict[BasePose.leftArmNeutral] == 3 && widget.poseController.poseCalculationDict[BasePose.rightArmNeutral] == 3 && widget.poseController.poseCalculationDict[BasePose.leftLegNeutral] == 3 && widget.poseController.poseCalculationDict[BasePose.rightLegNeutral] == 3) {
-      if(settingsController.isSoundOn.value) playSound();
+      if (settingsController.isSoundOn.value) playSound();
 
       if (gameController.gameMode == GameMode.training) {
         poseCalculationHelper.setNewTrainingGameModePose();
@@ -249,6 +242,9 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
       poseCalculationHelper.setNewDayNightPosition();
 
       widget.poseController.onboardingCompleted = true;
+      if (gameController.gameMode == GameMode.repeating) {
+        cameraViewController.pauseRepetitionTimer();
+      }
       widget.poseController.updateLottieStatus(true);
 
       cameraViewController.isProgressBarShowing = false;
@@ -267,11 +263,29 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
     }
 
     if (widget.poseController.dayNightDict[widget.poseController.wantedDayNightPosition] == 3) {
-      if(settingsController.isSoundOn.value) playSound();
+      if (settingsController.isSoundOn.value) playSound();
 
       gameController.currentRepetitionCounter++;
       poseCalculationHelper.setNewDayNightPosition();
       widget.poseController.updateLottieStatus(true);
+      cameraViewController.isProgressBarShowing = false;
+    }
+  }
+
+  void isRepeatingPoseSuccessful() {
+    if (widget.poseController.poseCalculationDict[widget.poseController.wantedPose]! > 1 && cameraViewController.poseTimer != null && cameraViewController.poseTimer!.isActive) {
+      cameraViewController.cancelTimer();
+    }
+    if (widget.poseController.poseCalculationDict[widget.poseController.wantedPose]! < 0.5 && (cameraViewController.poseTimer == null || !cameraViewController.poseTimer!.isActive)) {
+      cameraViewController.startCameraTimer();
+    }
+    if (widget.poseController.poseCalculationDict[widget.poseController.wantedPose] == 3) {
+      if (settingsController.isSoundOn.value) playSound();
+
+      gameController.currentRepetitionCounter++;
+      cameraViewController.pauseRepetitionTimer();
+      widget.poseController.updateLottieStatus(true);
+      poseCalculationHelper.setNewRepeatinGameModePose();
       cameraViewController.isProgressBarShowing = false;
     }
   }

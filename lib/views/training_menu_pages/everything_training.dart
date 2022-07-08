@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -35,13 +36,13 @@ class _EverythingTrainingState extends State<EverythingTraining> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: const [
-                  Text(
-                    "RUKE i",
+                children:  [
+                  AutoSizeText(
+                    "RukeI".tr,
                     style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
                   ),
-                  Text(
-                    "NOGE",
+                  AutoSizeText(
+                    "Noge".tr,
                     style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -65,7 +66,7 @@ class _EverythingTrainingState extends State<EverythingTraining> {
                             flex: 6,
                             child: GestureDetector(
                               onTap: () {
-                                gameController.possiblePoses = BasePose.values;
+                                gameController.possiblePoses = [BasePose.leftArmMiddle, BasePose.leftArmUp, BasePose.rightArmMiddle, BasePose.rightArmUp, BasePose.leftLegUp, BasePose.rightLegUp, BasePose.gap, BasePose.leftArmUpRightArmMiddle, BasePose.leftArmUpRightArmUp, BasePose.leftArmMiddleRightArmUp, BasePose.leftArmMiddleRightArmMiddle, BasePose.squat];
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext context) {
@@ -93,11 +94,11 @@ class _EverythingTrainingState extends State<EverythingTraining> {
                               ),
                             ),
                           ),
-                          const Expanded(
+                           Expanded(
                             flex: 2,
                             child: Center(
-                              child: Text(
-                                "SVE",
+                              child: AutoSizeText(
+                                "Sve".tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
                               ),

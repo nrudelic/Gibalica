@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+
+import '../../color_palette.dart';
 
 class Onboarding2 extends StatelessWidget {
   const Onboarding2({Key? key}) : super(key: key);
@@ -12,14 +15,14 @@ class Onboarding2 extends StatelessWidget {
         Expanded(
           child: Lottie.asset("assets/lotties/camera-roll.json"),
         ),
-        const Expanded(
+        Expanded(
           child: Center(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               child: AutoSizeText(
-                "Prednjom i stražnjom kamerom možeš snimati pokret tijela",
+                "PrednjomIStražnjomKameromMožešSnimatiPokretTijela".tr,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 40),
+                style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
               ),
             ),
           ),

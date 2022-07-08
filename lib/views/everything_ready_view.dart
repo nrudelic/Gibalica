@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -30,9 +31,9 @@ class EverythingReady extends StatelessWidget {
                 flex: 1,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
-                      "Super, sada je sve spremno!",
+                  children:  [
+                    AutoSizeText(
+                      "SuperSadaJeSveSpremno".tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(fontSize: 40, color: Colors.white),
                     ),
@@ -45,14 +46,16 @@ class EverythingReady extends StatelessWidget {
                   onPressed: () {
                     settingsController.gibalicaBox.put("onboardingFinished", true);
 
-                    Get.to(() => MainScreen());
+                    Get.off(() => MainScreen(),                              transition: Transition.fadeIn,
+);
                   },
+                  style: ButtonStyle(overlayColor: MaterialStateProperty.all(ColorPalette.yellow)),
                   child: Container(
                     padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40),
                     decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(50)), color: Colors.white),
-                    child: const Text(
-                      'Gibaj se!',
-                      style: TextStyle(fontSize: 35, color: Color.fromRGBO(36, 80, 128, 1)),
+                    child: AutoSizeText(
+                      "GibajSe".tr,
+                      style: TextStyle(fontSize: 35, color: ColorPalette.darkBlue),
                     ),
                   ),
                 ),

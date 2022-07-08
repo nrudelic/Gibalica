@@ -4,7 +4,7 @@ class PlayerController extends GetxController {
   String? playerName;
   var avatarAssetPath = "assets/Avatar_1_Girl1.svg".obs;
   PositionPlayMode? positionPlayMode;
-
+  var exerciseProgram = ExerciseProgram.all.obs;
   bool avatarChosen = false;
   
   var leftHandPref = false.obs; 
@@ -17,4 +17,9 @@ class PlayerController extends GetxController {
 enum PositionPlayMode{
   standing,
   sitting
+}
+
+enum ExerciseProgram{
+  all,
+  special
 }

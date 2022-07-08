@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -43,8 +44,8 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
               ),
             ),
           ),
-          title: const Text(
-            "Dan i noć",
+          title: AutoSizeText(
+            "DanINoć".tr,
             style: TextStyle(color: ColorPalette.lightBlue, fontSize: 40, fontWeight: FontWeight.bold),
           ),
         ),
@@ -57,12 +58,16 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
               Expanded(
                 flex: 4,
                 child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
-                  const Text(
-                    "Broj ponavljanja vježbe",
-                    style: TextStyle(
-                      color: ColorPalette.darkBlue,
-                      fontSize: 35,
-                      fontWeight: FontWeight.normal,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: AutoSizeText(
+                      "BrojPonavljanjaVježbe".tr,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: ColorPalette.darkBlue,
+                        fontSize: 35,
+                        fontWeight: FontWeight.normal,
+                      ),
                     ),
                   ),
                   Row(
@@ -105,10 +110,10 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
                             padding: const EdgeInsets.all(4),
                             child: Obx(
                               () => FittedBox(
-                                fit: BoxFit.fill,
+                                fit: BoxFit.contain,
                                 child: Padding(
                                   padding: const EdgeInsets.all(4.0),
-                                  child: Text(
+                                  child: AutoSizeText(
                                     gameController.dayNightCounter.value.toString(),
                                     // style: TextStyle(
                                     //   color: ColorPalette.darkBlue,
@@ -150,6 +155,18 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
                   ),
                 ]),
               ),
+              Padding(
+                padding: const EdgeInsets.only(left: 20.0, right: 20, bottom: 10),
+                child: AutoSizeText(
+                  "GibalicaGleda".tr,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: ColorPalette.darkBlue,
+                    fontSize: 35,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+              ),
               Expanded(
                 flex: 3,
                 child: Row(children: [
@@ -167,8 +184,8 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
                               () => Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: gameController.gameType.value == GameType.personal ? ColorPalette.pink : ColorPalette.darkBlue),
-                                child: const Text(
-                                  'OSOBNO',
+                                child: AutoSizeText(
+                                  "Mene".tr,
                                   style: TextStyle(color: Colors.white, fontSize: 30),
                                 ),
                               ),
@@ -192,8 +209,8 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
                               () => Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: gameController.gameType.value == GameType.cards ? ColorPalette.pink : ColorPalette.darkBlue),
-                                child: const Text(
-                                  'KARTICE',
+                                child: AutoSizeText(
+                                  "Kartice".tr,
                                   style: TextStyle(color: Colors.white, fontSize: 30),
                                 ),
                               ),
@@ -211,7 +228,10 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
                   onPressed: () {
                     gameController.currentRepetitionCounter = 0;
 
-                    Get.to(() => PoseDetectorView());
+                    Get.to(
+                      () => PoseDetectorView(),
+                      transition: Transition.fadeIn,
+                    );
                   },
                   style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
                   child: Container(
@@ -221,8 +241,8 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
                     decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30)), color: ColorPalette.green),
                     child: FittedBox(
                       fit: BoxFit.contain,
-                      child: const Text(
-                        'I G R A J',
+                      child: AutoSizeText(
+                        "IGRAJ".tr,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),

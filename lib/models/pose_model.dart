@@ -161,7 +161,8 @@ enum BasePose{
   leftArmUpRightArmMiddle,
   leftArmUpRightArmUp,
   leftArmMiddleRightArmUp,
-  leftArmMiddleRightArmMiddle
+  leftArmMiddleRightArmMiddle,
+  squat
 }
 
 extension BasePoseExtension on BasePose {

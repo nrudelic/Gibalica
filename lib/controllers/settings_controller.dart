@@ -8,6 +8,7 @@ class SettingsController extends GetxController {
   var isBiggerText = false.obs;
   var language = Language.Croatian.obs;
   late Box gibalicaBox;
+  var isUppercase = false.obs;
 }
 
 enum Language { Croatian, English }

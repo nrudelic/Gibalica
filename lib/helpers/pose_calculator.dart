@@ -1,9 +1,9 @@
 import 'dart:developer';
-import 'package:camera/camera.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/controllers/camera_view_controller.dart';
 import 'package:gibalica/controllers/game_controller.dart';
 import 'package:gibalica/controllers/pose_controller.dart';
+import 'package:gibalica/main.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:vector_math/vector_math.dart' as vector_math;
 import 'dart:math' as math;
@@ -35,7 +35,7 @@ class PoseCalculationHelper {
       }
     }
 
-    if (gameController.gameMode == GameMode.training || !poseController.onboardingCompleted) {
+    if (gameController.gameMode == GameMode.training || gameController.gameMode == GameMode.repeating || !poseController.onboardingCompleted) {
       Map<BasePose, double> posesDict = {};
       posesDict = poseController.poseCalculationDict;
 
@@ -117,7 +117,31 @@ class PoseCalculationHelper {
 
   void setNewRepeatinGameModePose() {
     var rnd = math.Random();
-    var nextPose = BasePose.values[rnd.nextInt(BasePose.values.length)];
+
+    var possiblePoses = [];
+
+    if (playerController.leftLegPref.value) {
+      possiblePoses.addAll([BasePose.leftArmMiddle, BasePose.leftArmUp]);
+    }
+    if (playerController.rightHandPref.value) {
+      possiblePoses.addAll([BasePose.rightArmMiddle, BasePose.rightArmUp]);
+    }
+    if (playerController.rightHandPref.value && playerController.leftHandPref.value) {
+      possiblePoses.addAll([BasePose.leftArmUpRightArmMiddle, BasePose.leftArmUpRightArmUp, BasePose.leftArmMiddleRightArmUp, BasePose.leftArmMiddleRightArmMiddle]);
+    }
+    if (playerController.leftLegPref.value) {
+      possiblePoses.addAll([BasePose.leftLegUp]);
+    }
+    if (playerController.rightLegPref.value) {
+      possiblePoses.addAll([BasePose.rightLegUp]);
+    }
+    if (playerController.rightLegPref.value && playerController.leftLegPref.value) {
+      possiblePoses.addAll([BasePose.gap]);
+    }
+    if (playerController.squatPref.value) {
+      possiblePoses.addAll([BasePose.squat]);
+    }
+    var nextPose = possiblePoses[rnd.nextInt(possiblePoses.length)];
 
     poseController.wantedPose = nextPose;
 
@@ -153,6 +177,7 @@ class PoseCalculationHelper {
     BasePose.leftArmUpRightArmUp: isLeftArmUpRightArmUp,
     BasePose.leftArmMiddleRightArmUp: isLeftArmMiddleRightArmUp,
     BasePose.leftArmMiddleRightArmMiddle: isLeftArmMiddleRightArmMiddle,
+    BasePose.squat: isSquat,
   };
 
   var dayNightFunctions = {
@@ -212,6 +237,19 @@ bool isLeftArmMiddle(PoseModel poses) {
   return false;
 }
 
+bool isLeftArmMiddleWithoutNeutral(PoseModel poses) {
+  var p1 = poses.leftElbow;
+  var p2 = poses.leftShoulder;
+  var p3 = poses.leftHip;
+
+  double r = calculateAngle(p1, p2, p3);
+
+  if (r > 80 && r < 100) {
+    return true;
+  }
+  return false;
+}
+
 bool isLeftArmUp(PoseModel poses) {
   var p1 = poses.leftElbow;
   var p2 = poses.leftShoulder;
@@ -220,6 +258,19 @@ bool isLeftArmUp(PoseModel poses) {
   double r = calculateAngle(p1, p2, p3);
 
   if (r > 110 && isRightArmNeutral(poses)) {
+    return true;
+  }
+  return false;
+}
+
+bool isLeftArmUpWithoutNeutral(PoseModel poses) {
+  var p1 = poses.leftElbow;
+  var p2 = poses.leftShoulder;
+  var p3 = poses.leftHip;
+
+  double r = calculateAngle(p1, p2, p3);
+
+  if (r > 110) {
     return true;
   }
   return false;
@@ -251,6 +302,19 @@ bool isRightArmMiddle(PoseModel poses) {
   return false;
 }
 
+bool isRightArmMiddleWithoutNeutral(PoseModel poses) {
+  var p1 = poses.rightElbow;
+  var p2 = poses.rightShoulder;
+  var p3 = poses.rightHip;
+
+  double r = calculateAngle(p1, p2, p3);
+
+  if (r > 80 && r < 100) {
+    return true;
+  }
+  return false;
+}
+
 bool isRightArmUp(PoseModel poses) {
   var p1 = poses.rightElbow;
   var p2 = poses.rightShoulder;
@@ -259,6 +323,19 @@ bool isRightArmUp(PoseModel poses) {
   double r = calculateAngle(p1, p2, p3);
 
   if (r > 110 && isLeftArmNeutral(poses)) {
+    return true;
+  }
+  return false;
+}
+
+bool isRightArmUpWithoutNeutral(PoseModel poses) {
+  var p1 = poses.rightElbow;
+  var p2 = poses.rightShoulder;
+  var p3 = poses.rightHip;
+
+  double r = calculateAngle(p1, p2, p3);
+
+  if (r > 110) {
     return true;
   }
   return false;
@@ -337,29 +414,36 @@ bool isGap(PoseModel poses) {
 }
 
 bool isLeftArmUpRightArmMiddle(PoseModel poses) {
-  if(isLeftArmUp(poses) && isRightArmMiddle(poses)){
+  if (isLeftArmUpWithoutNeutral(poses) && isRightArmMiddleWithoutNeutral(poses)) {
     return true;
   }
   return false;
 }
 
 bool isLeftArmUpRightArmUp(PoseModel poses) {
-  if(isLeftArmUp(poses) && isRightArmUp(poses)){
+  if (isLeftArmUpWithoutNeutral(poses) && isRightArmUpWithoutNeutral(poses)) {
     return true;
   }
   return false;
 }
 
 bool isLeftArmMiddleRightArmUp(PoseModel poses) {
-  if(isLeftArmMiddle(poses) && isRightArmUp(poses)){
+  if (isLeftArmMiddleWithoutNeutral(poses) && isRightArmUpWithoutNeutral(poses)) {
     return true;
   }
   return false;
 }
 
 bool isLeftArmMiddleRightArmMiddle(PoseModel poses) {
-  if(isLeftArmMiddle(poses) && isRightArmMiddle(poses)){
+  if (isLeftArmMiddleWithoutNeutral(poses) && isRightArmMiddleWithoutNeutral(poses)) {
     return true;
   }
+  return false;
+}
+
+bool isSquat(PoseModel poses) {
+  var cameraController = Get.find<CameraViewController>();
+  var rightShoulder = poses.rightShoulder;
+  if (rightShoulder != null && rightShoulder.y > (cameraController.maxY / 1.67)) return true;
   return false;
 }

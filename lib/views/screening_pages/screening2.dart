@@ -22,23 +22,23 @@ class _Screening2State extends State<Screening2> {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Expanded(
+           Expanded(
           flex: 2,
           child: Padding(
             padding: EdgeInsets.only(top: 30, left: 20, right: 20),
             child: AutoSizeText(
-              "Odaberi jedan od ponuđenih avatara koji ti se najviše sviđa",
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+              "OdaberiJedanOdPonuđenihAvataraKojiTiSeNajvišeSviđa".tr,
+              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
             ),
           ),
         ),
-        const Expanded(
+           Expanded(
           flex: 1,
           child: Padding(
             padding: EdgeInsets.only(left: 20, right: 20),
             child: AutoSizeText(
-              "Odaberi avatar",
-              style: TextStyle(fontSize: 30),
+              "OdaberiAvatar".tr,
+              style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
             ),
           ),
         ),
