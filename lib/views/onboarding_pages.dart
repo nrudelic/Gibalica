@@ -108,10 +108,12 @@ class _OnboardingPagesState extends State<OnboardingPages> {
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.50,
-              child: Center(
-                child: SmoothPageIndicator(
-                  controller: controller,
-                  count: 8,
+              child: FittedBox(
+                child: Center(
+                  child: SmoothPageIndicator(
+                    controller: controller,
+                    count: 8,
+                  ),
                 ),
               ),
             ),

@@ -65,295 +65,364 @@ class _SettingsViewState extends State<SettingsView> {
                     style: TextStyle(fontSize: 25, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 25.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SvgPicture.asset("assets/cards.svg"),
-                      GestureDetector(
-                        onTap: () async {
-                          Uri _url = Uri.parse('https://ferhr-my.sharepoint.com/:b:/g/personal/nr50748_fer_hr/EY4DIPtAv0lHvGN-0V9uEnkBPAjq7spxO6fOzFxM-pWprA?e=XFyVsG');
-                          if (!await launchUrl(_url)) throw "Could not launch $_url";
-                        },
-                        child: SvgPicture.asset("assets/share.svg"),
-                      ),
-                    ],
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 25.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Expanded(child: SvgPicture.asset("assets/cards.svg")),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () async {
+                              Uri _url = Uri.parse('https://ferhr-my.sharepoint.com/:b:/g/personal/nr50748_fer_hr/EY4DIPtAv0lHvGN-0V9uEnkBPAjq7spxO6fOzFxM-pWprA?e=XFyVsG');
+                              if (!await launchUrl(_url)) throw "Could not launch $_url";
+                            },
+                            child: SvgPicture.asset("assets/share.svg"),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20.0),
-                  child: AutoSizeText("OpcijePrilagodbi".tr, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 25.0),
-                  child: AutoSizeText("PromjenaIzgledaAplikacije".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          settingsController.isLightMode.value = false;
-                          settingsController.gibalicaBox.put("isLightMode", false);
-                          setState(() {});
-                        },
-                        child: Obx(
-                          () => Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.blue,
-                              ),
-                              color: settingsController.isLightMode.isTrue ? Colors.white : ColorPalette.darkBlue,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                        ),
-                      ),
-                      AutoSizeText(
-                        "Normalan kontrast".tr,
-                        style: TextStyle(fontSize: 15, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          settingsController.isLightMode.value = true;
-                          settingsController.gibalicaBox.put("isLightMode", true);
-                          setState(() {});
-                        },
-                        child: Obx(
-                          () => Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                color: Colors.blue,
-                              ),
-                              color: settingsController.isLightMode.isTrue ? ColorPalette.darkBlue : Colors.white,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                          ),
-                        ),
-                      ),
-                      AutoSizeText("Povećan kontrast".tr, style: TextStyle(fontSize: 15, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white))
-                    ],
+                FittedBox(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 20.0),
+                    child: AutoSizeText("OpcijePrilagodbi".tr, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20.0),
-                  child: AutoSizeText("PromjenaVeličineTeksta".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                FittedBox(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 25.0),
+                    child: AutoSizeText("PromjenaIzgledaAplikacije".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                  ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        onPressed: (() {
-                          settingsController.isBiggerText.value = false;
-                          settingsController.gibalicaBox.put("isBiggerText", false);
-                        }),
-                        style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
-                        child: Obx(
-                          () => AutoSizeText(
-                            "aA",
-                            style: TextStyle(fontSize: 30, color: !settingsController.isBiggerText.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: !settingsController.isBiggerText.value ? FontWeight.bold : FontWeight.normal),
-                          ),
-                        ),
-                      ),
-                      TextButton(
-                          onPressed: (() {
-                            settingsController.isBiggerText.value = true;
-                            settingsController.gibalicaBox.put("isBiggerText", true);
-                          }),
-                          style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 25.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            settingsController.isLightMode.value = false;
+                            settingsController.gibalicaBox.put("isLightMode", false);
+                            setState(() {});
+                          },
                           child: Obx(
-                            () => AutoSizeText(
-                              "aA",
-                              style: TextStyle(fontSize: 50, color: settingsController.isBiggerText.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: settingsController.isBiggerText.value ? FontWeight.bold : FontWeight.normal),
+                            () => Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.blue,
+                                ),
+                                color: settingsController.isLightMode.isTrue ? Colors.white : ColorPalette.darkBlue,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
                             ),
-                          ))
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(bottom: 20.0),
-                  child: AutoSizeText("VrstaSlova".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      TextButton(
-                        onPressed: (() {
-                          settingsController.isUppercase.value = true;
-                          settingsController.gibalicaBox.put("uppercaseLetters", true);
-
-                          if (settingsController.language.value == Language.Croatian) {
-                            var locale = const Locale('HR', 'HR');
-                            Get.updateLocale(locale);
-                          } else {
-                            var locale = const Locale('EN', 'US');
-                            Get.updateLocale(locale);
-                          }
-                        }),
-                        style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
-                        child: Obx(
-                          () => AutoSizeText(
-                            "VelikaTiskana".tr,
-                            style: TextStyle(fontSize: 15, color: settingsController.isUppercase.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: settingsController.isUppercase.value ? FontWeight.bold : FontWeight.normal),
                           ),
                         ),
-                      ),
-                      TextButton(
-                          onPressed: (() {
-                            settingsController.isUppercase.value = false;
-                            settingsController.gibalicaBox.put("uppercaseLetters", false);
-
-                            if (settingsController.language.value == Language.Croatian) {
-                              var locale = const Locale('hr', 'HR');
-                              Get.updateLocale(locale);
-                            } else {
-                              var locale = const Locale('en', 'US');
-                              Get.updateLocale(locale);
-                            }
-                          }),
-                          style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
-                          child: Obx(
-                            () => AutoSizeText(
-                              "VelikaIMalaTiskana".tr,
-                              style: TextStyle(fontSize: 15, color: !settingsController.isUppercase.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: !settingsController.isUppercase.value ? FontWeight.bold : FontWeight.normal),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: AutoSizeText(
+                              "Normalan kontrast".tr,
+                              style: TextStyle(fontSize: 15, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white),
                             ),
-                          ))
-                    ],
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            settingsController.isLightMode.value = true;
+                            settingsController.gibalicaBox.put("isLightMode", true);
+                            setState(() {});
+                          },
+                          child: Obx(
+                            () => Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.blue,
+                                ),
+                                color: settingsController.isLightMode.isTrue ? ColorPalette.darkBlue : Colors.white,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: AutoSizeText("Povećan kontrast".tr, style: TextStyle(fontSize: 15, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                FittedBox(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 20.0),
+                    child: AutoSizeText("PromjenaVeličineTeksta".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                  ),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            onPressed: (() {
+                              settingsController.isBiggerText.value = false;
+                              settingsController.gibalicaBox.put("isBiggerText", false);
+                            }),
+                            style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
+                            child: Obx(
+                              () => AutoSizeText(
+                                "aA",
+                                style: TextStyle(fontSize: 30, color: !settingsController.isBiggerText.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: !settingsController.isBiggerText.value ? FontWeight.bold : FontWeight.normal),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: TextButton(
+                              onPressed: (() {
+                                settingsController.isBiggerText.value = true;
+                                settingsController.gibalicaBox.put("isBiggerText", true);
+                              }),
+                              style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
+                              child: Obx(
+                                () => AutoSizeText(
+                                  "aA",
+                                  style: TextStyle(fontSize: 50, color: settingsController.isBiggerText.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: settingsController.isBiggerText.value ? FontWeight.bold : FontWeight.normal),
+                                ),
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                FittedBox(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 20.0),
+                    child: AutoSizeText("VrstaSlova".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                  ),
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 20.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: TextButton(
+                            onPressed: (() {
+                              settingsController.isUppercase.value = true;
+                              settingsController.gibalicaBox.put("uppercaseLetters", true);
+
+                              if (settingsController.language.value == Language.Croatian) {
+                                var locale = const Locale('HR', 'HR');
+                                Get.updateLocale(locale);
+                              } else {
+                                var locale = const Locale('EN', 'US');
+                                Get.updateLocale(locale);
+                              }
+                            }),
+                            style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
+                            child: Obx(
+                              () => AutoSizeText(
+                                "VelikaTiskana".tr,
+                                style: TextStyle(fontSize: 15, color: settingsController.isUppercase.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: settingsController.isUppercase.value ? FontWeight.bold : FontWeight.normal),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: TextButton(
+                              onPressed: (() {
+                                settingsController.isUppercase.value = false;
+                                settingsController.gibalicaBox.put("uppercaseLetters", false);
+
+                                if (settingsController.language.value == Language.Croatian) {
+                                  var locale = const Locale('hr', 'HR');
+                                  Get.updateLocale(locale);
+                                } else {
+                                  var locale = const Locale('en', 'US');
+                                  Get.updateLocale(locale);
+                                }
+                              }),
+                              style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
+                              child: Obx(
+                                () => AutoSizeText(
+                                  "VelikaIMalaTiskana".tr,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 15, color: !settingsController.isUppercase.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: !settingsController.isUppercase.value ? FontWeight.bold : FontWeight.normal),
+                                ),
+                              )),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 25.0),
                   child: AutoSizeText("Zvuk".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          settingsController.isSoundOn.value = true;
-                          settingsController.gibalicaBox.put("isSoundOn", true);
-                        },
-                        child: Row(
-                          children: [
-                            SvgPicture.asset("assets/sound_ON.svg"),
-                            const SizedBox(
-                              width: 10,
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 25.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              settingsController.isSoundOn.value = true;
+                              settingsController.gibalicaBox.put("isSoundOn", true);
+                            },
+                            child: Row(
+                              children: [
+                                Expanded(child: SvgPicture.asset("assets/sound_ON.svg")),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Obx(
+                                    () => AutoSizeText("UpaliZvuk".tr, style: TextStyle(fontSize: 15, color: settingsController.isSoundOn.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: settingsController.isSoundOn.value ? FontWeight.bold : FontWeight.normal)),
+                                  ),
+                                )
+                              ],
                             ),
-                            Obx(
-                              () => AutoSizeText("UpaliZvuk".tr, style: TextStyle(fontSize: 15, color: settingsController.isSoundOn.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: settingsController.isSoundOn.value ? FontWeight.bold : FontWeight.normal)),
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          settingsController.isSoundOn.value = false;
-                          settingsController.gibalicaBox.put("isSoundOn", false);
-                        },
-                        child: Row(
-                          children: [
-                            SvgPicture.asset("assets/sound_OFF.svg"),
-                            const SizedBox(
-                              width: 10,
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              settingsController.isSoundOn.value = false;
+                              settingsController.gibalicaBox.put("isSoundOn", false);
+                            },
+                            child: Row(
+                              children: [
+                                Expanded(child: SvgPicture.asset("assets/sound_OFF.svg")),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Obx(
+                                    () => AutoSizeText(
+                                      "UgasiZvuk".tr,
+                                      style: TextStyle(fontSize: 15, color: !settingsController.isSoundOn.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: !settingsController.isSoundOn.value ? FontWeight.bold : FontWeight.normal),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
-                            Obx(
-                              () => AutoSizeText(
-                                "UgasiZvuk".tr,
-                                style: TextStyle(fontSize: 15, color: !settingsController.isSoundOn.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: !settingsController.isSoundOn.value ? FontWeight.bold : FontWeight.normal),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 25.0),
                   child: AutoSizeText("PromjenaJezika".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 25.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          settingsController.language.value = Language.Croatian;
-                          settingsController.gibalicaBox.put("language", "Croatian");
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 25.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              settingsController.language.value = Language.Croatian;
+                              settingsController.gibalicaBox.put("language", "Croatian");
 
-                          if (settingsController.language.value == Language.Croatian && settingsController.isUppercase.value) {
-                            var locale = const Locale('HR', 'HR');
-                            Get.updateLocale(locale);
-                          } else if (settingsController.language.value == Language.Croatian && !settingsController.isUppercase.value) {
-                            var locale = const Locale('hr', 'HR');
-                            Get.updateLocale(locale);
-                          }
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset("assets/croatian_flag.jpg"),
-                            const SizedBox(
-                              width: 10,
+                              if (settingsController.language.value == Language.Croatian && settingsController.isUppercase.value) {
+                                var locale = const Locale('HR', 'HR');
+                                Get.updateLocale(locale);
+                              } else if (settingsController.language.value == Language.Croatian && !settingsController.isUppercase.value) {
+                                var locale = const Locale('hr', 'HR');
+                                Get.updateLocale(locale);
+                              }
+                            },
+                            child: Row(
+                              children: [
+                                Expanded(child: Image.asset("assets/croatian_flag.jpg")),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Obx(
+                                    () => AutoSizeText(
+                                      "Hrvatski".tr,
+                                      style: TextStyle(fontSize: 15, color: settingsController.language.value == Language.Croatian ? ColorPalette.darkBlue : Colors.grey, fontWeight: settingsController.language.value == Language.Croatian ? FontWeight.bold : FontWeight.normal),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
-                            Obx(
-                              () => AutoSizeText(
-                                "Hrvatski".tr,
-                                style: TextStyle(fontSize: 15, color: settingsController.language.value == Language.Croatian ? ColorPalette.darkBlue : Colors.grey, fontWeight: settingsController.language.value == Language.Croatian ? FontWeight.bold : FontWeight.normal),
-                              ),
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          settingsController.language.value = Language.English;
-                          settingsController.gibalicaBox.put("language", "English");
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              settingsController.language.value = Language.English;
+                              settingsController.gibalicaBox.put("language", "English");
 
-                          if (settingsController.language.value == Language.English && settingsController.isUppercase.value) {
-                            var locale = const Locale('EN', 'US');
-                            Get.updateLocale(locale);
-                          } else if (settingsController.language.value == Language.English && !settingsController.isUppercase.value) {
-                            var locale = const Locale('en', 'US');
-                            Get.updateLocale(locale);
-                          }
-                        },
-                        child: Row(
-                          children: [
-                            Image.asset("assets/english_flag.jpg"),
-                            const SizedBox(
-                              width: 10,
+                              if (settingsController.language.value == Language.English && settingsController.isUppercase.value) {
+                                var locale = const Locale('EN', 'US');
+                                Get.updateLocale(locale);
+                              } else if (settingsController.language.value == Language.English && !settingsController.isUppercase.value) {
+                                var locale = const Locale('en', 'US');
+                                Get.updateLocale(locale);
+                              }
+                            },
+                            child: Row(
+                              children: [
+                                Expanded(child: Image.asset("assets/english_flag.jpg")),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Expanded(
+                                  child: Obx(
+                                    () => AutoSizeText("Engleski".tr,
+                                        style: TextStyle(
+                                          fontSize: 15,
+                                          color: settingsController.language.value == Language.English ? ColorPalette.darkBlue : Colors.grey,
+                                          fontWeight: settingsController.language.value == Language.English ? FontWeight.bold : FontWeight.normal,
+                                        )),
+                                  ),
+                                )
+                              ],
                             ),
-                            Obx(
-                              () => AutoSizeText("Engleski".tr,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: settingsController.language.value == Language.English ? ColorPalette.darkBlue : Colors.grey,
-                                    fontWeight: settingsController.language.value == Language.English ? FontWeight.bold : FontWeight.normal,
-                                  )),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
@@ -362,31 +431,41 @@ class _SettingsViewState extends State<SettingsView> {
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.1,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: AutoSizeText("PonovnoUpoznajAplikaciju".tr, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                      Expanded(
+                        flex: 3,
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: AutoSizeText("PonovnoUpoznajAplikaciju".tr, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                          ),
+                        ),
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(
-                            () => OnboardingPages(1),
-                            transition: Transition.fadeIn,
-                          );
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.green),
-                          child: Center(
-                              child: Icon(
-                            Icons.navigate_next,
-                            color: Colors.white,
-                            size: MediaQuery.of(context).size.width * 0.1,
-                          )),
+                      Expanded(
+                        flex: 1,
+                        child: Center(
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.to(
+                                () => OnboardingPages(1),
+                                transition: Transition.fadeIn,
+                              );
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.green),
+                              child: Center(
+                                  child: Icon(
+                                Icons.navigate_next,
+                                color: Colors.white,
+                                size: MediaQuery.of(context).size.width * 0.1,
+                              )),
+                            ),
+                          ),
                         ),
                       ),
                     ],

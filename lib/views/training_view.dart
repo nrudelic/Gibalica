@@ -55,55 +55,58 @@ class _TrainingViewState extends State<TrainingView> {
           ),
         ),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              playerController.leftHandPref.value ? const LeftHandTraining() : Container(),
-              playerController.leftHandPref.value
-                  ? const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Divider(
-                        thickness: 3,
-                      ),
-                    )
-                  : Container(),
-              playerController.rightHandPref.value ? const RightHandTraining() : Container(),
-              playerController.rightHandPref.value
-                  ? const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Divider(
-                        thickness: 3,
-                      ),
-                    )
-                  : Container(),
-              (playerController.rightHandPref.value && playerController.leftHandPref.value) ? const BothHandsTraining() : Container(),
-              (playerController.rightHandPref.value && playerController.leftHandPref.value)
-                  ? const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Divider(
-                        thickness: 3,
-                      ),
-                    )
-                  : Container(),
-              (playerController.leftLegPref.value || playerController.rightLegPref.value) ? const SingleLegTraining() : Container(),
-              (playerController.leftLegPref.value || playerController.rightLegPref.value)
-                  ? const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Divider(
-                        thickness: 3,
-                      ),
-                    )
-                  : Container(),
-              (playerController.leftLegPref.value && playerController.rightLegPref.value || playerController.squatPref.value) ? const BothLegsTraining() : Container(),
-              (playerController.leftLegPref.value && playerController.rightLegPref.value || playerController.squatPref.value)
-                  ? const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Divider(
-                        thickness: 3,
-                      ),
-                    )
-                  : Container(),
-              const EverythingTraining()
-            ],
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.06),
+            child: Column(
+              children: [
+                playerController.leftHandPref.value ? const LeftHandTraining() : Container(),
+                playerController.leftHandPref.value
+                    ? const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Divider(
+                          thickness: 3,
+                        ),
+                      )
+                    : Container(),
+                playerController.rightHandPref.value ? const RightHandTraining() : Container(),
+                playerController.rightHandPref.value
+                    ? const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Divider(
+                          thickness: 3,
+                        ),
+                      )
+                    : Container(),
+                (playerController.rightHandPref.value && playerController.leftHandPref.value) ? const BothHandsTraining() : Container(),
+                (playerController.rightHandPref.value && playerController.leftHandPref.value)
+                    ? const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Divider(
+                          thickness: 3,
+                        ),
+                      )
+                    : Container(),
+                (playerController.leftLegPref.value || playerController.rightLegPref.value) ? const SingleLegTraining() : Container(),
+                (playerController.leftLegPref.value || playerController.rightLegPref.value)
+                    ? const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Divider(
+                          thickness: 3,
+                        ),
+                      )
+                    : Container(),
+                (playerController.leftLegPref.value && playerController.rightLegPref.value || playerController.squatPref.value) ? const BothLegsTraining() : Container(),
+                (playerController.leftLegPref.value && playerController.rightLegPref.value || playerController.squatPref.value)
+                    ? const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Divider(
+                          thickness: 3,
+                        ),
+                      )
+                    : Container(),
+                const EverythingTraining()
+              ],
+            ),
           ),
         ),
       ),

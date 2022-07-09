@@ -193,7 +193,7 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: gameController.gameType.value == GameType.personal ? ColorPalette.pink : ColorPalette.darkBlue),
                                 child: AutoSizeText(
-                                  "Mene".tr,
+                                  "Mene".tr,textScaleFactor:1,
                                   style: TextStyle(color: Colors.white, fontSize: 30),
                                 ),
                               ),
@@ -218,7 +218,7 @@ class _DayAndNightMenuViewState extends State<DayAndNightMenuView> {
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: gameController.gameType.value == GameType.cards ? ColorPalette.pink : ColorPalette.darkBlue),
                                 child: AutoSizeText(
-                                  "Kartice".tr,
+                                  "Kartice".tr,textScaleFactor:1,
                                   style: TextStyle(color: Colors.white, fontSize: 30),
                                 ),
                               ),

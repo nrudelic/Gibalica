@@ -127,7 +127,7 @@ class MainScreen extends StatelessWidget {
                               Positioned(
                                 child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
                                   return Padding(
-                                    padding: EdgeInsets.only(right: constraints.maxWidth * 0.12, left: constraints.maxWidth * 0.38, top: constraints.maxHeight * 0.3, bottom: constraints.maxHeight * 0.3),
+                                    padding: EdgeInsets.only(right: constraints.maxWidth * 0.12, left: constraints.maxWidth * 0.27, top: constraints.maxHeight * 0.3, bottom: constraints.maxHeight * 0.3),
                                     child: Center(child: FittedBox(child: AutoSizeText("DanINoć".tr, style: const TextStyle(fontSize: 30,color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)))),
                                   );
                                 }),
@@ -151,7 +151,7 @@ class MainScreen extends StatelessWidget {
                               Positioned(
                                 child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
                                   return Padding(
-                                    padding: EdgeInsets.only(left: constraints.maxWidth * 0.12, right: constraints.maxWidth * 0.38, top: constraints.maxHeight * 0.3, bottom: constraints.maxHeight * 0.3),
+                                    padding: EdgeInsets.only(left: constraints.maxWidth * 0.12, right: constraints.maxWidth * 0.34, top: constraints.maxHeight * 0.3, bottom: constraints.maxHeight * 0.3),
                                     child: Center(child: FittedBox(child: AutoSizeText("PONAVLJANJE1".tr, style: const TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)))),
                                   );
                                 }),

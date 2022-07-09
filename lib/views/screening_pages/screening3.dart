@@ -80,7 +80,10 @@ class _Screening3State extends State<Screening3> {
                         }),
                       ),
                     ),
-                    Expanded(flex: 2, child: AutoSizeText("Cijeli".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)))
+                    Expanded(flex: 2, child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(child: AutoSizeText("Cijeli".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))),
+                    ))
                   ],
                 ),
               ),
@@ -110,7 +113,10 @@ class _Screening3State extends State<Screening3> {
                         }),
                       ),
                     ),
-                    Expanded(flex: 4, child: AutoSizeText("Prilagođeni".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)))
+                    Expanded(flex: 4, child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Center(child: AutoSizeText("Prilagođeni".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))),
+                    ))
                   ],
                 ),
               ),

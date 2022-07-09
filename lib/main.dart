@@ -153,6 +153,13 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
+      builder: (context, child) {
+        final MediaQueryData data = MediaQuery.of(context);
+        return MediaQuery(
+          data: data.copyWith(textScaleFactor: 0.9),
+          child: child!,
+        );
+      },
       home: const MyHomePage(title: 'Gibalica'),
     );
   }
@@ -171,13 +178,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    Timer(const Duration(seconds: 2), () => Get.off(isOnboardingFinished ? ()=> MainScreen() : ()=> const StartView()));
+    Timer(const Duration(seconds: 2), () => Get.off(isOnboardingFinished ? () => MainScreen() : () => const StartView()));
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print(MediaQuery.of(context).textScaleFactor);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorPalette.yellow,

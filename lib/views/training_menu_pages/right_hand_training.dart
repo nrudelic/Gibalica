@@ -27,26 +27,19 @@ class _RightHandTrainingState extends State<RightHandTraining> {
           flex: 1,
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children:  [
-                  AutoSizeText(
-                    "Desna".tr,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: AutoSizeText(
+                    
+                    "Desna ruka",textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
                   ),
-                  AutoSizeText(
-                    "Ruka".tr,
-                    style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
-                  ),
-                ],
+                ),
               ),
             ),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Lottie.asset("assets/lotties/backhand-index-pointing-right.json"),
-              ),
+              child: Lottie.asset("assets/lotties/backhand-index-pointing-right.json"),
             ),
           ]),
         ),
@@ -79,20 +72,17 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                   },
                                 );
                               },
-                              child: Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: LayoutBuilder(builder: (context, constraint) {
-                                  return CircleAvatar(
-                                    child: Obx(
-                                      () => SvgPicture.asset(
-                                        gameController.isPoseFinished['rightArmUp']!.value ? "assets/RIGHT_HAND_up_dark.svg" : "assets/RIGHT_HAND_up_light.svg",
-                                      ),
+                              child: LayoutBuilder(builder: (context, constraint) {
+                                return CircleAvatar(
+                                  child: Obx(
+                                    () => SvgPicture.asset(
+                                      gameController.isPoseFinished['rightArmUp']!.value ? "assets/RIGHT_HAND_up_dark.svg" : "assets/RIGHT_HAND_up_light.svg",
                                     ),
-                                    backgroundColor: Colors.white,
-                                    minRadius: constraint.biggest.height,
-                                  );
-                                }),
-                              ),
+                                  ),
+                                  backgroundColor: Colors.white,
+                                  minRadius: constraint.biggest.height,
+                                );
+                              }),
                             ),
                           ),
                           Expanded(
@@ -129,20 +119,17 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                   },
                                 );
                               },
-                              child: Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: LayoutBuilder(builder: (context, constraint) {
-                                  return CircleAvatar(
-                                    child: Obx(
-                                      () => SvgPicture.asset(
-                                        gameController.isPoseFinished['rightArmMiddle']!.value ? "assets/RIGHT_HAND_onside_dark.svg" : "assets/RIGHT_HAND_onside_light.svg",
-                                      ),
+                              child: LayoutBuilder(builder: (context, constraint) {
+                                return CircleAvatar(
+                                  child: Obx(
+                                    () => SvgPicture.asset(
+                                      gameController.isPoseFinished['rightArmMiddle']!.value ? "assets/RIGHT_HAND_onside_dark.svg" : "assets/RIGHT_HAND_onside_light.svg",
                                     ),
-                                    backgroundColor: Colors.white,
-                                    minRadius: constraint.biggest.height,
-                                  );
-                                }),
-                              ),
+                                  ),
+                                  backgroundColor: Colors.white,
+                                  minRadius: constraint.biggest.height,
+                                );
+                              }),
                             ),
                           ),
                           Expanded(
@@ -185,29 +172,28 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                       return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Desna ruka - u vis i sa strane')));
                                     });
                               },
-                              child: Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: LayoutBuilder(builder: (context, constraint) {
-                                  return CircleAvatar(
-                                    child: Obx(
-                                      () => SvgPicture.asset(
-                                        gameController.isPoseFinished['rightArmUpAndMiddle']!.value ? "assets/RIGHT_HAND_plus_dark.svg" : "assets/RIGHT_HAND_plus_light.svg",
-                                      ),
+                              child: LayoutBuilder(builder: (context, constraint) {
+                                return CircleAvatar(
+                                  child: Obx(
+                                    () => SvgPicture.asset(
+                                      gameController.isPoseFinished['rightArmUpAndMiddle']!.value ? "assets/RIGHT_HAND_plus_dark.svg" : "assets/RIGHT_HAND_plus_light.svg",
                                     ),
-                                    backgroundColor: Colors.white,
-                                    minRadius: constraint.biggest.height,
-                                  );
-                                }),
-                              ),
+                                  ),
+                                  backgroundColor: Colors.white,
+                                  minRadius: constraint.biggest.height,
+                                );
+                              }),
                             ),
                           ),
                           Expanded(
                             flex: 2,
                             child: Center(
-                              child: AutoSizeText(
-                                "UVisISaStrane".tr,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                              child: FittedBox(
+                                child: AutoSizeText(
+                                  "UVisISaStrane".tr,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
                           ),

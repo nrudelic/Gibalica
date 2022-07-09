@@ -26,13 +26,17 @@ class StartView extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AutoSizeText(
-                        "Gibalica".tr,
-                        style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
+                      Expanded(
+                        child: AutoSizeText(
+                          "Gibalica".tr,
+                          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
+                        ),
                       ),
-                      AutoSizeText(
-                        "KažeBok".tr,
-                        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                      Expanded(
+                        child: AutoSizeText(
+                          "KažeBok".tr,
+                          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                        ),
                       ),
                     ],
                   ),
@@ -43,21 +47,35 @@ class StartView extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 1,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AutoSizeText(
-                        "DragoMiTeVidjetiOvdje".tr,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Center(
+                      child: AutoSizeText(
+                        "Veselim se našem druženju kroz vježbu",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: 30, color: Colors.white),
                       ),
-                      AutoSizeText(
-                        "DobroDošaola".tr,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 30, color: Colors.white),
-                      ),
-                    ],
+                    ),
                   ),
+                  // child: Column(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Expanded(
+                  //       child: AutoSizeText(
+                  //         "DragoMiTeVidjetiOvdje".tr,
+                  //         textAlign: TextAlign.center,
+                  //         style: TextStyle(fontSize: 30, color: Colors.white),
+                  //       ),
+                  //     ),
+                  //     Expanded(
+                  //       child: AutoSizeText(
+                  //         "DobroDošaola".tr,
+                  //         textAlign: TextAlign.center,
+                  //         style: TextStyle(fontSize: 30, color: Colors.white),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ),
                 Expanded(
                   flex: 1,

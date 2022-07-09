@@ -28,25 +28,15 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
           flex: 1,
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Lottie.asset("assets/lotties/footprints.json"),
-              ),
+              child: Lottie.asset("assets/lotties/footprints.json"),
             ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  AutoSizeText(
-                    "Obje".tr,
-                    style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
-                  ),
-                  AutoSizeText(
-                    "Noge".tr,
-                    style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
-                  ),
-                ],
+              child: Center(
+                child: AutoSizeText(
+                  "Obje Noge",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ]),
@@ -80,20 +70,17 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                                             return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Lijeva i desna noga - u vis')));
                                           });
                                     },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15),
-                                      child: LayoutBuilder(builder: (context, constraint) {
-                                        return CircleAvatar(
-                                          child: Obx(
-                                            () => SvgPicture.asset(
-                                              gameController.isPoseFinished['leftAndRightLegUp']!.value ? "assets/LEGS_up_dark.svg" : "assets/LEGS_up_light.svg",
-                                            ),
+                                    child: LayoutBuilder(builder: (context, constraint) {
+                                      return CircleAvatar(
+                                        child: Obx(
+                                          () => SvgPicture.asset(
+                                            gameController.isPoseFinished['leftAndRightLegUp']!.value ? "assets/LEGS_up_dark.svg" : "assets/LEGS_up_light.svg",
                                           ),
-                                          backgroundColor: Colors.white,
-                                          minRadius: constraint.biggest.height,
-                                        );
-                                      }),
-                                    ),
+                                        ),
+                                        backgroundColor: Colors.white,
+                                        minRadius: constraint.biggest.height,
+                                      );
+                                    }),
                                   ),
                                 ),
                                 Expanded(
@@ -143,20 +130,17 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                                         },
                                       );
                                     },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15),
-                                      child: LayoutBuilder(builder: (context, constraint) {
-                                        return CircleAvatar(
-                                          child: Obx(
-                                            () => SvgPicture.asset(
-                                              gameController.isPoseFinished['legGap']!.value ? "assets/LEGS_gap_dark.svg" : "assets/LEGS_gap_light.svg",
-                                            ),
+                                    child: LayoutBuilder(builder: (context, constraint) {
+                                      return CircleAvatar(
+                                        child: Obx(
+                                          () => SvgPicture.asset(
+                                            gameController.isPoseFinished['legGap']!.value ? "assets/LEGS_gap_dark.svg" : "assets/LEGS_gap_light.svg",
                                           ),
-                                          backgroundColor: Colors.white,
-                                          minRadius: constraint.biggest.height,
-                                        );
-                                      }),
-                                    ),
+                                        ),
+                                        backgroundColor: Colors.white,
+                                        minRadius: constraint.biggest.height,
+                                      );
+                                    }),
                                   ),
                                 ),
                                 Expanded(
@@ -195,20 +179,17 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                                         },
                                       );
                                     },
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(15),
-                                      child: LayoutBuilder(builder: (context, constraint) {
-                                        return CircleAvatar(
-                                          child: Obx(
-                                            () => SvgPicture.asset(
-                                              gameController.isPoseFinished['squat']!.value ? "assets/LEGS_squat_dark.svg" : "assets/LEGS_squat_light.svg",
-                                            ),
+                                    child: LayoutBuilder(builder: (context, constraint) {
+                                      return CircleAvatar(
+                                        child: Obx(
+                                          () => SvgPicture.asset(
+                                            gameController.isPoseFinished['squat']!.value ? "assets/LEGS_squat_dark.svg" : "assets/LEGS_squat_light.svg",
                                           ),
-                                          backgroundColor: Colors.white,
-                                          minRadius: constraint.biggest.height,
-                                        );
-                                      }),
-                                    ),
+                                        ),
+                                        backgroundColor: Colors.white,
+                                        minRadius: constraint.biggest.height,
+                                      );
+                                    }),
                                   ),
                                 ),
                                 Expanded(

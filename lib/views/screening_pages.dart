@@ -154,7 +154,7 @@ class _ScreeningPagesState extends State<ScreeningPages> {
         style: TextStyle(fontSize: 15),
       ),
       content: Container(
-        height: MediaQuery.of(context).size.height * 0.5,
+        height: MediaQuery.of(context).size.height * 0.4,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

@@ -27,25 +27,15 @@ class _EverythingTrainingState extends State<EverythingTraining> {
           flex: 2,
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, crossAxisAlignment: CrossAxisAlignment.center, children: [
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Lottie.asset("assets/lotties/warm-up-guy.json"),
-              ),
+              child: Lottie.asset("assets/lotties/warm-up-guy.json"),
             ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children:  [
-                  AutoSizeText(
-                    "RukeI".tr,
-                    style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
-                  ),
-                  AutoSizeText(
-                    "Noge".tr,
-                    style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
-                  ),
-                ],
+              child: Center(
+                child: AutoSizeText(
+                  "Ruke i Noge",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ]),
@@ -78,23 +68,20 @@ class _EverythingTrainingState extends State<EverythingTraining> {
                                       return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Sve')));
                                     });
                               },
-                              child: Padding(
-                                padding: const EdgeInsets.all(15),
-                                child: LayoutBuilder(builder: (context, constraint) {
-                                  return CircleAvatar(
-                                    child: Obx(
-                                      () => SvgPicture.asset(
-                                        gameController.isPoseFinished['all']!.value ? "assets/ALL_dark.svg" : "assets/ALL_light.svg",
-                                      ),
+                              child: LayoutBuilder(builder: (context, constraint) {
+                                return CircleAvatar(
+                                  child: Obx(
+                                    () => SvgPicture.asset(
+                                      gameController.isPoseFinished['all']!.value ? "assets/ALL_dark.svg" : "assets/ALL_light.svg",
                                     ),
-                                    backgroundColor: Colors.white,
-                                    minRadius: constraint.biggest.height,
-                                  );
-                                }),
-                              ),
+                                  ),
+                                  backgroundColor: Colors.white,
+                                  minRadius: constraint.biggest.height,
+                                );
+                              }),
                             ),
                           ),
-                           Expanded(
+                          Expanded(
                             flex: 2,
                             child: Center(
                               child: AutoSizeText(

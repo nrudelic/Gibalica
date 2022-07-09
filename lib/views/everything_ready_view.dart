@@ -34,10 +34,12 @@ class EverythingReady extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Expanded(
-                          child: AutoSizeText(
-                            "SuperSadaJeSveSpremno".tr,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(fontSize: 40, color: Colors.white),
+                          child: Center(
+                            child: AutoSizeText(
+                              "SuperSadaJeSveSpremno".tr,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 40, color: Colors.white),
+                            ),
                           ),
                         ),
                       ],

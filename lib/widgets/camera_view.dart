@@ -303,11 +303,11 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
           cameraViewController.repetitionTimer != null && showRepetitionInfo && gameController.gameMode == GameMode.repeating
               ? Positioned(
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(40.0),
                     child: Align(
                       alignment: Alignment.topRight,
                       child: Text(
-                        cameraViewController.repetitionTimer!.elapsed.toString(),
+                        cameraViewController.repetitionTimer!.elapsed.inSeconds.toString(),
                         style: TextStyle(fontSize: 50),
                       ),
                     ),
@@ -317,7 +317,7 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
           showRepetitionInfo && gameController.gameMode == GameMode.repeating
               ? Positioned(
                   child: Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(40.0),
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Text(
@@ -506,7 +506,6 @@ class GameFinishedMenu extends StatelessWidget {
                     cameraViewController.isOnboardingImageShowing = false;
                     cameraViewController.isProgressBarShowing = true;
                     if (gameController.gameMode == GameMode.repeating) {
-
                       showRepetitionInfo = true;
                       cameraViewController.startRepetitionTimer(gameController.repetitionTime.value);
                     }
@@ -526,9 +525,11 @@ class GameFinishedMenu extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: SvgPicture.asset("assets/repeat.svg"),
                       ),
-                      const AutoSizeText(
-                        "PONOVI",
-                        style: const TextStyle(color: ColorPalette.darkBlue, fontSize: 25),
+                      FittedBox(
+                        child: const AutoSizeText(
+                          "PONOVI",
+                          style: const TextStyle(color: ColorPalette.darkBlue, fontSize: 25),
+                        ),
                       )
                     ],
                   ),
@@ -555,10 +556,12 @@ class GameFinishedMenu extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 8.0),
                         child: SvgPicture.asset("assets/new_training.svg"),
                       ),
-                      const AutoSizeText(
-                        "NOVI TRENING",
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(color: ColorPalette.darkBlue, fontSize: 25),
+                      FittedBox(
+                        child: const AutoSizeText(
+                          "NOVI TRENING",
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: ColorPalette.darkBlue, fontSize: 25),
+                        ),
                       )
                     ],
                   ),
