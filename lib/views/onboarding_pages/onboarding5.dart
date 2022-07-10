@@ -4,12 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../color_palette.dart';
+import '../../controllers/settings_controller.dart';
 
 class Onboarding5 extends StatelessWidget {
   const Onboarding5({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  var settingsController = Get.find<SettingsController>();
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -26,17 +28,18 @@ class Onboarding5 extends StatelessWidget {
                   child: AutoSizeText(
                     "Trening".tr,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold,  color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,),),
                   ),
                 ),
-              ),
               Expanded(
                 flex: 2,
                 child: Center(
                   child: AutoSizeText(
                     "IgraSVježbamaZaRukeINoge".tr,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
+                    style: TextStyle(fontSize: 40, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,),
                   ),
                 ),
               ),

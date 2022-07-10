@@ -526,9 +526,10 @@ class GameFinishedMenu extends StatelessWidget {
                         child: SvgPicture.asset("assets/repeat.svg"),
                       ),
                       FittedBox(
-                        child: const AutoSizeText(
+                        child: AutoSizeText(
                           "PONOVI",
-                          style: const TextStyle(color: ColorPalette.darkBlue, fontSize: 25),
+                          style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 25),
                         ),
                       )
                     ],
@@ -557,10 +558,11 @@ class GameFinishedMenu extends StatelessWidget {
                         child: SvgPicture.asset("assets/new_training.svg"),
                       ),
                       FittedBox(
-                        child: const AutoSizeText(
+                        child:  AutoSizeText(
                           "NOVI TRENING",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(color: ColorPalette.darkBlue, fontSize: 25),
+                          style:  TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 25),
                         ),
                       )
                     ],

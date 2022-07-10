@@ -23,7 +23,7 @@ class PoseCalculationHelper {
   }
 
   void processBasePoses(List<Pose> poses, bool isOnboarding) {
-    log("KOKO: ${gameController.gameMode}");
+    
     this.poses = PoseModel(poses);
 
     if (!poseController.onboardingCompleted) {
@@ -38,6 +38,11 @@ class PoseCalculationHelper {
     if (gameController.gameMode == GameMode.training || gameController.gameMode == GameMode.repeating || !poseController.onboardingCompleted) {
       Map<BasePose, double> posesDict = {};
       posesDict = poseController.poseCalculationDict;
+
+      var basePoseFunctions = basePoseFunctionsPersonal;
+      if(gameController.gameType.value == GameType.cards){
+        basePoseFunctions = basePoseFunctionsCards;
+      }
 
       posesDict.forEach((BasePose pose, double poseCounter) {
         var isPoseFunction = basePoseFunctions[pose];
@@ -161,7 +166,7 @@ class PoseCalculationHelper {
     });
   }
 
-  var basePoseFunctions = {
+  var basePoseFunctionsPersonal = {
     BasePose.leftArmNeutral: isLeftArmNeutral,
     BasePose.leftArmMiddle: isLeftArmMiddle,
     BasePose.leftArmUp: isLeftArmUp,
@@ -176,6 +181,25 @@ class PoseCalculationHelper {
     BasePose.leftArmUpRightArmMiddle: isLeftArmUpRightArmMiddle,
     BasePose.leftArmUpRightArmUp: isLeftArmUpRightArmUp,
     BasePose.leftArmMiddleRightArmUp: isLeftArmMiddleRightArmUp,
+    BasePose.leftArmMiddleRightArmMiddle: isLeftArmMiddleRightArmMiddle,
+    BasePose.squat: isSquat,
+  };
+
+  var basePoseFunctionsCards = {
+    BasePose.leftArmNeutral: isRightArmNeutral,
+    BasePose.leftArmMiddle: isRightArmMiddle,
+    BasePose.leftArmUp: isRightArmUp,
+    BasePose.rightArmNeutral: isLeftArmNeutral,
+    BasePose.rightArmMiddle: isLeftArmMiddle,
+    BasePose.rightArmUp: isLeftArmUp,
+    BasePose.leftLegNeutral: isRightLegNeutral,
+    BasePose.leftLegUp: isRightLegUp,
+    BasePose.rightLegNeutral: isLeftLegNeutral,
+    BasePose.rightLegUp: isLeftLegUp,
+    BasePose.gap: isGap,
+    BasePose.leftArmUpRightArmMiddle: isLeftArmMiddleRightArmUp,
+    BasePose.leftArmUpRightArmUp: isLeftArmUpRightArmUp,
+    BasePose.leftArmMiddleRightArmUp: isLeftArmUpRightArmMiddle,
     BasePose.leftArmMiddleRightArmMiddle: isLeftArmMiddleRightArmMiddle,
     BasePose.squat: isSquat,
   };

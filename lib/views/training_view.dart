@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/player_controller.dart';
+import 'package:gibalica/controllers/settings_controller.dart';
 import 'package:gibalica/views/training_menu_pages/both_hands_training.dart';
 import 'package:gibalica/views/training_menu_pages/both_legs_training.dart';
 import 'package:gibalica/views/training_menu_pages/everything_training.dart';
@@ -21,7 +22,7 @@ class TrainingView extends StatefulWidget {
 
 class _TrainingViewState extends State<TrainingView> {
   var playerController = Get.find<PlayerController>();
-
+  var settingsController = Get.find<SettingsController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -51,7 +52,7 @@ class _TrainingViewState extends State<TrainingView> {
           ),
           title: AutoSizeText(
             "Trening".tr,
-            style: TextStyle(color: ColorPalette.lightBlue, fontSize: 40, fontWeight: FontWeight.bold),
+            style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.lightBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
           ),
         ),
         body: SingleChildScrollView(

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/player_controller.dart';
 import 'package:gibalica/controllers/pose_controller.dart';
+import 'package:gibalica/controllers/settings_controller.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'dart:core';
@@ -20,6 +21,7 @@ class TrainingInfoView extends StatefulWidget {
 
 class _TrainingInfoViewState extends State<TrainingInfoView> {
   late PoseController poseController;
+  var settingsController = Get.find<SettingsController>();
   double leftArmProgress = 0;
   double rightArmProgress = 0;
   double leftAndRightArmProgress = 0;
@@ -39,7 +41,24 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
 
     legsProgress = (((poseController.posePerformance[GamePlayModes.leftLegUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.rightLegUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightLegUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.legGap] as bool) ? 1 : 0)) / 4;
     legsAndSquatProgress = (legsProgress * 4 + ((poseController.posePerformance[GamePlayModes.squat] as bool) ? 1 : 0)) / 5;
-    allProgress = ((((poseController.posePerformance[GamePlayModes.leftArmUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftArmMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftArmUpAndMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.rightArmUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.rightArmMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.rightArmUpAndMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmMiddle] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmUpAndMiddleSamePosition] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmUpAndMiddleDiffPosition] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightArmAll] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftLegUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.rightLegUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.leftAndRightLegUp] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.legGap] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.squat] as bool) ? 1 : 0) + ((poseController.posePerformance[GamePlayModes.all] as bool) ? 1 : 0)) / 17);
+    allProgress = ((((poseController.posePerformance[GamePlayModes.leftArmUp] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.leftArmMiddle] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.leftArmUpAndMiddle] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.rightArmUp] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.rightArmMiddle] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.rightArmUpAndMiddle] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.leftAndRightArmUp] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.leftAndRightArmMiddle] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.leftAndRightArmUpAndMiddleSamePosition] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.leftAndRightArmUpAndMiddleDiffPosition] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.leftAndRightArmAll] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.leftLegUp] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.rightLegUp] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.leftAndRightLegUp] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.legGap] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.squat] as bool) ? 1 : 0) +
+            ((poseController.posePerformance[GamePlayModes.all] as bool) ? 1 : 0)) /
+        17);
   }
 
   @override
@@ -94,7 +113,11 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                       child: FittedBox(
                         child: AutoSizeText(
                           playerController.playerName as String,
-                          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: ColorPalette.darkBlue),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                            background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -123,8 +146,8 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                           animation: true,
                           percent: legsAndSquatProgress,
                           center: CircularPercentIndicator(
-                          radius: MediaQuery.of(context).size.width * 0.09,
-                          lineWidth: MediaQuery.of(context).size.width * 0.05,
+                            radius: MediaQuery.of(context).size.width * 0.09,
+                            lineWidth: MediaQuery.of(context).size.width * 0.05,
                             animation: true,
                             percent: allProgress,
                             circularStrokeCap: CircularStrokeCap.round,
@@ -148,8 +171,9 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                               child: FittedBox(
                                 child: AutoSizeText("GornjiDioTijela".tr,
                                     textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: ColorPalette.pink,
+                                    style: TextStyle(
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.pink,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
                                       fontWeight: FontWeight.bold,
                                     )),
                               ),
@@ -160,8 +184,9 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                                 child: FittedBox(
                                   child: AutoSizeText(((leftArmProgress + leftAndRightArmProgress + rightArmProgress) / 3 * 100).toInt().toString() + " %",
                                       textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        color: ColorPalette.darkBlue,
+                                      style: TextStyle(
+                                        color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                        background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
                                         fontWeight: FontWeight.normal,
                                       )),
                                 ),
@@ -171,8 +196,9 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                               child: FittedBox(
                                 child: AutoSizeText("DonjiDioTijela".tr,
                                     textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: ColorPalette.yellow,
+                                    style: TextStyle(
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.yellow,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
                                       fontWeight: FontWeight.bold,
                                     )),
                               ),
@@ -183,8 +209,9 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                                 child: FittedBox(
                                   child: AutoSizeText((legsAndSquatProgress * 100).toInt().toString() + " %",
                                       textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        color: ColorPalette.darkBlue,
+                                      style: TextStyle(
+                                        color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                        background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
                                         fontWeight: FontWeight.normal,
                                       )),
                                 ),
@@ -194,8 +221,9 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                               child: FittedBox(
                                 child: AutoSizeText("Sve".tr,
                                     textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: ColorPalette.green,
+                                    style: TextStyle(
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.green,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
                                       fontWeight: FontWeight.bold,
                                     )),
                               ),
@@ -206,8 +234,9 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                                 child: FittedBox(
                                   child: AutoSizeText((allProgress * 100).toInt().toString() + " %",
                                       textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        color: ColorPalette.darkBlue,
+                                      style: TextStyle(
+                                        color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                        background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
                                         fontWeight: FontWeight.normal,
                                       )),
                                 ),
@@ -236,7 +265,13 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                               child: Column(
                                 children: [
                                   Expanded(
-                                    child: FittedBox(child: AutoSizeText("LijevaRuka".tr, textAlign: TextAlign.center, style: const TextStyle(color: ColorPalette.darkBlue))),
+                                    child: FittedBox(
+                                        child: AutoSizeText("LijevaRuka".tr,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                              background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                            ))),
                                   ),
                                   Expanded(
                                     child: LinearPercentIndicator(
@@ -255,7 +290,13 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                               child: Column(
                                 children: [
                                   Expanded(
-                                    child: FittedBox(child: AutoSizeText("DesnaRuka".tr, textAlign: TextAlign.center, style: const TextStyle(color: ColorPalette.darkBlue))),
+                                    child: FittedBox(
+                                        child: AutoSizeText("DesnaRuka".tr,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                              background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                            ))),
                                   ),
                                   Expanded(
                                     child: LinearPercentIndicator(
@@ -278,7 +319,10 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                                       child: AutoSizeText(
                                         "LijevaIDesnaRuka".tr,
                                         textAlign: TextAlign.center,
-                                        style: const TextStyle(color: ColorPalette.darkBlue),
+                                        style: TextStyle(
+                                          color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                          background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -306,7 +350,13 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                               child: Column(
                                 children: [
                                   Expanded(
-                                    child: FittedBox(child: AutoSizeText("Noge".tr, textAlign: TextAlign.center, style: const TextStyle(color: ColorPalette.darkBlue))),
+                                    child: FittedBox(
+                                        child: AutoSizeText("Noge".tr,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                              background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                            ))),
                                   ),
                                   Expanded(
                                     child: LinearPercentIndicator(
@@ -325,7 +375,13 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                               child: Column(
                                 children: [
                                   Expanded(
-                                    child: FittedBox(child: AutoSizeText("NogeIČučanj".tr, textAlign: TextAlign.center, style: const TextStyle(color: ColorPalette.darkBlue))),
+                                    child: FittedBox(
+                                        child: AutoSizeText("NogeIČučanj".tr,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                              background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                            ))),
                                   ),
                                   Expanded(
                                     child: LinearPercentIndicator(
@@ -344,7 +400,13 @@ class _TrainingInfoViewState extends State<TrainingInfoView> {
                               child: Column(
                                 children: [
                                   Expanded(
-                                    child: FittedBox(child: AutoSizeText("Sve".tr, textAlign: TextAlign.center, style: const TextStyle(color: ColorPalette.darkBlue))),
+                                    child: FittedBox(
+                                        child: AutoSizeText("Sve".tr,
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                              background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                            ))),
                                   ),
                                   Expanded(
                                     child: LinearPercentIndicator(

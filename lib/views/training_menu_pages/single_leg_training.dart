@@ -8,6 +8,8 @@ import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/training_popup.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../controllers/settings_controller.dart';
+
 class SingleLegTraining extends StatefulWidget {
   const SingleLegTraining({Key? key}) : super(key: key);
 
@@ -17,6 +19,7 @@ class SingleLegTraining extends StatefulWidget {
 
 class _SingleLegTrainingState extends State<SingleLegTraining> {
   final GameController gameController = Get.find<GameController>();
+  var settingsController = Get.find<SettingsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,8 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
             Expanded(
               child: AutoSizeText(
                 "Noge".tr,
-                style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 30, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
           ]),
@@ -84,7 +88,8 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                           child: AutoSizeText(
                             "LijevaUVis".tr,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                            style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -109,7 +114,7 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                               gameController.gameType.value = GameType.personal;
                               gameController.currentMode = GamePlayModes.rightLegUp;
 
-                              return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Desna noga u vis')));
+                              return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Desna noga - u vis')));
                             },
                           );
                         },
@@ -134,7 +139,8 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                           child: AutoSizeText(
                             "DesnaUVis".tr,
                             textAlign: TextAlign.center,
-                            style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                            style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),

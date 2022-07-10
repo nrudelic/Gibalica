@@ -5,11 +5,14 @@ import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../controllers/settings_controller.dart';
+
 class Onboarding1 extends StatelessWidget {
   const Onboarding1({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  var settingsController = Get.find<SettingsController>();
+
     return Column(
       children: [
         Expanded(
@@ -23,7 +26,9 @@ class Onboarding1 extends StatelessWidget {
             child: AutoSizeText(
               "appsluzi".tr,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
+              style: TextStyle(fontSize: 40, 
+                                        color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,),
             ),
           ),
         )

@@ -24,7 +24,7 @@ class MeetupView extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: Padding(
-                    padding: EdgeInsets.only(top:MediaQuery.of(context).size.height * 0.05),
+                    padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
                     child: SvgPicture.asset('assets/Gibalica_hello_white_circle.svg'),
                   ),
                 ),
@@ -34,7 +34,11 @@ class MeetupView extends StatelessWidget {
                     child: AutoSizeText(
                       "SadaKadaZnašŠtoTeSveČekaMožemoKrenuti".tr,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 40, color: Colors.white),
+                      style: TextStyle(
+                        fontSize: 40,
+                        color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                        background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -54,7 +58,11 @@ class MeetupView extends StatelessWidget {
                       child: AutoSizeText(
                         "UpoznajmoSe".tr,
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 30, color: Color.fromRGBO(36, 80, 128, 1)),
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                          background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                        ),
                       ),
                     ),
                   ),

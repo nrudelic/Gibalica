@@ -6,6 +6,8 @@ import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/player_controller.dart';
 import 'package:gibalica/main.dart';
 
+import '../../controllers/settings_controller.dart';
+
 class Screening3 extends StatefulWidget {
   const Screening3({Key? key}) : super(key: key);
 
@@ -15,6 +17,7 @@ class Screening3 extends StatefulWidget {
 
 class _Screening3State extends State<Screening3> {
   var playerController = Get.find<PlayerController>();
+  var settingsController = Get.find<SettingsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,8 @@ class _Screening3State extends State<Screening3> {
             padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
             child: AutoSizeText(
               "KojiProgramVježbeŽeliš".tr,
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,),
             ),
           ),
         ),
@@ -36,7 +40,8 @@ class _Screening3State extends State<Screening3> {
           flex: 1,
           child: AutoSizeText(
             "OdaberiProgram".tr,
-            style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
+            style: TextStyle(fontSize: 30, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,),
           ),
         ),
         Expanded(
@@ -82,7 +87,8 @@ class _Screening3State extends State<Screening3> {
                     ),
                     Expanded(flex: 2, child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Center(child: AutoSizeText("Cijeli".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))),
+                      child: Center(child: AutoSizeText("Cijeli".tr, style: TextStyle(fontSize: 28, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,))),
                     ))
                   ],
                 ),
@@ -115,7 +121,8 @@ class _Screening3State extends State<Screening3> {
                     ),
                     Expanded(flex: 4, child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Center(child: AutoSizeText("Prilagođeni".tr, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))),
+                      child: Center(child: AutoSizeText("Prilagođeni".tr, style: TextStyle(fontSize: 28,color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,))),
                     ))
                   ],
                 ),

@@ -4,11 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/game_controller.dart';
+import 'package:gibalica/controllers/settings_controller.dart';
 import 'package:gibalica/views/day_night_menu_view.dart';
 import 'package:gibalica/views/profile_view.dart';
 import 'package:gibalica/views/repeating_menu_view.dart';
 import 'package:gibalica/views/settings_view.dart';
-import 'package:gibalica/views/training_info_view.dart';
 import 'package:gibalica/views/training_view.dart';
 
 import '../controllers/player_controller.dart';
@@ -18,7 +18,7 @@ class MainScreen extends StatelessWidget {
 
   var playerController = Get.find<PlayerController>();
   var gameController = Get.find<GameController>();
-
+  var settingsController = Get.find<SettingsController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -89,74 +89,83 @@ class MainScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            gameController.gameMode = GameMode.training;
-                            Get.to(
-                              () => const TrainingView(),
-                              transition: Transition.fadeIn,
-                            );
-                          },
-                          child: Stack(
-                            children: [
-                              Positioned.fill(child: SvgPicture.asset("assets/training_menu.svg")),
-                              Positioned(
-                                child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(left: constraints.maxWidth * 0.12, right: constraints.maxWidth * 0.40, top: constraints.maxHeight * 0.3, bottom: constraints.maxHeight * 0.3),
-                                    child: Center(child: FittedBox(child: AutoSizeText("Trening".tr, style: const TextStyle(fontSize: 30,color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)))),
-                                  );
-                                }),
-                              )
-                            ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              gameController.gameMode = GameMode.training;
+                              Get.to(
+                                () => const TrainingView(),
+                                transition: Transition.fadeIn,
+                              );
+                            },
+                            child: Stack(
+                              children: [
+                                Positioned.fill(child: SvgPicture.asset("assets/training_menu.svg")),
+                                Positioned(
+                                  child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(left: constraints.maxWidth * 0.12, right: constraints.maxWidth * 0.40, top: constraints.maxHeight * 0.3, bottom: constraints.maxHeight * 0.3),
+                                      child: Center(child: FittedBox(child: AutoSizeText("Trening".tr, style: TextStyle(fontSize: 30, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0), fontWeight: FontWeight.bold)))),
+                                    );
+                                  }),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
                       Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            gameController.gameMode = GameMode.dayAndNight;
-                            Get.to(
-                              () => const DayAndNightMenuView(),
-                              transition: Transition.fadeIn,
-                            );
-                          },
-                          child: Stack(
-                            children: [
-                              Positioned.fill(child: SvgPicture.asset("assets/day_night_menu.svg")),
-                              Positioned(
-                                child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(right: constraints.maxWidth * 0.12, left: constraints.maxWidth * 0.27, top: constraints.maxHeight * 0.3, bottom: constraints.maxHeight * 0.3),
-                                    child: Center(child: FittedBox(child: AutoSizeText("DanINoć".tr, style: const TextStyle(fontSize: 30,color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)))),
-                                  );
-                                }),
-                              )
-                            ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              gameController.gameMode = GameMode.dayAndNight;
+                              Get.to(
+                                () => const DayAndNightMenuView(),
+                                transition: Transition.fadeIn,
+                              );
+                            },
+                            child: Stack(
+                              children: [
+                                Positioned.fill(child: SvgPicture.asset("assets/day_night_menu.svg")),
+                                Positioned(
+                                  child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(right: constraints.maxWidth * 0.12, left: constraints.maxWidth * 0.27, top: constraints.maxHeight * 0.3, bottom: constraints.maxHeight * 0.3),
+                                      child: Center(child: FittedBox(child: AutoSizeText("DanINoć".tr, style: TextStyle(fontSize: 30, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0), fontWeight: FontWeight.bold)))),
+                                    );
+                                  }),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),
                       Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            gameController.gameMode = GameMode.repeating;
-                            Get.to(
-                              () => const RepeatingMenuView(),
-                              transition: Transition.fadeIn,
-                            );
-                          },
-                          child: Stack(
-                            children: [
-                              Positioned.fill(child: SvgPicture.asset("assets/repeating_menu.svg")),
-                              Positioned(
-                                child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(left: constraints.maxWidth * 0.12, right: constraints.maxWidth * 0.34, top: constraints.maxHeight * 0.3, bottom: constraints.maxHeight * 0.3),
-                                    child: Center(child: FittedBox(child: AutoSizeText("PONAVLJANJE1".tr, style: const TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold)))),
-                                  );
-                                }),
-                              )
-                            ],
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              gameController.gameMode = GameMode.repeating;
+                              Get.to(
+                                () => const RepeatingMenuView(),
+                                transition: Transition.fadeIn,
+                              );
+                            },
+                            child: Stack(
+                              children: [
+                                Positioned.fill(child: SvgPicture.asset("assets/repeating_menu.svg")),
+                                Positioned(
+                                  child: LayoutBuilder(builder: (BuildContext context, BoxConstraints constraints) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(left: constraints.maxWidth * 0.12, right: constraints.maxWidth * 0.34, top: constraints.maxHeight * 0.3, bottom: constraints.maxHeight * 0.3),
+                                      child: Center(child: FittedBox(child: AutoSizeText("PONAVLJANJE1".tr, style: TextStyle(fontSize: 30,  color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0), fontWeight: FontWeight.bold)))),
+                                    );
+                                  }),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       ),

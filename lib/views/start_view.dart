@@ -3,14 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
+import 'package:gibalica/controllers/settings_controller.dart';
 
 import 'onboarding_pages.dart';
 
 class StartView extends StatelessWidget {
   const StartView({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    var settingsController = Get.find<SettingsController>();
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: ColorPalette.lightBlue,
@@ -29,13 +31,23 @@ class StartView extends StatelessWidget {
                       Expanded(
                         child: AutoSizeText(
                           "Gibalica".tr,
-                          style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
+                          style: TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.bold,
+                            color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                            background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                          ),
                         ),
                       ),
                       Expanded(
                         child: AutoSizeText(
                           "KažeBok".tr,
-                          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
+                          style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                            background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                          ),
                         ),
                       ),
                     ],
@@ -53,7 +65,11 @@ class StartView extends StatelessWidget {
                       child: AutoSizeText(
                         "Veselim se našem druženju kroz vježbu",
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 30, color: Colors.white),
+                        style: TextStyle(
+                          fontSize: 30,
+                          color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                          background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -92,7 +108,7 @@ class StartView extends StatelessWidget {
                       decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(50)), color: Colors.white),
                       child: AutoSizeText(
                         "Kreni".tr,
-                        style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
+                        style: TextStyle(fontSize: 30, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0)),
                       ),
                     ),
                   ),

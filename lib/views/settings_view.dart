@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/settings_controller.dart';
+import 'package:gibalica/views/main_screen_view.dart';
 import 'package:gibalica/views/onboarding_pages.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,7 +33,10 @@ class _SettingsViewState extends State<SettingsView> {
             padding: const EdgeInsets.only(left: 10.0),
             child: GestureDetector(
               onTap: () {
-                Get.back();
+                setState(() {
+                  
+                });
+                Get.offAll(() => MainScreen());
               },
               child: Container(
                 decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.darkBlue),
@@ -47,7 +51,7 @@ class _SettingsViewState extends State<SettingsView> {
           ),
           title: AutoSizeText(
             "Postavke".tr,
-            style: TextStyle(color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.pink, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
+            style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.pink, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
           ),
         ),
         body: Container(
@@ -62,7 +66,7 @@ class _SettingsViewState extends State<SettingsView> {
                   padding: EdgeInsets.only(bottom: 25.0),
                   child: AutoSizeText(
                     "IspisKartica".tr,
-                    style: TextStyle(fontSize: 25, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white),
+                    style: TextStyle(fontSize: 25, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white),
                   ),
                 ),
                 SizedBox(
@@ -91,13 +95,13 @@ class _SettingsViewState extends State<SettingsView> {
                 FittedBox(
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 20.0),
-                    child: AutoSizeText("OpcijePrilagodbi".tr, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                    child: AutoSizeText("OpcijePrilagodbi".tr, style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white)),
                   ),
                 ),
                 FittedBox(
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 25.0),
-                    child: AutoSizeText("PromjenaIzgledaAplikacije".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                    child: AutoSizeText("PromjenaIzgledaAplikacije".tr, style: TextStyle(fontSize: 20, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white)),
                   ),
                 ),
                 SizedBox(
@@ -110,8 +114,8 @@ class _SettingsViewState extends State<SettingsView> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            settingsController.isLightMode.value = false;
-                            settingsController.gibalicaBox.put("isLightMode", false);
+                            settingsController.isNormalContrast.value = true;
+                            settingsController.gibalicaBox.put("isNormalContrast", true);
                             setState(() {});
                           },
                           child: Obx(
@@ -122,7 +126,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 border: Border.all(
                                   color: Colors.blue,
                                 ),
-                                color: settingsController.isLightMode.isTrue ? Colors.white : ColorPalette.darkBlue,
+                                color: settingsController.isNormalContrast.isTrue ? ColorPalette.darkBlue : Colors.white,
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
@@ -133,14 +137,14 @@ class _SettingsViewState extends State<SettingsView> {
                             padding: const EdgeInsets.all(8.0),
                             child: AutoSizeText(
                               "Normalan kontrast".tr,
-                              style: TextStyle(fontSize: 15, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white),
+                              style: TextStyle(fontSize: 15, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white),
                             ),
                           ),
                         ),
                         GestureDetector(
                           onTap: () {
-                            settingsController.isLightMode.value = true;
-                            settingsController.gibalicaBox.put("isLightMode", true);
+                            settingsController.isNormalContrast.value = false;
+                            settingsController.gibalicaBox.put("isNormalContrast", false);
                             setState(() {});
                           },
                           child: Obx(
@@ -151,7 +155,7 @@ class _SettingsViewState extends State<SettingsView> {
                                 border: Border.all(
                                   color: Colors.blue,
                                 ),
-                                color: settingsController.isLightMode.isTrue ? ColorPalette.darkBlue : Colors.white,
+                                color: settingsController.isNormalContrast.isTrue ? Colors.white : ColorPalette.darkBlue,
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
                             ),
@@ -160,7 +164,7 @@ class _SettingsViewState extends State<SettingsView> {
                         Expanded(
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: AutoSizeText("Povećan kontrast".tr, style: TextStyle(fontSize: 15, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                            child: AutoSizeText("Povećan kontrast".tr, style: TextStyle(fontSize: 15, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white)),
                           ),
                         )
                       ],
@@ -170,7 +174,7 @@ class _SettingsViewState extends State<SettingsView> {
                 FittedBox(
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 20.0),
-                    child: AutoSizeText("PromjenaVeličineTeksta".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                    child: AutoSizeText("PromjenaVeličineTeksta".tr, style: TextStyle(fontSize: 20, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white)),
                   ),
                 ),
                 SizedBox(
@@ -218,7 +222,7 @@ class _SettingsViewState extends State<SettingsView> {
                 FittedBox(
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 20.0),
-                    child: AutoSizeText("VrstaSlova".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                    child: AutoSizeText("VrstaSlova".tr, style: TextStyle(fontSize: 20, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white)),
                   ),
                 ),
                 SizedBox(
@@ -282,7 +286,7 @@ class _SettingsViewState extends State<SettingsView> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 25.0),
-                  child: AutoSizeText("Zvuk".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                  child: AutoSizeText("Zvuk".tr, style: TextStyle(fontSize: 20, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white)),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
@@ -344,7 +348,7 @@ class _SettingsViewState extends State<SettingsView> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 25.0),
-                  child: AutoSizeText("PromjenaJezika".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                  child: AutoSizeText("PromjenaJezika".tr, style: TextStyle(fontSize: 20, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white)),
                 ),
                 SizedBox(
                   width: MediaQuery.of(context).size.width,
@@ -427,9 +431,10 @@ class _SettingsViewState extends State<SettingsView> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(bottom: 25.0),
-                  child: AutoSizeText("InformacijeOAplikaciji".tr, style: TextStyle(fontSize: 20, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                  child: AutoSizeText("InformacijeOAplikaciji".tr, style: TextStyle(fontSize: 20, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white)),
                 ),
-                SizedBox(
+                Container(
+                  padding: EdgeInsets.only(bottom: 10),
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.1,
                   child: Row(
@@ -437,11 +442,11 @@ class _SettingsViewState extends State<SettingsView> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
-                        flex: 3,
+                        flex: 4,
                         child: Center(
                           child: Padding(
                             padding: const EdgeInsets.only(right: 8.0),
-                            child: AutoSizeText("PonovnoUpoznajAplikaciju".tr, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: settingsController.isLightMode.isTrue ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isLightMode.isTrue ? Colors.black : Colors.white)),
+                            child: AutoSizeText("PonovnoUpoznajAplikaciju".tr, style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white)),
                           ),
                         ),
                       ),
@@ -456,7 +461,7 @@ class _SettingsViewState extends State<SettingsView> {
                               );
                             },
                             child: Container(
-                              padding: const EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(5),
                               decoration: const BoxDecoration(shape: BoxShape.circle, color: ColorPalette.green),
                               child: Center(
                                   child: Icon(

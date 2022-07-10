@@ -9,6 +9,8 @@ import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/training_popup.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../controllers/settings_controller.dart';
+
 class BothLegsTraining extends StatefulWidget {
   const BothLegsTraining({Key? key}) : super(key: key);
 
@@ -19,6 +21,8 @@ class BothLegsTraining extends StatefulWidget {
 class _BothLegsTrainingState extends State<BothLegsTraining> {
   final GameController gameController = Get.find<GameController>();
   final PlayerController playerController = Get.find<PlayerController>();
+    var settingsController = Get.find<SettingsController>();
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -33,9 +37,10 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
             Expanded(
               child: Center(
                 child: AutoSizeText(
-                  "Obje Noge",
+                  "Obje Noge".tr,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 30, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
@@ -89,7 +94,8 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                                     child: AutoSizeText(
                                       "LijevaIliDesnaUVis".tr,
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                                      style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
@@ -149,7 +155,8 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                                     child: AutoSizeText(
                                       "Raskorak".tr,
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                                      style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
@@ -198,7 +205,8 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                                     child: AutoSizeText(
                                       "Čučanj".tr,
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                                      style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),

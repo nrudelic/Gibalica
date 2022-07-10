@@ -9,6 +9,7 @@ import 'package:gibalica/controllers/camera_view_controller.dart';
 import 'package:gibalica/controllers/device_controller.dart';
 import 'package:gibalica/controllers/game_controller.dart';
 import 'package:gibalica/controllers/pose_controller.dart';
+import 'package:gibalica/controllers/settings_controller.dart';
 import 'package:gibalica/helpers/pose_calculator.dart';
 import 'package:gibalica/main.dart';
 import 'package:gibalica/models/pose_model.dart';
@@ -31,7 +32,7 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
   CameraViewController cameraViewController = Get.find<CameraViewController>();
   PoseCalculationHelper poseCalculationHelper = PoseCalculationHelper();
   GameController gameController = Get.find<GameController>();
-
+  SettingsController settingsController = Get.find<SettingsController>();
   bool isBusy = false;
   CustomPaint? customPaint;
   DateTime? timestamp;

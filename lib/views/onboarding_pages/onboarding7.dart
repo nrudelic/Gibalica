@@ -4,12 +4,14 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../color_palette.dart';
+import '../../controllers/settings_controller.dart';
 
 class Onboarding7 extends StatelessWidget {
   const Onboarding7({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  var settingsController = Get.find<SettingsController>();
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -27,7 +29,8 @@ class Onboarding7 extends StatelessWidget {
                     child: AutoSizeText(
                       "Ponavljanje".tr,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+                      style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,),
                     ),
                   ),
                 ),
@@ -37,7 +40,8 @@ class Onboarding7 extends StatelessWidget {
                     child: AutoSizeText(
                       "IgraPamćenjaRedoslijedaVježbi".tr,
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 40, color: ColorPalette.darkBlue),
+                      style: TextStyle(fontSize: 40, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,),
                     ),
                   ),
                 ),

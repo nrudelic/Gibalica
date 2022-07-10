@@ -92,7 +92,12 @@ class _ProfileViewState extends State<ProfileView> {
                     child: FittedBox(
                       child: AutoSizeText(
                         playerController.playerName as String,
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: ColorPalette.darkBlue),
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 30,
+                          color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                          background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -114,7 +119,13 @@ class _ProfileViewState extends State<ProfileView> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         FittedBox(
-                          child: AutoSizeText("PodatciOVježbanju".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)),
+                          child: AutoSizeText("PodatciOVježbanju".tr,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 28,
+                                color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                              )),
                         ),
                         FittedBox(
                           child: TextButton(
@@ -130,7 +141,11 @@ class _ProfileViewState extends State<ProfileView> {
                               decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30)), color: ColorPalette.lightBlue),
                               child: AutoSizeText(
                                 "KlikniZaViše".tr,
-                                style: TextStyle(fontSize: 20, color: Colors.white),
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                                  background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0),
+                                ),
                               ),
                             ),
                           ),
@@ -168,7 +183,20 @@ class _ProfileViewState extends State<ProfileView> {
                                   );
                                 }),
                               ),
-                              Expanded(flex: 1, child: FittedBox(child: AutoSizeText("LijevaRuka".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                              Expanded(
+                                flex: 1,
+                                child: FittedBox(
+                                  child: AutoSizeText(
+                                    "LijevaRuka".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -187,7 +215,20 @@ class _ProfileViewState extends State<ProfileView> {
                                   );
                                 }),
                               ),
-                              Expanded(flex: 1, child: FittedBox(child: AutoSizeText("DesnaRuka".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                              Expanded(
+                                flex: 1,
+                                child: FittedBox(
+                                  child: AutoSizeText(
+                                    "DesnaRuka".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -213,7 +254,20 @@ class _ProfileViewState extends State<ProfileView> {
                                   );
                                 }),
                               ),
-                              Expanded(flex: 1, child: FittedBox(child: AutoSizeText("Čučanj".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                              Expanded(
+                                flex: 1,
+                                child: FittedBox(
+                                  child: AutoSizeText(
+                                    "Čučanj".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -239,7 +293,20 @@ class _ProfileViewState extends State<ProfileView> {
                                   );
                                 }),
                               ),
-                              Expanded(flex: 1, child: FittedBox(child: AutoSizeText("LijevaNoga".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                              Expanded(
+                                flex: 1,
+                                child: FittedBox(
+                                  child: AutoSizeText(
+                                    "LijevaNoga".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         ),
@@ -258,7 +325,20 @@ class _ProfileViewState extends State<ProfileView> {
                                   );
                                 }),
                               ),
-                              Expanded(flex: 1, child: FittedBox(child: AutoSizeText("DesnaNoga".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue))))
+                              Expanded(
+                                flex: 1,
+                                child: FittedBox(
+                                  child: AutoSizeText(
+                                    "DesnaNoga".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),

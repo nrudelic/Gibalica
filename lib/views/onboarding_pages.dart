@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
+import 'package:gibalica/controllers/settings_controller.dart';
 import 'package:gibalica/views/onboarding_pages/onboarding1.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -25,7 +26,7 @@ class OnboardingPages extends StatefulWidget {
 class _OnboardingPagesState extends State<OnboardingPages> {
   final controller = PageController();
   bool isLastPage = false;
-
+  var settingsController = Get.find<SettingsController>();
   @override
   void dispose() {
     controller.dispose();
@@ -57,7 +58,11 @@ class _OnboardingPagesState extends State<OnboardingPages> {
                 padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.05),
                 child: AutoSizeText(
                   "Preskoči".tr,
-                  style: TextStyle(fontSize: 20, color: ColorPalette.darkBlue),
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                  ),
                 ),
               ),
             )

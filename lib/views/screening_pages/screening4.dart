@@ -36,14 +36,23 @@ class _Screening4State extends State<Screening4> {
                   padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
                   child: AutoSizeText(
                     "PrilagodiSvojTrening".tr,
-                    style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                    ),
                   ),
                 ),
               ),
               Expanded(
                 child: AutoSizeText(
                   "OdaberiVježbe".tr,
-                  style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
+                  style: TextStyle(
+                    fontSize: 30,
+                    color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                  ),
                 ),
               ),
             ],
@@ -78,17 +87,27 @@ class _Screening4State extends State<Screening4> {
                               }),
                             ),
                           ),
-                          Expanded(flex: 1, child: FittedBox(child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: AutoSizeText("LijevaRuka".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)),
-                          )))
+                          Expanded(
+                              flex: 1,
+                              child: FittedBox(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: AutoSizeText("LijevaRuka".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                    )),
+                              )))
                         ],
                       ),
                     ),
                     Expanded(
                       child: Column(
                         children: [
-                          Expanded(flex: 3, 
+                          Expanded(
+                            flex: 3,
                             child: GestureDetector(
                               onTap: () {
                                 playerController.rightHandPref.value = !playerController.rightHandPref.value;
@@ -105,10 +124,19 @@ class _Screening4State extends State<Screening4> {
                               }),
                             ),
                           ),
-                          Expanded(flex: 1, child: FittedBox(child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: AutoSizeText("DesnaRuka".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)),
-                          )))
+                          Expanded(
+                              flex: 1,
+                              child: FittedBox(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: AutoSizeText("DesnaRuka".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                    )),
+                              )))
                         ],
                       ),
                     ),
@@ -122,7 +150,8 @@ class _Screening4State extends State<Screening4> {
                     Expanded(
                       child: Column(
                         children: [
-                          Expanded(flex: 3, 
+                          Expanded(
+                            flex: 3,
                             child: GestureDetector(
                               onTap: () {
                                 playerController.squatPref.value = !playerController.squatPref.value;
@@ -139,10 +168,18 @@ class _Screening4State extends State<Screening4> {
                               }),
                             ),
                           ),
-                          Expanded(flex: 1, child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: AutoSizeText("Čučanj".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)),
-                          ))
+                          Expanded(
+                              flex: 1,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: AutoSizeText("Čučanj".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                    )),
+                              ))
                         ],
                       ),
                     ),
@@ -156,7 +193,8 @@ class _Screening4State extends State<Screening4> {
                     Expanded(
                       child: Column(
                         children: [
-                          Expanded(flex: 3, 
+                          Expanded(
+                            flex: 3,
                             child: GestureDetector(
                               onTap: () {
                                 playerController.leftLegPref.value = !playerController.leftLegPref.value;
@@ -173,17 +211,27 @@ class _Screening4State extends State<Screening4> {
                               }),
                             ),
                           ),
-                          Expanded(flex: 1, child: FittedBox(child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: AutoSizeText("LijevaNoga".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)),
-                          )))
+                          Expanded(
+                              flex: 1,
+                              child: FittedBox(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: AutoSizeText("LijevaNoga".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                    )),
+                              )))
                         ],
                       ),
                     ),
                     Expanded(
                       child: Column(
                         children: [
-                          Expanded(flex: 3, 
+                          Expanded(
+                            flex: 3,
                             child: GestureDetector(
                               onTap: () {
                                 playerController.rightLegPref.value = !playerController.rightLegPref.value;
@@ -200,10 +248,19 @@ class _Screening4State extends State<Screening4> {
                               }),
                             ),
                           ),
-                          Expanded(flex: 1, child: FittedBox(child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: AutoSizeText("DesnaNoga".tr, textAlign: TextAlign.center, style: TextStyle(fontSize: 28, color: ColorPalette.darkBlue)),
-                          )))
+                          Expanded(
+                              flex: 1,
+                              child: FittedBox(
+                                  child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: AutoSizeText("DesnaNoga".tr,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 28,
+                                      color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                                      background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                                    )),
+                              )))
                         ],
                       ),
                     ),

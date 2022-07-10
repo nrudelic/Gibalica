@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/color_palette.dart';
+import 'package:gibalica/constants.dart';
 import 'package:gibalica/controllers/game_controller.dart';
+import 'package:gibalica/controllers/settings_controller.dart';
 import 'package:gibalica/widgets/pose_detector_view.dart';
 
 Widget buildPopupDialog(GameController gameController, StateSetter setState, String title) {
+  var settingsController = Get.find<SettingsController>();
+
+  title = resolveTitle(title, settingsController.language.value, settingsController.isUppercase.value);
   return SimpleDialog(
     backgroundColor: ColorPalette.darkBlue,
     shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(30))),
@@ -15,7 +20,8 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
           Text(
             title,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 25, color: Colors.white),
+            style: TextStyle(fontSize: 25, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0),),
           ),
           const Divider(
             thickness: 2,
@@ -31,7 +37,8 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
             child: Text(
               "BrojPonavljanjaVježbe".tr,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 20, color: Colors.white),
+              style:  TextStyle(fontSize: 20, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0)),
             ),
           ),
           Row(
@@ -50,9 +57,10 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
                           Radius.circular(15),
                         ),
                         color: (gameController.repeatNumber.value == 1 ? ColorPalette.lightBlue : const Color.fromRGBO(26, 63, 103, 1))),
-                    child: const Text(
+                    child:  Text(
                       '1',
-                      style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 25, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0), fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -70,9 +78,10 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
                           Radius.circular(15),
                         ),
                         color: (gameController.repeatNumber.value == 3 ? ColorPalette.lightBlue : const Color.fromRGBO(26, 63, 103, 1))),
-                    child: const Text(
+                    child:  Text(
                       '3',
-                      style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 25, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0), fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -90,9 +99,10 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
                           Radius.circular(15),
                         ),
                         color: (gameController.repeatNumber.value == 5 ? ColorPalette.lightBlue : const Color.fromRGBO(26, 63, 103, 1))),
-                    child: const Text(
+                    child:  Text(
                       '5',
-                      style: TextStyle(fontSize: 25, color: Colors.white, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 25, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0), fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -121,7 +131,8 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
                         color: (gameController.gameType.value == GameType.personal ? ColorPalette.pink : const Color.fromRGBO(26, 63, 103, 1))),
                     child: Text(
                       "Mene".tr,
-                      style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                      style:  TextStyle(fontSize: 20, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0), fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -141,7 +152,8 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
                         color: (gameController.gameType.value == GameType.cards ? ColorPalette.pink : const Color.fromRGBO(26, 63, 103, 1))),
                     child: Text(
                       "Kartice".tr,
-                      style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                      style:  TextStyle(fontSize: 20, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0), fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -162,7 +174,8 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
               decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15)), color: ColorPalette.green),
               child: Text(
                 "Igraj".tr,
-                style: const TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                style:  TextStyle(fontSize: 20, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0), fontWeight: FontWeight.bold),
               ),
             ),
           ),
@@ -170,4 +183,17 @@ Widget buildPopupDialog(GameController gameController, StateSetter setState, Str
       )
     ],
   );
+}
+
+String resolveTitle(String title, Language language, bool isUpper) {
+  String ret = title;
+
+  if (language == Language.English) {
+    ret = TrainingTitleEnglish[title]!;
+  }
+
+  if (isUpper) {
+    return ret.toUpperCase();
+  }
+  return ret;
 }

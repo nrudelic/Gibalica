@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:gibalica/controllers/game_controller.dart';
+import 'package:gibalica/controllers/settings_controller.dart';
 import 'package:gibalica/widgets/pose_detector_view.dart';
 
 import '../color_palette.dart';
@@ -16,7 +17,7 @@ class RepeatingMenuView extends StatefulWidget {
 
 class _RepeatingMenuViewState extends State<RepeatingMenuView> {
   var gameController = Get.find<GameController>();
-
+  var settingsController = Get.find<SettingsController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -47,7 +48,7 @@ class _RepeatingMenuViewState extends State<RepeatingMenuView> {
           title: FittedBox(
             child: AutoSizeText(
               "Ponavljanje".tr,
-              style: TextStyle(color: ColorPalette.lightBlue, fontSize: 40, fontWeight: FontWeight.bold),
+              style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.lightBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
             ),
           ),
         ),
@@ -67,7 +68,9 @@ class _RepeatingMenuViewState extends State<RepeatingMenuView> {
                         "KolikoDugoŽelišVježbati".tr,
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: ColorPalette.darkBlue,
+                                              color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+
                           fontSize: 35,
                           fontWeight: FontWeight.normal,
                         ),
@@ -169,7 +172,9 @@ class _RepeatingMenuViewState extends State<RepeatingMenuView> {
                       "GibalicaGleda".tr,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        color: ColorPalette.darkBlue,
+                                            color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+
                         fontSize: 35,
                         fontWeight: FontWeight.normal,
                       ),
@@ -195,8 +200,11 @@ class _RepeatingMenuViewState extends State<RepeatingMenuView> {
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: gameController.gameType.value == GameType.personal ? ColorPalette.pink : ColorPalette.darkBlue),
                                 child: AutoSizeText(
-                                  "Mene".tr,textScaleFactor:1,
-                                  style: TextStyle(color: Colors.white, fontSize: 30),
+                                  "Mene".tr,
+                                  textScaleFactor: 1,
+                                  style: TextStyle(                    color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0),
+ fontSize: 30),
                                 ),
                               ),
                             ),
@@ -220,8 +228,11 @@ class _RepeatingMenuViewState extends State<RepeatingMenuView> {
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(10)), color: gameController.gameType.value == GameType.cards ? ColorPalette.pink : ColorPalette.darkBlue),
                                 child: AutoSizeText(
-                                  "Kartice".tr,textScaleFactor:1,
-                                  style: TextStyle(color: Colors.white, fontSize: 30),
+                                  "Kartice".tr,
+                                  textScaleFactor: 1,
+                                  style: TextStyle(                    color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0),
+ fontSize: 30),
                                 ),
                               ),
                             ),
@@ -250,8 +261,11 @@ class _RepeatingMenuViewState extends State<RepeatingMenuView> {
                     padding: const EdgeInsets.all(10),
                     decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(30)), color: ColorPalette.green),
                     child: AutoSizeText(
-                      "IGRAJ".tr, textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white,fontSize: 30),
+                      "IGRAJ".tr,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(                    color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white.withOpacity(0),
+ fontSize: 30),
                     ),
                   ),
                 ),

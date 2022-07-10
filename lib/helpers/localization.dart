@@ -4,6 +4,15 @@ class Localization extends Translations {
   @override
   Map<String, Map<String, String>> get keys => {
         'hr_HR': {
+          "Ruke i Noge": "Ruke i Noge",
+          "Obje Noge": "Obje Noge",
+          "Lijeva i Desna ruka": "Lijeva i Desna ruka",
+          "Desna ruka": "Desna ruka",
+          "Lijeva ruka": "Lijeva ruka",
+          "Prilagođeni": "Prilagođeni",
+          "Cijeli": "Cijeli",
+          "Normalan kontrast": "Normalan kontrast",
+          "Povećan kontrast": "Povećan kontrast",
           "OpcijePrilagodbi": "Opcije prilagodbi",
           "BokJaSam": "Bok, ja sam",
           "Gibalica": "Gibalica",
@@ -94,10 +103,19 @@ class Localization extends Translations {
           "VelikaIMalaTiskana": "Velika i mala tiskana",
           "VelikaTiskana": "VELIKA TISKANA",
           "KolikoDugoŽelišVježbati": "Koliko dugo želiš vježbati?",
-          "KojiProgramVježbeŽeliš" : "Koji program vježbanja želiš?",
-          "OdaberiProgram" : "Odaberi program"
+          "KojiProgramVježbeŽeliš": "Koji program vježbanja želiš?",
+          "OdaberiProgram": "Odaberi program"
         },
         'en_US': {
+          "Ruke i Noge": "Arms and Legs",
+          "Obje Noge": "Both Legs",
+          "Lijeva i Desna ruka": "Left and right arm",
+          "Desna ruka": "Right arm",
+          "Lijeva ruka": "Left arm",
+          "Prilagođeni": "Custom",
+          "Cijeli": "Whole",
+          "Normalan kontrast": "Normal contrast",
+          "Povećan kontrast": "Higher contrast",
           "OpcijePrilagodbi": "Accessibility options",
           "BokJaSam": "Hi, I am",
           "Gibalica": "Gibalica",
@@ -188,10 +206,19 @@ class Localization extends Translations {
           "VelikaIMalaTiskana": "Uppercase and lowercase",
           "VelikaTiskana": "UPPERCASE",
           "KolikoDugoŽelišVježbati": "How long do you want to exercise?",
-          "KojiProgramVježbeŽeliš" : "Which exercise program do you want?",
-          "OdaberiProgram" : "Choose program"
+          "KojiProgramVježbeŽeliš": "Which exercise program do you want?",
+          "OdaberiProgram": "Choose program"
         },
         'HR_HR': {
+          "Ruke i Noge": "RUKE I NOGE",
+          "Obje Noge": "OBJE NOGE",
+          "Lijeva i Desna ruka": "LIJEVA I DESNA RUKA",
+          "Desna ruka": "DESNA RUKA",
+          "Lijeva ruka": "LIJEVA RUKA",
+          "Prilagođeni": "PRILAGOĐENI",
+          "Cijeli": "CIJELI",
+          "Normalan kontrast": "NORMALAN KONTRAST",
+          "Povećan kontrast": "POVEĆAN KONTRAST",
           "OpcijePrilagodbi": "OPCIJE PRILAGODBI",
           "BokJaSam": "BOK, JA SAM",
           "Gibalica": "GIBALICA",
@@ -282,10 +309,19 @@ class Localization extends Translations {
           "VelikaIMalaTiskana": "Velika i mala tiskana",
           "VelikaTiskana": "VELIKA TISKANA",
           "KolikoDugoŽelišVježbati": "KOLIKO DUGO ŽELIŠ VJEŽBATI?",
-          "KojiProgramVježbeŽeliš" : "KOJI PROGRAM VJEŽBANJA ŽELIŠ?",
-          "OdaberiProgram" : "ODABERI PROGRAM"
+          "KojiProgramVježbeŽeliš": "KOJI PROGRAM VJEŽBANJA ŽELIŠ?",
+          "OdaberiProgram": "ODABERI PROGRAM"
         },
         'EN_US': {
+          "Ruke i Noge": "ARMS AND LEGS",
+          "Obje Noge": "BOTH LEGS",
+          "Lijeva i Desna ruka": "LEFT AND RIGHT ARM",
+          "Desna ruka": "RIGHT ARM",
+          "Lijeva ruka": "LEFT ARM",
+          "Prilagođeni": "CUSTOM",
+          "Cijeli": "NORMAL",
+          "Normalan kontrast": "NORMAL CONTRAST",
+          "Povećan kontrast": "HIGHER CONTRAST",
           "OpcijePrilagodbi": "ACCESSIBILITY OPTIONS",
           "BokJaSam": "HI, I AM",
           "Gibalica": "GIBALICA",
@@ -376,8 +412,8 @@ class Localization extends Translations {
           "VelikaIMalaTiskana": "Uppercase and lowercase",
           "VelikaTiskana": "UPPERCASE",
           "KolikoDugoŽelišVježbati": "HOW LONG DO YOU WANT TO EXERCISE?",
-          "KojiProgramVježbeŽeliš" : "WHICH EXERCISE PROGRAM DO YOU WANT?",
-          "OdaberiProgram" : "CHOOSE PROGRAM"
+          "KojiProgramVježbeŽeliš": "WHICH EXERCISE PROGRAM DO YOU WANT?",
+          "OdaberiProgram": "CHOOSE PROGRAM"
         },
       };
 }

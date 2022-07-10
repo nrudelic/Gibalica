@@ -8,6 +8,8 @@ import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/training_popup.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../controllers/settings_controller.dart';
+
 class LeftHandTraining extends StatefulWidget {
   const LeftHandTraining({Key? key}) : super(key: key);
 
@@ -17,6 +19,7 @@ class LeftHandTraining extends StatefulWidget {
 
 class _LeftHandTrainingState extends State<LeftHandTraining> {
   final GameController gameController = Get.find<GameController>();
+  var settingsController = Get.find<SettingsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +37,9 @@ class _LeftHandTrainingState extends State<LeftHandTraining> {
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: AutoSizeText(
-                    "Lijeva ruka",textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue, fontWeight: FontWeight.bold),
+                    "Lijeva ruka".tr,textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 30, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
@@ -88,7 +92,8 @@ class _LeftHandTrainingState extends State<LeftHandTraining> {
                               child: AutoSizeText(
                                 "UVis".tr,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                                style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -133,7 +138,8 @@ class _LeftHandTrainingState extends State<LeftHandTraining> {
                               child: AutoSizeText(
                                 "SaStrane".tr,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                                style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -185,7 +191,8 @@ class _LeftHandTrainingState extends State<LeftHandTraining> {
                                 child: AutoSizeText(
                                   "UVisISaStrane".tr,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(color: ColorPalette.darkBlue, fontSize: 30, fontWeight: FontWeight.bold),
+                                  style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 30, fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),

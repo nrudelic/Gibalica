@@ -6,6 +6,8 @@ import 'package:gibalica/color_palette.dart';
 import 'package:gibalica/controllers/player_controller.dart';
 import 'package:gibalica/main.dart';
 
+import '../../controllers/settings_controller.dart';
+
 class Screening2 extends StatefulWidget {
   const Screening2({Key? key}) : super(key: key);
 
@@ -15,6 +17,7 @@ class Screening2 extends StatefulWidget {
 
 class _Screening2State extends State<Screening2> {
   var playerController = Get.find<PlayerController>();
+  var settingsController = Get.find<SettingsController>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +31,8 @@ class _Screening2State extends State<Screening2> {
             padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.02),
             child: AutoSizeText(
               "OdaberiJedanOdPonuđenihAvataraKojiTiSeNajvišeSviđa".tr,
-              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: ColorPalette.darkBlue),
+              style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,),
             ),
           ),
         ),
@@ -36,7 +40,8 @@ class _Screening2State extends State<Screening2> {
           flex: 1,
           child: AutoSizeText(
             "OdaberiAvatar".tr,
-            style: TextStyle(fontSize: 30, color: ColorPalette.darkBlue),
+            style: TextStyle(fontSize: 30, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
+                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,),
           ),
         ),
         Expanded(
