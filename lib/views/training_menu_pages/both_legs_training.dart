@@ -26,7 +26,7 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.8,
+      height: (playerController.leftLegPref.value && playerController.rightLegPref.value) ? MediaQuery.of(context).size.height * 0.8 : MediaQuery.of(context).size.height * 0.5,
       child: Column(children: [
         Expanded(
           flex: 1,
@@ -72,7 +72,7 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                                             gameController.gameType.value = GameType.personal;
                                             gameController.currentMode = GamePlayModes.leftAndRightLegUp;
 
-                                            return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Lijeva i desna noga - u vis')));
+                                            return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Lijeva i desna noga - u vis')));
                                           });
                                     },
                                     child: LayoutBuilder(builder: (context, constraint) {
@@ -132,7 +132,7 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                                           gameController.gameType.value = GameType.personal;
                                           gameController.currentMode = GamePlayModes.legGap;
 
-                                          return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Raskorak')));
+                                          return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Raskorak')));
                                         },
                                       );
                                     },
@@ -182,7 +182,7 @@ class _BothLegsTrainingState extends State<BothLegsTraining> {
                                           gameController.gameType.value = GameType.personal;
                                           gameController.currentMode = GamePlayModes.squat;
 
-                                          return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Čučanj')));
+                                          return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Čučanj')));
                                         },
                                       );
                                     },

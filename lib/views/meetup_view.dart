@@ -37,7 +37,7 @@ class MeetupView extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 40,
                         color: settingsController.isNormalContrast.isFalse ? Colors.yellow : Colors.white,
-                        background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white,
+                        background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : ColorPalette.green,
                       ),
                     ),
                   ),

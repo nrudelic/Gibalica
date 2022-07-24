@@ -69,7 +69,7 @@ class _EverythingTrainingState extends State<EverythingTraining> {
                                       gameController.gameType.value = GameType.personal;
                                       gameController.currentMode = GamePlayModes.all;
 
-                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Sve')));
+                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Sve')));
                                     });
                               },
                               child: LayoutBuilder(builder: (context, constraint) {

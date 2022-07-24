@@ -35,12 +35,12 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   cameras = await availableCameras();
 
-  var poseController = Get.put(PoseController());
-  var deviceController = Get.put(DeviceController());
-  var cameraViewController = Get.put(CameraViewController());
-  var playerController = Get.put(PlayerController());
-  var gameController = Get.put(GameController());
-  var settingsController = Get.put(SettingsController());
+  poseController = Get.put(PoseController());
+  deviceController = Get.put(DeviceController());
+  cameraViewController = Get.put(CameraViewController());
+  playerController = Get.put(PlayerController());
+  gameController = Get.put(GameController());
+  settingsController = Get.put(SettingsController());
 
   await Hive.initFlutter();
   await getSettingsFromBox();

@@ -171,54 +171,54 @@ class _SettingsViewState extends State<SettingsView> {
                     ),
                   ),
                 ),
-                FittedBox(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 20.0),
-                    child: AutoSizeText("PromjenaVeličineTeksta".tr, style: TextStyle(fontSize: 20, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white)),
-                  ),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.15,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 20.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: TextButton(
-                            onPressed: (() {
-                              settingsController.isBiggerText.value = false;
-                              settingsController.gibalicaBox.put("isBiggerText", false);
-                            }),
-                            style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
-                            child: Obx(
-                              () => AutoSizeText(
-                                "aA",
-                                style: TextStyle(fontSize: 30, color: !settingsController.isBiggerText.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: !settingsController.isBiggerText.value ? FontWeight.bold : FontWeight.normal),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: TextButton(
-                              onPressed: (() {
-                                settingsController.isBiggerText.value = true;
-                                settingsController.gibalicaBox.put("isBiggerText", true);
-                              }),
-                              style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
-                              child: Obx(
-                                () => AutoSizeText(
-                                  "aA",
-                                  style: TextStyle(fontSize: 50, color: settingsController.isBiggerText.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: settingsController.isBiggerText.value ? FontWeight.bold : FontWeight.normal),
-                                ),
-                              )),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                // FittedBox(
+                //   child: Padding(
+                //     padding: EdgeInsets.only(bottom: 20.0),
+                //     child: AutoSizeText("PromjenaVeličineTeksta".tr, style: TextStyle(fontSize: 20, color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white)),
+                //   ),
+                // ),
+                // SizedBox(
+                //   width: MediaQuery.of(context).size.width,
+                //   height: MediaQuery.of(context).size.height * 0.15,
+                //   child: Padding(
+                //     padding: const EdgeInsets.only(bottom: 20.0),
+                //     child: Row(
+                //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //       crossAxisAlignment: CrossAxisAlignment.center,
+                //       children: [
+                //         Expanded(
+                //           child: TextButton(
+                //             onPressed: (() {
+                //               settingsController.isBiggerText.value = false;
+                //               settingsController.gibalicaBox.put("isBiggerText", false);
+                //             }),
+                //             style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
+                //             child: Obx(
+                //               () => AutoSizeText(
+                //                 "aA",
+                //                 style: TextStyle(fontSize: 30, color: !settingsController.isBiggerText.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: !settingsController.isBiggerText.value ? FontWeight.bold : FontWeight.normal),
+                //               ),
+                //             ),
+                //           ),
+                //         ),
+                //         Expanded(
+                //           child: TextButton(
+                //               onPressed: (() {
+                //                 settingsController.isBiggerText.value = true;
+                //                 settingsController.gibalicaBox.put("isBiggerText", true);
+                //               }),
+                //               style: ButtonStyle(overlayColor: MaterialStateProperty.all(Colors.white)),
+                //               child: Obx(
+                //                 () => AutoSizeText(
+                //                   "aA",
+                //                   style: TextStyle(fontSize: 50, color: settingsController.isBiggerText.value ? ColorPalette.darkBlue : Colors.grey, fontWeight: settingsController.isBiggerText.value ? FontWeight.bold : FontWeight.normal),
+                //                 ),
+                //               )),
+                //         )
+                //       ],
+                //     ),
+                //   ),
+                // ),
                 FittedBox(
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 20.0),

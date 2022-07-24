@@ -69,7 +69,7 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                                     gameController.gameType.value = GameType.personal;
                                     gameController.currentMode = GamePlayModes.leftAndRightArmUp;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Lijeva i desna ruka - u vis')));
+                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Lijeva i desna ruka - u vis')));
                                   },
                                 );
                               },
@@ -117,7 +117,7 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                                     gameController.gameType.value = GameType.personal;
                                     gameController.currentMode = GamePlayModes.leftAndRightArmMiddle;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Lijeva i desna ruka - sa strane')));
+                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Lijeva i desna ruka - sa strane')));
                                   },
                                 );
                               },
@@ -172,7 +172,7 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                                       gameController.gameType.value = GameType.personal;
                                       gameController.currentMode = GamePlayModes.leftAndRightArmUpAndMiddleSamePosition;
 
-                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Lijeva i desna ruka - u vis i sa strane isti položaj')));
+                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Lijeva i desna ruka - u vis i sa strane isti položaj')));
                                     });
                               },
                               child: LayoutBuilder(builder: (context, constraint) {
@@ -230,7 +230,7 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                                     gameController.gameType.value = GameType.personal;
                                     gameController.currentMode = GamePlayModes.leftAndRightArmUpAndMiddleDiffPosition;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Lijeva i desna ruka - u vis i sa strane razičiti položaj')));
+                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Lijeva i desna ruka - u vis i sa strane razičiti položaj')));
                                   },
                                 );
                               },
@@ -278,7 +278,7 @@ class _BothHandsTrainingState extends State<BothHandsTraining> {
                                     gameController.gameType.value = GameType.personal;
                                     gameController.currentMode = GamePlayModes.leftAndRightArmAll;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Lijeva i desna ruka - sve')));
+                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Lijeva i desna ruka - sve')));
                                   },
                                 );
                               },

@@ -8,6 +8,7 @@ import 'package:gibalica/models/pose_model.dart';
 import 'package:gibalica/widgets/training_popup.dart';
 import 'package:lottie/lottie.dart';
 
+import '../../controllers/player_controller.dart';
 import '../../controllers/settings_controller.dart';
 
 class SingleLegTraining extends StatefulWidget {
@@ -20,6 +21,7 @@ class SingleLegTraining extends StatefulWidget {
 class _SingleLegTrainingState extends State<SingleLegTraining> {
   final GameController gameController = Get.find<GameController>();
   var settingsController = Get.find<SettingsController>();
+  var playerController = Get.find<PlayerController>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,7 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Expanded(
+              playerController.leftLegPref.value ? Expanded(
                 flex: 1,
                 child: Column(
                   children: [
@@ -63,7 +65,7 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                               gameController.gameType.value = GameType.personal;
                               gameController.currentMode = GamePlayModes.leftLegUp;
 
-                              return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Lijeva noga - u vis')));
+                              return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Lijeva noga - u vis')));
                             },
                           );
                         },
@@ -96,8 +98,8 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                     ),
                   ],
                 ),
-              ),
-              Expanded(
+              ) : Container(),
+              playerController.rightLegPref.value ? Expanded(
                 flex: 1,
                 child: Column(
                   children: [
@@ -114,7 +116,7 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                               gameController.gameType.value = GameType.personal;
                               gameController.currentMode = GamePlayModes.rightLegUp;
 
-                              return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Desna noga - u vis')));
+                              return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Desna noga - u vis')));
                             },
                           );
                         },
@@ -147,7 +149,7 @@ class _SingleLegTrainingState extends State<SingleLegTraining> {
                     ),
                   ],
                 ),
-              ),
+              ) : Container(),
             ],
           ),
         )

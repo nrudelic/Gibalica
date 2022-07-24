@@ -18,6 +18,7 @@ import '../../main.dart';
 import '../color_palette.dart';
 import '../controllers/camera_view_controller.dart';
 import '../controllers/pose_controller.dart';
+import '../controllers/settings_controller.dart';
 import '../helpers/pose_calculator.dart';
 
 enum ScreenMode { liveFeed, gallery }
@@ -39,8 +40,9 @@ class CameraView extends StatefulWidget {
 
 class _CameraViewState extends State<CameraView> with SingleTickerProviderStateMixin {
   late AnimationController lottieController;
-  final poseController = Get.find<PoseController>();
-  final gameController = Get.find<GameController>();
+  var poseController = Get.find<PoseController>();
+  var gameController = Get.find<GameController>();
+  var settingsController = Get.find<SettingsController>();
   CameraViewController cameraViewController = Get.find<CameraViewController>();
 
   CameraController? _controller;
@@ -73,11 +75,12 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
           widget.poseController.playAnimation.value = false;
           lottieController.value = 0;
           if (gameController.gameMode == GameMode.training) {
+
             if (gameController.repeatNumber.value == gameController.currentRepetitionCounter) {
+
               poseController.posePerformance[gameController.currentMode!] = true;
               gameController.isPoseFinished[gameController.currentMode!.toStr]!.value = true;
               settingsController.gibalicaBox.put(gameController.currentMode!.toStr, true);
-
               gameController.isCurrentGameFinished = true;
               cameraViewController.isProgressBarShowing = false;
               cameraViewController.isPoseImageShowing = false;
@@ -244,7 +247,9 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
         progressBarValue = (poseController.dayNightDict[poseController.wantedDayNightPosition] as double) / 3;
       }
     }
-
+    log(gameController.isCurrentGameFinished.toString());
+    log(gameController.repeatNumber.value.toString());
+    log((gameController.repeatNumber.value == gameController.currentRepetitionCounter).toString());
     return Container(
       color: Colors.black,
       child: Stack(
@@ -457,12 +462,14 @@ class _CameraViewState extends State<CameraView> with SingleTickerProviderStateM
 }
 
 class GameFinishedMenu extends StatelessWidget {
-  const GameFinishedMenu({
+  GameFinishedMenu({
     Key? key,
     required this.context,
   }) : super(key: key);
   final BuildContext context;
 
+  var gameController = Get.find<GameController>();
+  var settingsController = Get.find<SettingsController>();
   @override
   Widget build(BuildContext context) {
     showRepetitionInfo = false;
@@ -528,8 +535,7 @@ class GameFinishedMenu extends StatelessWidget {
                       FittedBox(
                         child: AutoSizeText(
                           "PONOVI",
-                          style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
-                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 25),
+                          style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : ColorPalette.yellow, fontSize: 25),
                         ),
                       )
                     ],
@@ -558,11 +564,10 @@ class GameFinishedMenu extends StatelessWidget {
                         child: SvgPicture.asset("assets/new_training.svg"),
                       ),
                       FittedBox(
-                        child:  AutoSizeText(
+                        child: AutoSizeText(
                           "NOVI TRENING",
                           textAlign: TextAlign.center,
-                          style:  TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue,
-                    background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : Colors.white, fontSize: 25),
+                          style: TextStyle(color: settingsController.isNormalContrast.isFalse ? Colors.yellow : ColorPalette.darkBlue, background: Paint()..color = settingsController.isNormalContrast.isFalse ? Colors.black : ColorPalette.green, fontSize: 25),
                         ),
                       )
                     ],

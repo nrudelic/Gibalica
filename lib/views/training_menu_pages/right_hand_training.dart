@@ -72,7 +72,7 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                     gameController.gameType.value = GameType.personal;
                                     gameController.currentMode = GamePlayModes.rightArmUp;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Desna ruka - u vis')));
+                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Desna ruka - u vis')));
                                   },
                                 );
                               },
@@ -120,7 +120,7 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                     gameController.gameType.value = GameType.personal;
                                     gameController.currentMode = GamePlayModes.rightArmMiddle;
 
-                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Desna ruka - sa strane')));
+                                    return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Desna ruka - sa strane')));
                                   },
                                 );
                               },
@@ -175,7 +175,7 @@ class _RightHandTrainingState extends State<RightHandTraining> {
                                       gameController.gameType.value = GameType.personal;
                                       gameController.currentMode = GamePlayModes.rightArmUpAndMiddle;
 
-                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog(gameController, setState, 'Desna ruka - u vis i sa strane')));
+                                      return StatefulBuilder(builder: ((context, setState) => buildPopupDialog( setState, 'Desna ruka - u vis i sa strane')));
                                     });
                               },
                               child: LayoutBuilder(builder: (context, constraint) {

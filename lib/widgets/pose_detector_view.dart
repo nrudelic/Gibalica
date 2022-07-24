@@ -213,6 +213,7 @@ class _PoseDetectorViewState extends State<PoseDetectorView> {
     if (widget.poseController.poseCalculationDict[widget.poseController.wantedPose] == 3) {
       if (settingsController.isSoundOn.value) playSound();
 
+      print("PODIZEEM");
       gameController.currentRepetitionCounter++;
 
       widget.poseController.updateLottieStatus(true);
